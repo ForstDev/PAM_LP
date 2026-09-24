@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  /* Plomo oscuro — pedido explícito del cliente en vez de negro puro para
+     fondos y superficies. Texto de cuerpo normal sí puede ser negro. */
+  --foreground: #2e3235;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Paleta oficial — Manual de Marca PerúAyudemosMás */
+  --color-verde: #7fdbc2; /* Verde Esperanza — primario, CTAs, logo */
+  --color-celeste: #66c0da; /* secundario */
+  /* Morado/lavanda fuera de uso — indicación explícita del cliente. */
+  /* Plomo oscuro — reservado solo para el fondo del footer, no usar como
+     color de elementos/circulos decorativos en ninguna otra sección. */
+  --color-plomo: #2e3235;
+
+  --font-sans: var(--font-outfit);
+  --font-serif: var(--font-tinos);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Doble anillo (blanco + oscuro) para que el foco se vea sobre cualquier
+   fondo de la página — claro, de color o la foto oscura del hero. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--color-foreground);
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
