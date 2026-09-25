@@ -11,15 +11,15 @@ export function NgoSection() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
         <Reveal>
-          <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-            ¿Trabajas con una organización que combate el hambre?
+          <h2 className="font-serif text-3xl font-bold uppercase leading-tight text-foreground sm:text-4xl">
+            ¿Representas una organización con una causa social?
           </h2>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground/80">
-            Súmate como aliada. Cada compra que hacemos juntos se convierte en
-            un fondo constante para tu causa.
+            Súmate como aliada y recibe un fondo constante gracias a cada
+            compra que hacemos juntos, sin depender de una sola donación.
           </p>
           <a
-            href={waLink("Hola, represento a una organización que combate el hambre y quiero conversar sobre una alianza.")}
+            href={waLink("Hola, represento a una organización con una causa social y quiero conversar sobre una alianza.")}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-8 inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105"

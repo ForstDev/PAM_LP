@@ -13,9 +13,10 @@ import {
 import { waLink } from "@/lib/whatsapp";
 
 const navLinks = [
-  { href: "#quienes-somos", label: "¿Quiénes somos?" },
-  { href: "#productos", label: "Productos" },
-  { href: "#afiliacion", label: "Afiliación" },
+  { href: "#quienes-somos", pre: "¿", letter: "Q", rest: "uiénes somos?", label: "¿Quiénes somos?", color: "celeste" as const },
+  { href: "#problematicas", pre: "", letter: "P", rest: "roblemáticas", label: "Problemáticas", color: "verde" as const },
+  { href: "#productos", pre: "", letter: "P", rest: "roductos", label: "Productos", color: "celeste" as const },
+  { href: "#afiliacion", pre: "", letter: "A", rest: "filiación", label: "Afiliación", color: "verde" as const },
 ];
 
 export function Header() {
@@ -37,54 +38,66 @@ export function Header() {
           scrolled ? "border-black/5 shadow-sm" : "border-transparent"
         }`}
       >
-        <div className="mx-auto flex h-24 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto grid h-20 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-4 px-3 sm:px-4 lg:px-6">
           {/* El logo siempre lleva al inicio (hero) de la landing. */}
-          <Link href="#top" className="flex items-center gap-2">
+          <Link href="#top" className="flex items-center gap-2 justify-self-start">
             <Image
               src="/logo-horizontal.svg"
               alt="PerúAyudemosMás"
               width={560}
               height={100}
-              className="h-14 w-auto sm:h-16"
+              className="h-12 w-auto sm:h-14"
               priority
             />
           </Link>
 
-          <nav className="hidden items-center gap-8 lg:flex">
+          <nav className="hidden items-center justify-center gap-7 lg:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 className="group relative text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
               >
-                {link.label}
+                {link.pre}
+                <span className="relative inline-block">
+                  <span
+                    aria-hidden
+                    className={`absolute -inset-1 -z-10 rounded-full ${
+                      link.color === "verde" ? "bg-verde/40" : "bg-celeste/40"
+                    }`}
+                  />
+                  {link.letter}
+                </span>
+                {link.rest}
                 <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-verde transition-transform duration-300 ease-out group-hover:scale-x-100" />
               </a>
             ))}
           </nav>
 
-          <a
-            href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden rounded-full bg-verde px-5 py-3 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block"
-          >
-            Comprar y ayudar
-          </a>
+          <div className="flex items-center gap-2 justify-self-end">
+            <a
+              href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden rounded-full bg-verde px-5 py-3 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block"
+            >
+              Comprar y ayudar
+            </a>
 
-          <button
-            type="button"
-            onClick={() => setMobileOpen((open) => !open)}
-            aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-            className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full text-foreground lg:hidden"
-          >
-            {mobileOpen ? (
-              <X className="h-6 w-6" strokeWidth={1.75} />
-            ) : (
-              <Menu className="h-6 w-6" strokeWidth={1.75} />
-            )}
-          </button>
+            <button
+              type="button"
+              onClick={() => setMobileOpen((open) => !open)}
+              aria-expanded={mobileOpen}
+              aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+              className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full text-foreground lg:hidden"
+            >
+              {mobileOpen ? (
+                <X className="h-6 w-6" strokeWidth={1.75} />
+              ) : (
+                <Menu className="h-6 w-6" strokeWidth={1.75} />
+              )}
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -106,13 +119,13 @@ export function Header() {
               transition={{ duration: 0.35, ease: "easeOut" }}
               style={{
                 transformOrigin: "top right",
-                width: "min(80vw, 380px)",
-                height: "min(80vw, 380px)",
+                width: "min(85vw, 400px)",
+                height: "min(85vw, 400px)",
                 borderBottomLeftRadius: "100%",
               }}
               className="fixed right-0 top-0 z-40 bg-verde/85 shadow-xl backdrop-blur-sm lg:hidden"
             >
-              <div className="flex h-full flex-col items-end justify-start gap-2 pt-24 pr-6 text-right">
+              <div className="flex h-full flex-col items-end justify-start gap-1.5 pt-20 pr-6 text-right">
                 {navLinks.map((link) => (
                   <a
                     key={link.href}

@@ -12,9 +12,12 @@ export function FinalCta() {
       <GlowOrb className="-bottom-24 -right-10 h-52 w-52 bg-celeste/60 blur-2xl sm:h-72 sm:w-72" />
 
       <Reveal className="relative mx-auto max-w-2xl">
-        <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-5xl">
-          Es hora de ayudar.
+        <h2 className="font-serif text-3xl font-bold uppercase leading-tight text-foreground sm:text-5xl">
+          Ayudar empieza aquí
         </h2>
+        <p className="mt-4 text-lg text-foreground/80">
+          Escríbenos y súmate a quienes ya están ayudando.
+        </p>
         <motion.a
           href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
           target="_blank"

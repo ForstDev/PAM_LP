@@ -2,7 +2,7 @@ import Image from "next/image";
 import { GlowOrb } from "@/components/GlowOrb";
 import { HeroContent } from "./HeroContent";
 
-export function Hero() {
+export function HeroSection() {
   return (
     <section id="top" className="relative isolate overflow-hidden bg-foreground">
       <div className="absolute inset-0">

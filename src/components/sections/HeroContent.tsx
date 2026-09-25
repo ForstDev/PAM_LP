@@ -15,9 +15,9 @@ export function HeroContent() {
         initial={fadeUp.initial}
         animate={fadeUp.animate}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-        className="max-w-2xl text-[clamp(2rem,4.5vw+1rem,4rem)] font-bold leading-tight text-white"
+        className="max-w-2xl font-serif text-[clamp(2rem,4.5vw+1rem,4rem)] font-bold uppercase leading-tight text-white"
       >
-        Transformamos tu compra en ayuda real.
+        Transformamos tu compra en ayuda real
       </motion.h1>
 
       <motion.p
@@ -26,9 +26,8 @@ export function HeroContent() {
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
         className="mt-6 max-w-xl text-lg leading-relaxed text-white/90"
       >
-        Cada compra que haces con nosotros se convierte en ayuda directa
-        contra el hambre en el Perú. 100% de las ganancias, siempre
-        transparentes.
+        Cada compra que haces con nosotros se convierte en ayuda directa para
+        quienes más lo necesitan.
       </motion.p>
 
       <motion.div
