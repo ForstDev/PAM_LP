@@ -42,3 +42,7 @@ next-env.d.ts
 
 # Claude Code (config local, no relevante para el repo)
 .claude/
+
+# Next.js regenera estos automáticamente en cada `next dev` — no subir
+AGENTS.md
+CLAUDE.md
