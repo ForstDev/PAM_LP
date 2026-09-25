@@ -7,7 +7,7 @@ export function StickyMobileCta() {
         href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
         target="_blank"
         rel="noopener noreferrer"
-        className="block w-full rounded-full bg-verde py-3 text-center text-sm font-semibold text-foreground"
+        className="block w-full rounded-full bg-verde py-4 text-center text-sm font-semibold text-foreground"
       >
         Comprar y ayudar
       </a>
