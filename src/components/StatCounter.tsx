@@ -12,11 +12,13 @@ export function StatCounter({
   suffix = "",
   decimals = 0,
   className = "",
+  onComplete,
 }: {
   to: number;
   suffix?: string;
   decimals?: number;
   className?: string;
+  onComplete?: () => void;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.6 });
@@ -45,6 +47,7 @@ export function StatCounter({
       if (ref.current) {
         ref.current.textContent = format(to);
       }
+      onComplete?.();
       return;
     }
 
@@ -56,6 +59,7 @@ export function StatCounter({
           ref.current.textContent = format(latest);
         }
       },
+      onComplete: () => onComplete?.(),
     });
 
     return () => controls.stop();

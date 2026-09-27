@@ -6,7 +6,7 @@ import { GlowOrb } from "@/components/GlowOrb";
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden bg-foreground pb-28 pt-16 text-white sm:pb-16">
-      <GlowOrb className="-left-20 -top-24 h-72 w-72 bg-verde/10 blur-3xl" />
+      <GlowOrb className="-left-16 top-16 h-64 w-64 bg-verde/10 blur-2xl" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">

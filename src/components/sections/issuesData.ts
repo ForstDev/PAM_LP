@@ -1,10 +1,6 @@
-import type { LucideIcon } from "lucide-react";
-import { UtensilsCrossed, Sparkles } from "lucide-react";
-
 export type Issue = {
   id: string;
   title: string;
-  icon: LucideIcon;
   color: "verde" | "celeste";
   hasContent: boolean;
   summary: string;
@@ -14,14 +10,13 @@ export type Issue = {
 };
 
 // "Hambre" tiene contenido real y aprobado. Las demás son causas futuras del
-// enfoque general de donación (no solo hambre) — todavía sin contenido
-// confirmado por el cliente, así que llevan lorem ipsum a propósito hasta
-// que se defina qué se muestra ahí.
+// enfoque general de donación (no solo hambre) — todavía sin contenido ni
+// fotografía confirmados por el cliente, así que llevan lorem ipsum y un
+// placeholder de imagen a propósito hasta que se defina qué va ahí.
 export const issues: Issue[] = [
   {
     id: "hambre",
     title: "Hambre",
-    icon: UtensilsCrossed,
     color: "verde",
     hasContent: true,
     summary: "En su peor momento en 15 años.",
@@ -36,7 +31,6 @@ export const issues: Issue[] = [
   {
     id: "proxima-causa-1",
     title: "Próxima causa",
-    icon: Sparkles,
     color: "celeste",
     hasContent: false,
     summary: "Contenido en definición con el cliente.",
@@ -46,7 +40,6 @@ export const issues: Issue[] = [
   {
     id: "proxima-causa-2",
     title: "Próxima causa",
-    icon: Sparkles,
     color: "verde",
     hasContent: false,
     summary: "Contenido en definición con el cliente.",

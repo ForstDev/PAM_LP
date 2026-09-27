@@ -15,7 +15,7 @@ export function HeroContent() {
         initial={fadeUp.initial}
         animate={fadeUp.animate}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
-        className="max-w-2xl font-serif text-[clamp(2rem,4.5vw+1rem,4rem)] font-bold uppercase leading-tight text-white"
+        className="max-w-2xl font-serif text-[clamp(2rem,4.5vw+1rem,4rem)] font-bold italic leading-tight text-white"
       >
         Transformamos tu compra en ayuda real
       </motion.h1>

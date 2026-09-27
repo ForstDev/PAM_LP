@@ -8,12 +8,12 @@ import { GlowOrb } from "@/components/GlowOrb";
 export function FinalCta() {
   return (
     <section className="relative isolate overflow-hidden bg-verde px-4 py-20 text-center sm:px-6 sm:py-28 lg:px-8">
-      <GlowOrb className="-left-16 -top-20 h-64 w-64 bg-celeste/25 blur-2xl sm:h-80 sm:w-80" />
-      <GlowOrb className="-bottom-24 -right-10 h-52 w-52 bg-celeste/60 blur-2xl sm:h-72 sm:w-72" />
+      <GlowOrb className="left-8 top-16 h-56 w-56 bg-celeste/20 blur-2xl sm:h-64 sm:w-64" />
+      <GlowOrb className="bottom-16 right-8 h-48 w-48 bg-celeste/50 blur-2xl sm:h-56 sm:w-56" />
 
       <Reveal className="relative mx-auto max-w-2xl">
-        <h2 className="font-serif text-3xl font-bold uppercase leading-tight text-foreground sm:text-5xl">
-          Ayudar empieza aquí
+        <h2 className="text-impact text-3xl font-bold leading-tight sm:text-5xl">
+          La ayuda empieza aquí
         </h2>
         <p className="mt-4 text-lg text-foreground/80">
           Escríbenos y súmate a quienes ya están ayudando.

@@ -10,8 +10,8 @@ export function WhoWeAre() {
       id="quienes-somos"
       className="relative isolate overflow-hidden bg-celeste/10 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
-      <GlowOrb className="-right-20 -top-24 h-72 w-72 bg-verde/25 blur-3xl" />
-      <GlowOrb className="-bottom-24 -left-16 h-64 w-64 bg-celeste/25 blur-3xl" />
+      <GlowOrb className="-right-12 top-16 h-56 w-56 bg-verde/20 blur-2xl" />
+      <GlowOrb className="bottom-16 -left-10 h-52 w-52 bg-celeste/20 blur-2xl" />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         <SignatureCircle
@@ -29,7 +29,7 @@ export function WhoWeAre() {
         </SignatureCircle>
 
         <Reveal delay={0.1}>
-          <h2 className="font-serif text-3xl font-bold uppercase leading-tight text-foreground sm:text-4xl">
+          <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             Un puente entre tu compra diaria y la ayuda directa
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground/80">
@@ -38,9 +38,6 @@ export function WhoWeAre() {
             ganancias, una vez cubiertos los costos operativos, a
             organizaciones que ya vienen trabajando en distintas causas
             sociales del Perú.
-          </p>
-          <p className="mt-6 inline-block rounded-full bg-celeste/20 px-4 py-2 text-sm font-medium text-foreground">
-            Somos un movimiento cultural, no político.
           </p>
         </Reveal>
       </div>

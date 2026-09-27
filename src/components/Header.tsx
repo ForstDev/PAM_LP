@@ -62,8 +62,8 @@ export function Header() {
                 <span className="relative inline-block">
                   <span
                     aria-hidden
-                    className={`absolute -inset-1 -z-10 rounded-full ${
-                      link.color === "verde" ? "bg-verde/40" : "bg-celeste/40"
+                    className={`absolute left-1/2 top-1/2 -z-10 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full ${
+                      link.color === "verde" ? "bg-verde/45" : "bg-celeste/45"
                     }`}
                   />
                   {link.letter}
