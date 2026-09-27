@@ -11,7 +11,7 @@ export function WhoWeAre() {
       className="relative isolate overflow-hidden bg-celeste/10 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="-right-12 top-16 h-56 w-56 bg-verde/20 blur-2xl" />
-      <GlowOrb className="bottom-16 -left-10 h-52 w-52 bg-celeste/20 blur-2xl" />
+      <GlowOrb className="bottom-16 -left-10 h-52 w-52 bg-azul/25 blur-2xl" />
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
         <SignatureCircle

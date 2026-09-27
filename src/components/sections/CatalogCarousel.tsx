@@ -29,7 +29,7 @@ const categories: Category[] = [
   { name: "Belleza", icon: Sparkles },
 ];
 
-const circleColors = ["verde", "celeste"] as const;
+const circleColors = ["verde", "celeste", "azul"] as const;
 
 export function CatalogCarousel() {
   const [emblaRef] = useEmblaCarousel({

@@ -1,7 +1,7 @@
 export type Issue = {
   id: string;
   title: string;
-  color: "verde" | "celeste";
+  color: "verde" | "celeste" | "azul";
   hasContent: boolean;
   summary: string;
   description: string;
@@ -40,7 +40,7 @@ export const issues: Issue[] = [
   {
     id: "proxima-causa-2",
     title: "Próxima causa",
-    color: "verde",
+    color: "azul",
     hasContent: false,
     summary: "Contenido en definición con el cliente.",
     description:

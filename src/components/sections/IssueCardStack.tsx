@@ -6,7 +6,12 @@ import { ImageIcon, X } from "lucide-react";
 import { StatCounter } from "@/components/StatCounter";
 import { issues } from "./issuesData";
 
-const colorBg = { verde: "bg-verde", celeste: "bg-celeste" } as const;
+const colorBg = { verde: "bg-verde", celeste: "bg-celeste", azul: "bg-azul" } as const;
+const colorBorder = {
+  verde: "border-verde/40",
+  celeste: "border-celeste/40",
+  azul: "border-azul/40",
+} as const;
 
 export function IssueCardStack() {
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -69,15 +74,21 @@ export function IssueCardStack() {
 
             <div className="flex flex-col gap-6 sm:flex-row">
               <div
-                className={`flex h-32 w-full flex-shrink-0 items-center justify-center rounded-2xl sm:h-auto sm:w-40 ${colorBg[active.color]}`}
+                className={`flex h-32 w-full flex-shrink-0 items-center justify-center rounded-2xl border-2 bg-foreground/[0.03] sm:h-auto sm:w-40 ${colorBorder[active.color]}`}
               >
-                <ImageIcon className="h-10 w-10 text-foreground/50" strokeWidth={1.25} />
+                <ImageIcon className="h-10 w-10 text-foreground/35" strokeWidth={1.25} />
               </div>
 
               <div className="min-w-0 flex-1 pr-8">
-                <h3 className="text-2xl font-bold leading-tight text-foreground">
-                  {active.title}
-                </h3>
+                <div className="flex items-center gap-2.5">
+                  <span
+                    aria-hidden
+                    className={`h-2.5 w-2.5 flex-shrink-0 rounded-full ${colorBg[active.color]}`}
+                  />
+                  <h3 className="text-2xl font-bold leading-tight text-foreground">
+                    {active.title}
+                  </h3>
+                </div>
 
                 {!active.hasContent && (
                   <p className="mt-2 inline-block rounded-full bg-foreground/5 px-3 py-1 text-xs font-medium text-foreground/60">
@@ -89,7 +100,7 @@ export function IssueCardStack() {
                   <div className="mt-4 grid grid-cols-2 gap-4">
                     {active.stats.map((stat) => (
                       <div key={stat.label}>
-                        <p className="text-2xl font-bold text-foreground">
+                        <p className="text-3xl font-bold text-foreground">
                           <StatCounter
                             to={stat.value}
                             decimals={stat.decimals}

@@ -3,11 +3,12 @@
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
 
-type Color = "verde" | "celeste";
+type Color = "verde" | "celeste" | "azul";
 
 const colorMap: Record<Color, string> = {
   verde: "bg-verde",
   celeste: "bg-celeste",
+  azul: "bg-azul",
 };
 
 /**
