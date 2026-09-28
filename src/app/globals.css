@@ -21,7 +21,7 @@
   --color-plomo: #2e3235;
 
   --font-sans: var(--font-outfit);
-  --font-serif: var(--font-tinos);
+  --font-serif: var(--font-freeserif);
 }
 
 html {
@@ -44,10 +44,9 @@ button:focus-visible {
   border-radius: 2px;
 }
 
-/* Frases de impacto — regla de tipografía actualizada: FreeSerif/Tinos es
-   solo para frases de impacto puntuales (no títulos de sección), en
-   itálica, negro 100% puro y sin ninguna opacidad. Úsese vía esta clase,
-   nunca font-serif suelto, para que la regla no se desvíe entre secciones. */
+/* Frases de impacto — FreeSerif (real, autohospedada) en itálica, negro
+   100% puro y sin ninguna opacidad. Úsese vía esta clase, nunca font-serif
+   suelto, para que la regla no se desvíe entre secciones. */
 .text-impact {
   font-family: var(--font-serif);
   font-style: italic;

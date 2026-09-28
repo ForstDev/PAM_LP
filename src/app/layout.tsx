@@ -1,19 +1,44 @@
 import type { Metadata } from "next";
-import { Outfit, Tinos } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const outfit = Outfit({
+// Tipografías reales del manual de marca — autohospedadas, no sustitutos de
+// Google Fonts. Outfit es variable (cubre todo el rango de grosor); FreeSerif
+// es estática, así que se declaran sus 4 cortes (regular/bold/italic/bold
+// italic) tal como los define el manual.
+const outfit = localFont({
+  src: "../fonts/outfit/Outfit-VariableFont_wght.ttf",
   variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: "100 900",
+  display: "swap",
 });
 
-const tinos = Tinos({
-  variable: "--font-tinos",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+const freeserif = localFont({
+  src: [
+    {
+      path: "../fonts/freeserif/FreeSerif.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/freeserif/FreeSerifBold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/freeserif/FreeSerifItalic.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../fonts/freeserif/FreeSerifBoldItalic.ttf",
+      weight: "700",
+      style: "italic",
+    },
+  ],
+  variable: "--font-freeserif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -57,7 +82,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${outfit.variable} ${tinos.variable} h-full antialiased`}>
+    <html lang="es" className={`${outfit.variable} ${freeserif.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         {children}
         <script
