@@ -11,7 +11,7 @@ export function CatalogSection() {
       <div className="relative mx-auto max-w-6xl">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <Reveal>
-            <h2 className="max-w-2xl text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+            <h2 className="max-w-2xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
               Lo que ya compras cada semana, ahora también ayuda
             </h2>
           </Reveal>

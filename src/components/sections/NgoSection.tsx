@@ -10,7 +10,7 @@ export function NgoSection() {
 
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
         <Reveal>
-          <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+          <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             ¿Representas una organización con una causa social?
           </h2>
           <p className="text-impact mt-4 text-2xl sm:text-3xl">

@@ -13,7 +13,7 @@ export function IssuesSection() {
 
       <div className="relative mx-auto max-w-5xl">
         <Reveal>
-          <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
             Las causas que ya estamos atendiendo
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground/80">

@@ -85,7 +85,7 @@ export function IssueCardStack() {
                     aria-hidden
                     className={`h-2.5 w-2.5 flex-shrink-0 rounded-full ${colorBg[active.color]}`}
                   />
-                  <h3 className="text-2xl font-bold leading-tight text-foreground">
+                  <h3 className="font-serif text-2xl font-bold leading-tight text-foreground">
                     {active.title}
                   </h3>
                 </div>

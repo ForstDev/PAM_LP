@@ -29,7 +29,7 @@ export function WhoWeAre() {
         </SignatureCircle>
 
         <Reveal delay={0.1}>
-          <h2 className="text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+          <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             Un puente entre tu compra diaria y la ayuda directa
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground/80">
