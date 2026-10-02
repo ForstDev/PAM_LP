@@ -16,8 +16,7 @@ export function FinalCta() {
           La ayuda empieza aquí
         </h2>
         <p className="mt-4 text-lg text-foreground/80">
-          Escríbenos por cualquier duda, propuesta o idea — Iván te responde
-          directo.
+          Escríbenos por cualquier duda, propuesta o idea.
         </p>
         <motion.a
           href={waLink("Hola, me gustaría conversar con Iván sobre PerúAyudemosMás.")}

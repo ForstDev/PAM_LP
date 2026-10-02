@@ -79,7 +79,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/50">
-          <p>© {new Date().getFullYear()} {site.name} — Ecommerce Solidario.</p>
+          <p>© {new Date().getFullYear()} {site.name}. Ecommerce Solidario.</p>
           {/* TODO: texto de política de privacidad/acuerdos legales — pendiente
               de que el cliente confirme el contenido real antes de publicarlo. */}
         </div>
