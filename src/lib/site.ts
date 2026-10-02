@@ -4,11 +4,8 @@ export const site = {
   domain: "https://peruayudemosmas.com",
   email: "contacto@peruayudemosmas.com",
   phone: "+51 580 433 20",
+  instagram: "https://www.instagram.com/peru.ayudemosmas/",
 } as const;
 
-/**
- * Número de WhatsApp Business — pendiente del dato real del cliente.
- * Reemplazar aquí (formato E.164 sin "+" ni espacios, ej. "51987654321")
- * antes de publicar; todos los CTA de la landing usan esta única constante.
- */
-export const WHATSAPP_NUMBER = "51000000000";
+/** Número real de WhatsApp Business — todos los CTA de la landing lo usan. */
+export const WHATSAPP_NUMBER = "51938973251";

@@ -16,10 +16,11 @@ export function FinalCta() {
           La ayuda empieza aquí
         </h2>
         <p className="mt-4 text-lg text-foreground/80">
-          Escríbenos y súmate a quienes ya están ayudando.
+          Escríbenos por cualquier duda, propuesta o idea — Iván te responde
+          directo.
         </p>
         <motion.a
-          href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
+          href={waLink("Hola, me gustaría conversar con Iván sobre PerúAyudemosMás.")}
           target="_blank"
           rel="noopener noreferrer"
           animate={{ scale: [1, 1.035, 1] }}
@@ -27,7 +28,7 @@ export function FinalCta() {
           whileHover={{ scale: 1.08 }}
           className="mt-8 inline-block rounded-full bg-celeste px-8 py-4 text-base font-semibold text-foreground"
         >
-          Escríbenos por WhatsApp
+          Hablar con Iván
         </motion.a>
       </Reveal>
     </section>

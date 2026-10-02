@@ -13,10 +13,10 @@ import {
 import { waLink } from "@/lib/whatsapp";
 
 const navLinks = [
-  { href: "#quienes-somos", pre: "¿", letter: "Q", rest: "uiénes somos?", label: "¿Quiénes somos?", color: "celeste" as const },
-  { href: "#problematicas", pre: "", letter: "P", rest: "roblemáticas", label: "Problemáticas", color: "verde" as const },
-  { href: "#productos", pre: "", letter: "P", rest: "roductos", label: "Productos", color: "celeste" as const },
-  { href: "#afiliacion", pre: "", letter: "A", rest: "filiación", label: "Afiliación", color: "verde" as const },
+  { href: "#quienes-somos", label: "¿Quiénes somos?" },
+  { href: "#problematicas", label: "Problemáticas" },
+  { href: "#productos", label: "Productos" },
+  { href: "#afiliacion", label: "Afiliación" },
 ];
 
 export function Header() {
@@ -58,17 +58,7 @@ export function Header() {
                 href={link.href}
                 className="group relative text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
               >
-                {link.pre}
-                <span className="relative inline-block">
-                  <span
-                    aria-hidden
-                    className={`absolute left-1/2 top-1/2 -z-10 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rounded-full ${
-                      link.color === "verde" ? "bg-verde/45" : "bg-celeste/45"
-                    }`}
-                  />
-                  {link.letter}
-                </span>
-                {link.rest}
+                {link.label}
                 <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-verde transition-transform duration-300 ease-out group-hover:scale-x-100" />
               </a>
             ))}

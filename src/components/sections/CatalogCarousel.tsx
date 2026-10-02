@@ -3,12 +3,12 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { motion } from "motion/react";
 import {
+  Apple,
+  Carrot,
   CupSoda,
-  Droplet,
-  HeartPulse,
-  Sparkles,
-  SprayCan,
+  Milk,
   ShoppingBasket,
+  Wheat,
   type LucideIcon,
 } from "lucide-react";
 import { SignatureCircle } from "@/components/SignatureCircle";
@@ -19,14 +19,16 @@ type Category = {
   icon: LucideIcon;
 };
 
-// Placeholder — confirmar nombres finales con Iván antes de publicar.
+// Categorías reales de Iván. Falta confirmar la 7ma — "Pastas" venía
+// repetida dos veces en la lista que mandó, así que por ahora van las 6
+// que sí están claras.
 const categories: Category[] = [
+  { name: "Frutas", icon: Apple },
+  { name: "Verduras", icon: Carrot },
+  { name: "Lácteos", icon: Milk },
+  { name: "Pastas", icon: Wheat },
   { name: "Abarrotes", icon: ShoppingBasket },
-  { name: "Limpieza", icon: SprayCan },
-  { name: "Cuidado personal", icon: HeartPulse },
   { name: "Bebidas", icon: CupSoda },
-  { name: "Aseo", icon: Droplet },
-  { name: "Belleza", icon: Sparkles },
 ];
 
 const circleColors = ["verde", "celeste", "azul"] as const;

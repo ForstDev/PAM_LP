@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { HandHeart, TrendingUp } from "lucide-react";
+import { HandHeart, TrendingUp, ArrowRight } from "lucide-react";
 import { SignatureCircle } from "@/components/SignatureCircle";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
@@ -87,6 +87,79 @@ export function WhoWeAre() {
                 se sostiene en el tiempo, no en una donación aislada.
               </p>
             </div>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* Tercer pilar — "Ayudar no tiene partido". Único lugar de toda la
+          landing donde se menciona política, por pedido explícito del
+          cliente. Orden en mobile: título, foto, pie de foto, párrafos,
+          enlace. En desktop: foto a la izquierda, texto a la derecha,
+          mismo ancho/estilo que el bloque de "Quiénes somos" de arriba. */}
+      <div className="relative mx-auto mt-16 max-w-6xl border-t border-foreground/10 pt-14">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start lg:gap-12">
+          <Reveal className="order-1 lg:order-none lg:col-start-2 lg:row-start-1">
+            <h3 className="font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+              Ayudar no tiene partido
+            </h3>
+          </Reveal>
+
+          <Reveal
+            delay={0.1}
+            className="order-2 lg:order-none lg:col-start-1 lg:row-start-1 lg:row-span-2"
+          >
+            <SignatureCircle
+              color="azul"
+              className="mx-auto w-full max-w-xs lg:mx-0"
+              circleClassName="-right-6 -bottom-6 h-[70%] w-[70%]"
+            >
+              <Image
+                src="/recambio-cumbre.jpg"
+                alt="Conversación de Recambio en la Cumbre Perú Sostenible 2026"
+                width={420}
+                height={420}
+                className="aspect-square w-full rounded-[2rem] object-cover"
+              />
+            </SignatureCircle>
+          </Reveal>
+
+          <Reveal
+            delay={0.15}
+            className="order-3 lg:order-none lg:col-start-1 lg:row-start-2"
+          >
+            <p className="mx-auto max-w-xs text-center text-sm text-foreground/60 lg:mx-0 lg:text-left">
+              Conversación de Recambio · Cumbre Perú Sostenible 2026
+            </p>
+          </Reveal>
+
+          <Reveal
+            delay={0.2}
+            className="order-4 lg:order-none lg:col-start-2 lg:row-start-2"
+          >
+            <p className="text-foreground/80">
+              AyudemosMás es el emprendimiento social motor de MÁS, un
+              movimiento cultural de iniciativas de impacto social. Somos
+              independientes y apartidarios: no respaldamos partidos
+              políticos ni candidaturas.
+            </p>
+            <p className="mt-4 text-foreground/80">
+              Cuando nuestra misión se cruza con asuntos públicos, valoramos
+              el diálogo plural y apartidario. Por eso asistimos a una
+              conversación de Recambio en la Cumbre Perú Sostenible 2026
+              para aprender sobre democracia y sostenibilidad.
+            </p>
+            <a
+              href="https://www.recambio.pe/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground/60 transition-colors hover:text-foreground"
+            >
+              Conoce a Recambio
+              <ArrowRight
+                className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                strokeWidth={1.75}
+              />
+            </a>
           </Reveal>
         </div>
       </div>

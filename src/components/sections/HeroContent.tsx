@@ -26,8 +26,8 @@ export function HeroContent() {
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
         className="mt-6 max-w-xl text-lg leading-relaxed text-white/90"
       >
-        Cada compra que haces con nosotros se convierte en ayuda directa para
-        quienes más lo necesitan.
+        El e-commerce solidario donde cada compra se convierte en ayuda
+        directa para quienes más lo necesitan.
       </motion.p>
 
       <motion.div

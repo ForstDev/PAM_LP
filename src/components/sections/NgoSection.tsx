@@ -1,4 +1,4 @@
-import { ImageIcon } from "lucide-react";
+import Image from "next/image";
 import { waLink } from "@/lib/whatsapp";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
@@ -11,10 +11,14 @@ export function NgoSection() {
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
         <Reveal>
           <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-            ¿Representas una organización con una causa social?
+            ¿Representas una
+            <br />
+            organización
+            <br />
+            con una causa social?
           </h2>
           <p className="text-impact mt-4 text-2xl sm:text-3xl">
-            ¿Formamos la alianza?
+            Súmate para formar el cambio
           </p>
           <a
             href={waLink("Hola, represento a una organización con una causa social y quiero conversar sobre una alianza.")}
@@ -28,8 +32,14 @@ export function NgoSection() {
 
         <Reveal delay={0.15} className="mx-auto w-full max-w-xs justify-self-center lg:max-w-none">
           <div className="relative rounded-[2rem] bg-white p-3 shadow-lg">
-            <div className="relative flex h-48 items-center justify-center overflow-hidden rounded-[1.5rem] bg-verde/20 sm:h-56">
-              <ImageIcon className="h-12 w-12 text-foreground/40" strokeWidth={1.25} />
+            <div className="relative h-48 overflow-hidden rounded-[1.5rem] sm:h-56">
+              <Image
+                src="/manos-alianza.webp"
+                alt="Manos unidas en círculo, símbolo de alianza"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 420px, 320px"
+              />
             </div>
             <div
               aria-hidden

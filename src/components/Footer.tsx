@@ -3,6 +3,27 @@ import { site } from "@/lib/site";
 import { waLink } from "@/lib/whatsapp";
 import { GlowOrb } from "@/components/GlowOrb";
 
+// Lucide quitó los íconos de marcas (incluido Instagram) de su set —
+// se dibuja a mano, mismo grosor de trazo que el resto de íconos del sitio.
+function InstagramIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
 export function Footer() {
   return (
     <footer className="relative isolate overflow-hidden bg-foreground pb-28 pt-16 text-white sm:pb-16">
@@ -20,7 +41,7 @@ export function Footer() {
             />
             <p className="mt-4 text-sm leading-relaxed text-white/70">
               {site.claim}. Parte del movimiento cultural MÁS: Proyectos
-              Benéficos. Somos un movimiento cultural, no político.
+              Benéficos.
             </p>
           </div>
 
@@ -42,12 +63,25 @@ export function Footer() {
                   {site.email}
                 </a>
               </li>
+              <li>
+                <a
+                  href={site.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 hover:text-white"
+                >
+                  <InstagramIcon className="h-4 w-4" />
+                  @peru.ayudemosmas
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-6 text-xs text-white/50">
-          © {new Date().getFullYear()} {site.name} — Ecommerce Solidario.
+        <div className="mt-12 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-white/50">
+          <p>© {new Date().getFullYear()} {site.name} — Ecommerce Solidario.</p>
+          {/* TODO: texto de política de privacidad/acuerdos legales — pendiente
+              de que el cliente confirme el contenido real antes de publicarlo. */}
         </div>
       </div>
     </footer>
