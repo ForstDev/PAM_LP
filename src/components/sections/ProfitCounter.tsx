@@ -20,7 +20,7 @@ export function ProfitCounter() {
         initial={{ opacity: 0, y: 6 }}
         animate={done ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="mt-1 max-w-[13rem] text-xs leading-snug text-foreground/70"
+        className="mt-1 max-w-[13rem] text-xs leading-snug text-foreground"
       >
         de las ganancias va a causas sociales, una vez cubiertos los costos
         operativos.

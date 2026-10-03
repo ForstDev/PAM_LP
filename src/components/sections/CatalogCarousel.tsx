@@ -12,16 +12,13 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { SignatureCircle } from "@/components/SignatureCircle";
-import { waLink } from "@/lib/whatsapp";
 
 type Category = {
   name: string;
   icon: LucideIcon;
 };
 
-// Categorías reales de Iván. Falta confirmar la 7ma — "Pastas" venía
-// repetida dos veces en la lista que mandó, así que por ahora van las 6
-// que sí están claras.
+// Categorías reales del catálogo (confirmadas: son 6).
 const categories: Category[] = [
   { name: "Frutas", icon: Apple },
   { name: "Verduras", icon: Carrot },
@@ -54,12 +51,11 @@ export function CatalogCarousel() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.45, ease: "easeOut", delay: (index % 3) * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="min-w-[65%] flex-shrink-0 rounded-3xl border border-black/5 p-6 shadow-sm transition-shadow duration-200 hover:shadow-md sm:min-w-0"
+              className="flex min-w-[65%] flex-shrink-0 items-center gap-5 rounded-3xl border border-foreground bg-white p-5 sm:min-w-0"
             >
               <SignatureCircle
                 color={circleColors[index % circleColors.length]}
-                className="h-16 w-16"
+                className="h-16 w-16 flex-shrink-0"
                 circleClassName="inset-0"
               >
                 <div className="flex h-16 w-16 items-center justify-center">
@@ -67,18 +63,9 @@ export function CatalogCarousel() {
                 </div>
               </SignatureCircle>
 
-              <p className="mt-5 text-lg font-semibold text-foreground">
+              <p className="text-lg font-semibold text-foreground">
                 {category.name}
               </p>
-
-              <a
-                href={waLink(`Hola, quiero ver el catálogo de ${category.name}.`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-4 inline-block text-sm font-semibold text-foreground underline decoration-verde decoration-2 underline-offset-4"
-              >
-                Ver por WhatsApp
-              </a>
             </motion.div>
           );
         })}

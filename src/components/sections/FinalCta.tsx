@@ -15,11 +15,11 @@ export function FinalCta() {
         <h2 className="text-impact text-3xl font-bold leading-tight sm:text-5xl">
           La ayuda empieza aquí
         </h2>
-        <p className="mt-4 text-lg text-foreground/80">
+        <p className="mt-4 text-lg text-foreground">
           Escríbenos por cualquier duda, propuesta o idea.
         </p>
         <motion.a
-          href={waLink("Hola, me gustaría conversar con Iván sobre PerúAyudemosMás.")}
+          href={waLink("Hola, me gustaría conversar con PerúAyudemosMás.")}
           target="_blank"
           rel="noopener noreferrer"
           animate={{ scale: [1, 1.035, 1] }}
@@ -27,7 +27,7 @@ export function FinalCta() {
           whileHover={{ scale: 1.08 }}
           className="mt-8 inline-block rounded-full bg-celeste px-8 py-4 text-base font-semibold text-foreground"
         >
-          Hablar con Iván
+          Escríbenos
         </motion.a>
       </Reveal>
     </section>

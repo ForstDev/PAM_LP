@@ -4,7 +4,7 @@
   --background: #ffffff;
   /* Plomo oscuro — pedido explícito del cliente en vez de negro puro para
      fondos y superficies. Texto de cuerpo normal sí puede ser negro. */
-  --foreground: #2e3235;
+  --foreground: #000000;
 }
 
 @theme inline {

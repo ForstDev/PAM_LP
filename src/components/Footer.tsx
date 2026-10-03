@@ -26,10 +26,10 @@ function InstagramIcon({ className = "" }: { className?: string }) {
 
 export function Footer() {
   return (
-    <footer className="relative isolate overflow-hidden bg-foreground pb-28 pt-16 text-white sm:pb-16">
+    <footer className="relative isolate overflow-hidden bg-plomo pb-28 pt-16 text-white sm:pb-16">
       <GlowOrb className="-left-16 top-16 h-64 w-64 bg-verde/10 blur-2xl" />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-[84rem] px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div className="max-w-sm">
             <Image

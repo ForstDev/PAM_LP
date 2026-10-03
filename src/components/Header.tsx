@@ -38,7 +38,7 @@ export function Header() {
           scrolled ? "border-black/5 shadow-sm" : "border-transparent"
         }`}
       >
-        <div className="mx-auto grid h-20 max-w-6xl grid-cols-[auto_1fr_auto] items-center gap-4 px-3 sm:px-4 lg:px-6">
+        <div className="mx-auto grid h-20 max-w-[90rem] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-10">
           {/* El logo siempre lleva al inicio (hero) de la landing. */}
           <Link href="#top" className="flex items-center gap-2 justify-self-start">
             <Image
@@ -56,7 +56,7 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="group relative text-sm font-medium text-foreground/80 transition-colors hover:text-foreground"
+                className="group relative text-sm font-medium text-foreground transition-colors hover:text-foreground"
               >
                 {link.label}
                 <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-verde transition-transform duration-300 ease-out group-hover:scale-x-100" />

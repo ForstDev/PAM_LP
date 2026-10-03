@@ -10,7 +10,7 @@ const fadeUp = {
 
 export function HeroContent() {
   return (
-    <div className="relative mx-auto flex min-h-[92vh] max-w-6xl flex-col justify-end px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:px-8">
+    <div className="relative mx-auto flex min-h-[92vh] max-w-[84rem] flex-col justify-end px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:px-8">
       <motion.h1
         initial={fadeUp.initial}
         animate={fadeUp.animate}
