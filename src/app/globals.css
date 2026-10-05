@@ -2,8 +2,6 @@
 
 :root {
   --background: #ffffff;
-  /* Plomo oscuro — pedido explícito del cliente en vez de negro puro para
-     fondos y superficies. Texto de cuerpo normal sí puede ser negro. */
   --foreground: #000000;
 }
 
@@ -11,14 +9,14 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Paleta oficial — Manual de Marca PerúAyudemosMás */
+  /* Paleta oficial — Manual de Marca AyudemosMás Perú */
   --color-verde: #7fdbc2; /* Verde Esperanza — primario, CTAs, logo */
   --color-celeste: #66c0da; /* secundario */
   --color-azul: #7ba4db; /* nuevo secundario — manual de marca actualizado, sept. 2026 */
   /* Morado/lavanda fuera de uso — indicación explícita del cliente. */
-  /* Plomo oscuro — reservado solo para el fondo del footer, no usar como
-     color de elementos/circulos decorativos en ninguna otra sección. */
-  --color-plomo: #2e3235;
+  /* Hale Navy — color oficial del manual actualizado. Reservado para el fondo
+     del footer y la capa oscura del hero; no usar en círculos decorativos. */
+  --color-navy: #434b56;
 
   --font-sans: var(--font-outfit);
   --font-serif: var(--font-freeserif);
@@ -26,6 +24,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Alto del header sticky (h-20): al saltar a una sección desde el menú,
+     el contenido queda justo debajo y no tapado por la línea del header. */
+  scroll-padding-top: 5rem;
 }
 
 body {

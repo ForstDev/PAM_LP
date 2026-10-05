@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { WhoWeAre } from "@/components/sections/WhoWeAre";
 import { IssuesSection } from "@/components/sections/IssuesSection";
+import { DonationGrowth } from "@/components/sections/DonationGrowth";
 import { CatalogSection } from "@/components/sections/CatalogSection";
 import { NgoSection } from "@/components/sections/NgoSection";
 import { FinalCta } from "@/components/sections/FinalCta";
@@ -15,6 +16,7 @@ export default function Home() {
         <HeroSection />
         <WhoWeAre />
         <IssuesSection />
+        <DonationGrowth />
         <CatalogSection />
         <NgoSection />
         <FinalCta />

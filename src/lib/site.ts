@@ -1,10 +1,13 @@
+// Datos oficiales del Manual de Marca AyudemosMás Perú (versión actualizada).
 export const site = {
-  name: "PerúAyudemosMás",
-  claim: "Ecommerce Solidario",
-  domain: "https://peruayudemosmas.com",
-  email: "contacto@peruayudemosmas.com",
-  phone: "+51 580 433 20",
-  instagram: "https://www.instagram.com/peru.ayudemosmas/",
+  name: "AyudemosMás Perú",
+  claim: "E-commerce solidario",
+  tagline: "Es hora de ayudar.",
+  domain: "https://ayudemosmas.com.pe",
+  email: "contacto@ayudemosmas.com",
+  alliancesEmail: "alianzas@ayudemosmas.com",
+  instagram: "https://www.instagram.com/ayudemosmas.peru/",
+  instagramHandle: "@ayudemosmas.peru",
 } as const;
 
 /** Número real de WhatsApp Business — todos los CTA de la landing lo usan. */

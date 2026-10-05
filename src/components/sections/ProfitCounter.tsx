@@ -22,8 +22,7 @@ export function ProfitCounter() {
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="mt-1 max-w-[13rem] text-xs leading-snug text-foreground"
       >
-        de las ganancias va a causas sociales, una vez cubiertos los costos
-        operativos.
+        de las ganancias va a organizaciones y causas sociales.
       </motion.p>
     </div>
   );

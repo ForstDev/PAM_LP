@@ -24,11 +24,14 @@ export function StatCounter({
   const isInView = useInView(ref, { once: true, amount: 0.6 });
   const count = useMotionValue(0);
 
-  const format = (value: number) =>
-    `${value.toLocaleString("es-PE", {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals,
-    })}${suffix}`;
+  // Formato del tablero del cliente: coma decimal y espacio fino para miles
+  // (19 642), sin agrupar los números de 4 cifras.
+  const format = (value: number) => {
+    const [int, dec] = value.toFixed(decimals).split(".");
+    const grouped =
+      int.length > 4 ? int.replace(/\B(?=(\d{3})+(?!\d))/g, "\u00a0") : int;
+    return `${grouped}${dec ? "," + dec : ""}${suffix}`;
+  };
 
   useEffect(() => {
     if (!ref.current) return;

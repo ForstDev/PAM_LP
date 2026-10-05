@@ -19,7 +19,7 @@ export function FinalCta() {
           Escríbenos por cualquier duda, propuesta o idea.
         </p>
         <motion.a
-          href={waLink("Hola, me gustaría conversar con PerúAyudemosMás.")}
+          href={waLink("Hola, me gustaría conversar con AyudemosMás Perú.")}
           target="_blank"
           rel="noopener noreferrer"
           animate={{ scale: [1, 1.035, 1] }}

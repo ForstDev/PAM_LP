@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { HandHeart, TrendingUp, Scale, ArrowRight } from "lucide-react";
+import { HandHeart, TrendingUp, Scale } from "lucide-react";
 import { SignatureCircle } from "@/components/SignatureCircle";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
+import { RecambioFeature } from "./RecambioFeature";
 
 const pillars = [
   {
@@ -23,7 +24,7 @@ const pillars = [
     icon: Scale,
     color: "azul" as const,
     title: "Ayudar no tiene partido",
-    text: "AyudemosMás es el emprendimiento social motor de MÁS, un movimiento cultural de iniciativas de impacto social. Somos independientes y apartidarios: no respaldamos partidos políticos ni candidaturas.",
+    text: "Somos parte del movimiento cultural MÁS, independiente y apartidario. No respaldamos partidos ni candidaturas.",
   },
 ];
 
@@ -43,8 +44,8 @@ export function WhoWeAre() {
           circleClassName="-left-8 -top-8 h-[75%] w-[75%]"
         >
           <Image
-            src="/hero-construccion.png"
-            alt="Equipo de PerúAyudemosMás"
+            src="/hero-construccion.webp"
+            alt="Equipo de AyudemosMás Perú"
             width={480}
             height={480}
             className="aspect-square w-full rounded-[2.5rem] object-cover"
@@ -56,11 +57,10 @@ export function WhoWeAre() {
             Un puente entre tu compra diaria y la ayuda directa
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground">
-            Somos PerúAyudemosMás, parte del movimiento cultural MÁS.
-            Revendemos productos de primera necesidad y destinamos nuestras
-            ganancias, una vez cubiertos los costos operativos, a
-            organizaciones que ya vienen trabajando en distintas causas
-            sociales del Perú.
+            Somos AyudemosMás Perú, parte del movimiento cultural MÁS.
+            Revendemos productos de primera necesidad y destinamos el 100% de
+            nuestras ganancias a organizaciones que ya vienen trabajando en
+            distintas causas sociales del Perú.
           </p>
         </Reveal>
       </div>
@@ -101,53 +101,7 @@ export function WhoWeAre() {
         </div>
       </div>
 
-      {/* Texto aparte del tercer pilar. La foto sigue el sistema de imágenes
-          del manual de marca: recorte circular con un círculo de color
-          detrás. Mobile: foto, pie de foto, párrafo, enlace. Desktop: foto
-          a la izquierda, texto a la derecha. */}
-      <div className="relative mx-auto mt-16 max-w-[84rem] border-t border-foreground/10 pt-14">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,20rem)_1fr] lg:gap-14">
-          <Reveal delay={0.05}>
-            <SignatureCircle
-              color="azul"
-              className="mx-auto w-full max-w-[16rem] lg:mx-0"
-              circleClassName="-bottom-4 -right-4 h-[80%] w-[80%]"
-            >
-              <Image
-                src="/recambio-cumbre.jpg"
-                alt="Conversación de Recambio en la Cumbre Perú Sostenible 2026"
-                width={420}
-                height={420}
-                className="aspect-square w-full rounded-full object-cover object-[50%_58%]"
-              />
-            </SignatureCircle>
-            <p className="mx-auto mt-6 max-w-[16rem] text-center text-sm text-foreground lg:mx-0 lg:text-left">
-              Conversación de Recambio · Cumbre Perú Sostenible 2026
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.15}>
-            <p className="max-w-2xl text-lg leading-relaxed text-foreground">
-              Cuando nuestra misión se cruza con asuntos públicos, valoramos el
-              diálogo plural y apartidario. Por eso asistimos a una
-              conversación de Recambio en la Cumbre Perú Sostenible 2026 para
-              aprender sobre democracia y sostenibilidad.
-            </p>
-            <a
-              href="https://www.recambio.pe/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors"
-            >
-              <span className="border-b border-foreground">Conoce a Recambio</span>
-              <ArrowRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                strokeWidth={1.75}
-              />
-            </a>
-          </Reveal>
-        </div>
-      </div>
+      <RecambioFeature />
     </section>
   );
 }

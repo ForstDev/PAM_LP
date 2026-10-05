@@ -43,9 +43,9 @@ export function Header() {
           <Link href="#top" className="flex items-center gap-2 justify-self-start">
             <Image
               src="/logo-horizontal.svg"
-              alt="PerúAyudemosMás"
-              width={560}
-              height={100}
+              alt="AyudemosMás Perú"
+              width={504}
+              height={90}
               className="h-12 w-auto sm:h-14"
               priority
             />
