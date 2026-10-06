@@ -31,7 +31,7 @@ const series = [
   {
     id: "animales",
     name: "Animales en abandono",
-    color: "#000000",
+    color: "#ffffff",
     values: [3, 5, 9, 8, 18, 22, 28, 36, 44],
   },
 ] as const;
@@ -111,13 +111,15 @@ export function DonationGrowth() {
                   onFocus={() => setHovered(s.id)}
                   onBlur={() => setHovered(null)}
                   aria-label={`Resaltar ${s.name} en el gráfico`}
-                  className={`flex w-full items-center gap-3 rounded-full border bg-white px-4 py-2.5 text-left font-medium text-foreground transition-colors ${
-                    hovered === s.id ? "border-foreground" : "border-foreground/30"
+                  className={`flex w-full items-center gap-3 rounded-full bg-white px-4 py-2.5 text-left font-medium text-foreground transition-all duration-200 ${
+                    hovered === s.id
+                      ? "translate-x-1 shadow-lg shadow-azul/30"
+                      : "shadow-sm shadow-azul/10"
                   }`}
                 >
                   <span
                     aria-hidden
-                    className="h-3.5 w-3.5 flex-shrink-0 rounded-full"
+                    className="h-3.5 w-3.5 flex-shrink-0 rounded-full ring-1 ring-navy/40"
                     style={{ backgroundColor: s.color }}
                   />
                   {s.name}
@@ -128,7 +130,7 @@ export function DonationGrowth() {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <figure className="rounded-3xl border border-foreground bg-white p-4 sm:p-6">
+          <figure className="rounded-3xl bg-navy p-4 text-white shadow-xl shadow-navy/20 sm:p-6">
             <div className="relative">
               <svg
                 viewBox={`0 0 ${W} ${H}`}
@@ -143,8 +145,8 @@ export function DonationGrowth() {
                     x2={W - PAD.r}
                     y1={py(v)}
                     y2={py(v)}
-                    stroke="#000"
-                    strokeOpacity={v === 0 ? 0.6 : 0.12}
+                    stroke="#fff"
+                    strokeOpacity={v === 0 ? 0.5 : 0.14}
                     strokeDasharray={v === 0 ? undefined : "4 6"}
                   />
                 ))}
@@ -155,8 +157,8 @@ export function DonationGrowth() {
                     x2={px(i * 2, 9)}
                     y1={PAD.t}
                     y2={py(0)}
-                    stroke="#000"
-                    strokeOpacity={0.12}
+                    stroke="#fff"
+                    strokeOpacity={0.14}
                     strokeDasharray="4 6"
                   />
                 ))}
@@ -179,7 +181,7 @@ export function DonationGrowth() {
                         d={smoothPath(pts)}
                         fill="none"
                         stroke={s.color}
-                        strokeWidth={s.id === "animales" ? 3.5 : 5}
+                        strokeWidth={5}
                         strokeLinecap="round"
                         strokeLinejoin="round"
                         initial={{ pathLength: reduceMotion ? 1 : 0 }}
@@ -196,8 +198,8 @@ export function DonationGrowth() {
                         cy={last[1]}
                         r={8}
                         fill={s.color}
-                        stroke="#000"
-                        strokeWidth={2}
+                        stroke="#434b56"
+                        strokeWidth={3}
                         initial={{ opacity: reduceMotion ? 1 : 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true, amount: 0.5 }}
@@ -211,7 +213,7 @@ export function DonationGrowth() {
                 })}
               </svg>
 
-              <div className="relative mt-3 h-[4.5rem] text-xs leading-tight text-foreground sm:h-12 sm:text-sm">
+              <div className="relative mt-3 h-[4.5rem] text-xs leading-tight text-white sm:h-12 sm:text-sm">
                 {xLabels.map((label, i) => (
                   <p
                     key={label.top}
@@ -236,11 +238,11 @@ export function DonationGrowth() {
               </div>
             </div>
 
-            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-foreground pt-4">
-              <span className="rounded-full border border-foreground px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-foreground">
+            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/20 pt-4">
+              <span className="rounded-full bg-verde px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-foreground">
                 Gráfico ilustrativo, sin cifras
               </span>
-              <span className="max-w-sm text-sm text-foreground">
+              <span className="max-w-sm text-sm text-white">
                 Junto a AyudemosMás Perú, diversas caridades y ONGs tendrán más
                 ayuda en sus misiones.
               </span>

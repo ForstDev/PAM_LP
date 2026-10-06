@@ -89,7 +89,7 @@ export function NgoSection() {
               {areas.map((area) => (
                 <li
                   key={area}
-                  className="rounded-full border border-foreground px-3.5 py-1.5 text-sm font-medium text-foreground"
+                  className="rounded-full bg-white px-3.5 py-1.5 text-sm font-medium text-foreground shadow-sm shadow-azul/20"
                 >
                   {area}
                 </li>

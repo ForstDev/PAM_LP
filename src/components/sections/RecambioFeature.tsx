@@ -32,7 +32,7 @@ export function RecambioFeature() {
             href="https://www.recambio.pe/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-8 inline-flex items-center gap-2 rounded-full border border-foreground bg-white px-6 py-3 text-sm font-semibold text-foreground transition-transform hover:scale-105"
+            className="group mt-8 inline-flex items-center gap-2 rounded-full bg-verde px-7 py-3.5 text-base font-semibold text-foreground transition-transform hover:scale-105"
           >
             Conoce a Recambio
             <ArrowRight
@@ -79,7 +79,7 @@ export function RecambioFeature() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.6 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0.6 }}
-              className="absolute -bottom-1 left-1/2 w-max max-w-[92%] -translate-x-1/2 rounded-full border border-foreground bg-white px-4 py-2 text-center text-xs font-medium text-foreground sm:text-sm"
+              className="absolute -bottom-1 left-1/2 w-max max-w-[92%] -translate-x-1/2 rounded-full bg-white px-4 py-2 text-center text-xs font-medium text-foreground shadow-lg shadow-azul/30 sm:text-sm"
             >
               Cumbre Perú Sostenible 2026
             </motion.p>

@@ -20,13 +20,17 @@ const imageTint = {
 
 function MissionDetail({ mission }: { mission: Mission }) {
   return (
-    <article className="rounded-3xl border border-foreground bg-white p-5 sm:p-6">
+    <article className="rounded-3xl bg-white p-5 shadow-xl shadow-azul/20 sm:p-7">
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-full border border-foreground px-3 py-1 text-xs font-semibold text-foreground">
+        <span
+          className={`rounded-full px-3 py-1 text-xs font-semibold text-foreground ${fillColor[mission.color]}`}
+        >
           {mission.ods}
         </span>
         {mission.framework && (
-          <span className="rounded-full border border-foreground px-3 py-1 text-xs font-medium text-foreground">
+          <span
+            className={`rounded-full px-3 py-1 text-xs font-medium text-foreground ${imageTint[mission.color]}`}
+          >
             {mission.framework}
           </span>
         )}
@@ -40,7 +44,7 @@ function MissionDetail({ mission }: { mission: Mission }) {
           Así lo importante queda arriba y se scrollea menos. */}
       <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:items-stretch">
         <div
-          className={`flex aspect-[16/9] w-full flex-col items-center justify-center gap-2 rounded-2xl border border-dashed border-foreground sm:aspect-auto sm:min-h-[12rem] ${imageTint[mission.color]}`}
+          className={`flex aspect-[16/9] w-full flex-col items-center justify-center gap-2 rounded-2xl sm:aspect-auto sm:min-h-[12rem] ${imageTint[mission.color]}`}
         >
           <ImageIcon className="h-8 w-8 text-foreground" strokeWidth={1.25} />
           <span className="text-xs font-medium text-foreground">
@@ -68,7 +72,7 @@ function MissionDetail({ mission }: { mission: Mission }) {
         </div>
       </div>
 
-      <div className="mt-5 border-t border-foreground pt-5">
+      <div className={`mt-5 rounded-2xl p-5 ${imageTint[mission.color]}`}>
         {mission.stats ? (
           <>
             <div
@@ -101,7 +105,7 @@ function MissionDetail({ mission }: { mission: Mission }) {
             )}
           </>
         ) : (
-          <p className="inline-block rounded-full border border-foreground px-3 py-1 text-xs font-medium text-foreground">
+          <p className="text-sm font-medium text-foreground">
             {mission.note ?? "Dato y fuente pendientes"}
           </p>
         )}
@@ -134,10 +138,8 @@ export function MissionBoard() {
                 animate={{ x: isActive ? 0 : -10 }}
                 whileHover={{ x: isActive ? 0 : -4 }}
                 transition={{ duration: reduceMotion ? 0 : 0.25, ease: "easeOut" }}
-                className={`relative flex w-full items-center gap-4 overflow-hidden rounded-2xl border py-4 pl-6 pr-4 text-left transition-[background-color,border-color,box-shadow] duration-300 ${
-                  isActive
-                    ? "border-foreground bg-white shadow-md"
-                    : "border-foreground/40 bg-white/60"
+                className={`relative flex w-full items-center gap-4 overflow-hidden rounded-2xl py-4 pl-6 pr-4 text-left transition-[background-color,box-shadow] duration-300 ${
+                  isActive ? "bg-white shadow-lg shadow-azul/25" : "bg-white/55"
                 }`}
               >
                 <motion.span

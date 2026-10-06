@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { site } from "@/lib/site";
+import { MotionProvider } from "@/components/MotionProvider";
 import "./globals.css";
 
 // Tipografías reales del manual de marca — autohospedadas, no sustitutos de
@@ -83,7 +84,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="es" className={`${outfit.variable} ${freeserif.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        {children}
+        <MotionProvider>{children}</MotionProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
