@@ -45,13 +45,18 @@ export function CatalogCarousel() {
         {categories.map((category, index) => {
           const Icon = category.icon;
           return (
-            <motion.div
+            // Por ahora son botones sin destino: todavía no hay tienda a la que
+            // llevar (cuando exista la URL de la tienda, aquí va el enlace).
+            <motion.button
+              type="button"
               key={category.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.45, ease: "easeOut", delay: (index % 3) * 0.1 }}
-              className="flex min-w-[65%] flex-shrink-0 items-center gap-5 rounded-3xl border border-foreground bg-white p-5 sm:min-w-0"
+              whileHover={{ y: -4 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex min-w-[65%] flex-shrink-0 cursor-pointer items-center gap-5 rounded-3xl border border-foreground bg-white p-5 text-left transition-colors hover:bg-verde/15 sm:min-w-0"
             >
               <SignatureCircle
                 color={circleColors[index % circleColors.length]}
@@ -66,7 +71,7 @@ export function CatalogCarousel() {
               <p className="text-lg font-semibold text-foreground">
                 {category.name}
               </p>
-            </motion.div>
+            </motion.button>
           );
         })}
       </div>

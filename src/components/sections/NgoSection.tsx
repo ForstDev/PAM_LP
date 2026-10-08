@@ -1,19 +1,8 @@
 import Image from "next/image";
-import { waLink } from "@/lib/whatsapp";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
 import { SignatureCircle } from "@/components/SignatureCircle";
-
-const areas = [
-  "Nutrición",
-  "Salud",
-  "Agua",
-  "Educación",
-  "Animales",
-  "Amazonas",
-  "Paz",
-  "Tecnología",
-];
+import { AffiliationPanel } from "./AffiliationPanel";
 
 export function NgoSection() {
   return (
@@ -43,7 +32,7 @@ export function NgoSection() {
             >
               {/* Ilustración del manual de marca: negro con las manos
                   "calando" el fondo, que es el verde de la marca. */}
-              <div className="aspect-square w-full overflow-hidden rounded-full bg-verde">
+              <div className="aspect-square w-full overflow-hidden rounded-full border-[10px] border-black bg-verde">
                 <Image
                   src="/manos-alianza.svg"
                   alt="Manos unidas en círculo, símbolo de alianza"
@@ -61,51 +50,9 @@ export function NgoSection() {
           </div>
         </Reveal>
 
-        <div>
-          <Reveal>
-            <div className="flex items-center gap-3">
-              <span aria-hidden className="h-0.5 w-8 bg-verde" />
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
-                Afiliación
-              </p>
-            </div>
-            <h2 className="mt-5 font-serif text-3xl font-bold leading-tight text-foreground sm:text-5xl">
-              ¿Representas una
-              <br />
-              organización
-              <br />
-              con una causa social?
-            </h2>
-            <p className="text-impact mt-5 text-2xl sm:text-3xl">
-              Súmate para formar el cambio
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
-              Misiones en las que podemos apoyarte
-            </p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {areas.map((area) => (
-                <li
-                  key={area}
-                  className="rounded-full bg-white px-3.5 py-1.5 text-sm font-medium text-foreground shadow-sm shadow-azul/20"
-                >
-                  {area}
-                </li>
-              ))}
-            </ul>
-
-            <a
-              href={waLink("Hola, represento a una organización con una causa social y quiero conversar sobre una alianza.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-10 inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105"
-            >
-              Conversemos
-            </a>
-          </Reveal>
-        </div>
+        <Reveal>
+          <AffiliationPanel />
+        </Reveal>
       </div>
     </section>
   );

@@ -23,15 +23,9 @@ const series = [
     values: [6, 10, 16, 19, 30, 38, 48, 60, 74],
   },
   {
-    id: "guerra",
-    name: "Víctimas de guerra",
-    color: "#7ba4db",
-    values: [4, 9, 12, 17, 22, 31, 36, 47, 56],
-  },
-  {
     id: "animales",
     name: "Animales en abandono",
-    color: "#ffffff",
+    color: "#7ba4db",
     values: [3, 5, 9, 8, 18, 22, 28, 36, 44],
   },
 ] as const;
@@ -78,7 +72,7 @@ export function DonationGrowth() {
 
   return (
     <section
-      id="impacto"
+      id="donaciones"
       className="relative isolate overflow-hidden bg-verde/15 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="-right-16 top-20 h-64 w-64 bg-celeste/25 blur-2xl" />
@@ -90,14 +84,15 @@ export function DonationGrowth() {
           <div className="flex items-center gap-3">
             <span aria-hidden className="h-0.5 w-8 bg-verde" />
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
-              Hacia dónde va tu ayuda
+              Donaciones
             </p>
           </div>
           <h2 className="mt-5 font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
-            Mientras más compras, más ayuda llega
+            ¿A quién llega tu ayuda?
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-foreground">
-            Así crecerá la ayuda desde la puesta en marcha. Los montos reales se
+            Mientras más compras, más ayuda llega. Así crecerá desde la puesta en
+            marcha. Los montos reales se
             publicarán cada mes a partir de las primeras ventas.
           </p>
 
@@ -136,7 +131,7 @@ export function DonationGrowth() {
                 viewBox={`0 0 ${W} ${H}`}
                 className="h-auto w-full"
                 role="img"
-                aria-label="Gráfico ilustrativo: la ayuda a familias con hambre, hospitales, víctimas de guerra y animales en abandono crece desde la puesta en marcha hasta el primer año."
+                aria-label="Gráfico ilustrativo: la ayuda a familias con hambre, hospitales y animales en abandono crece desde la puesta en marcha hasta el primer año."
               >
                 {[0, 25, 50, 75, 100].map((v) => (
                   <line

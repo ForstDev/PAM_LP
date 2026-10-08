@@ -17,9 +17,8 @@ export function IssuesSection() {
             Los desafíos que nos mueven a ayudar
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">
-            Cada compra impulsa el trabajo de organizaciones que enfrentan
-            estos desafíos en el Perú y en el mundo. Conoce cada misión y la
-            ayuda que recibe.
+            Cada compra impulsa causas en el Perú y en el mundo. Elige un tema
+            y conoce la ayuda que recibe.
           </p>
         </Reveal>
 

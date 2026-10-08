@@ -10,13 +10,13 @@ const pillars = [
     icon: HandHeart,
     color: "verde" as const,
     title: "Ayuda inmediata",
-    text: "Los fondos llegan directo a organizaciones que ya trabajan en el terreno, sin intermediarios en el camino.",
+    text: "Los fondos llegan directo a las causas, sin intermediarios en el camino.",
   },
   {
     icon: TrendingUp,
     color: "celeste" as const,
-    title: "Fondo constante",
-    text: "Cada compra semanal se convierte en una fuente de ingresos que se sostiene en el tiempo, no en una donación aislada.",
+    title: "Un nuevo ingreso para las ONGs",
+    text: "Cada compra suma a una fuente de ingresos que se sostiene en el tiempo, no a una donación aislada.",
   },
   {
     // Único lugar de toda la landing donde se menciona política, por pedido
@@ -24,7 +24,7 @@ const pillars = [
     icon: Scale,
     color: "azul" as const,
     title: "Ayudar no tiene partido",
-    text: "Somos parte del movimiento cultural MÁS, independiente y apartidario. No respaldamos partidos ni candidaturas.",
+    text: "Somos parte del movimiento cultural MÁS, no político ni partidario. Somos ciudadanos independientes.",
   },
 ];
 
@@ -58,9 +58,8 @@ export function WhoWeAre() {
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground">
             Somos AyudemosMás Perú, parte del movimiento cultural MÁS.
-            Revendemos productos de primera necesidad y destinamos el 100% de
-            nuestras ganancias a organizaciones que ya vienen trabajando en
-            distintas causas sociales del Perú.
+            Destinamos el 100% de nuestras ganancias a causas sociales del
+            Perú.
           </p>
         </Reveal>
       </div>

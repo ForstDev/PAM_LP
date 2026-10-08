@@ -1,192 +1,215 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ImageIcon } from "lucide-react";
+import Image from "next/image";
+import { AnimatePresence, motion } from "motion/react";
+import { Globe, ImageIcon, MapPin } from "lucide-react";
 import { StatCounter } from "@/components/StatCounter";
-import { missions, type Mission } from "./issuesData";
+import { groups, missions, type Mission } from "./issuesData";
 
-const fillColor = {
+const solid = {
   verde: "bg-verde",
   celeste: "bg-celeste",
   azul: "bg-azul",
 } as const;
 
-const imageTint = {
-  verde: "bg-verde/20",
-  celeste: "bg-celeste/20",
-  azul: "bg-azul/20",
+const tint = {
+  verde: "bg-verde/25",
+  celeste: "bg-celeste/25",
+  azul: "bg-azul/25",
 } as const;
+
+// Foto circular de la misión. Mientras no esté la foto, un marcador del
+// mismo color mantiene el espacio y la forma.
+function MissionPhoto({ mission }: { mission: Mission }) {
+  if (!mission.image) {
+    return (
+      <div
+        className={`flex aspect-square w-full items-center justify-center rounded-full ${tint[mission.color]}`}
+      >
+        <ImageIcon className="h-1/3 w-1/3 text-foreground" strokeWidth={1.25} />
+      </div>
+    );
+  }
+  return (
+    <Image
+      src={mission.image.src}
+      alt={mission.image.alt}
+      width={480}
+      height={480}
+      className="aspect-square w-full rounded-full object-cover"
+      sizes="(min-width: 768px) 240px, 192px"
+    />
+  );
+}
 
 function MissionDetail({ mission }: { mission: Mission }) {
   return (
-    <article className="rounded-3xl bg-white p-5 shadow-xl shadow-azul/20 sm:p-7">
-      <div className="flex flex-wrap items-center gap-2">
-        <span
-          className={`rounded-full px-3 py-1 text-xs font-semibold text-foreground ${fillColor[mission.color]}`}
-        >
-          {mission.ods}
-        </span>
-        {mission.framework && (
+    <article className="rounded-3xl bg-white p-6 shadow-xl shadow-azul/20 sm:p-8">
+      <div className="grid items-center gap-8 md:grid-cols-[minmax(0,15rem)_1fr] lg:gap-12">
+        <div className="relative mx-auto w-full max-w-[12rem] md:max-w-none">
+          <div
+            aria-hidden
+            className={`absolute -bottom-3 -right-3 h-[80%] w-[80%] rounded-full ${solid[mission.color]}`}
+          />
+          <div className="relative">
+            <MissionPhoto mission={mission} />
+          </div>
+        </div>
+
+        <div>
           <span
-            className={`rounded-full px-3 py-1 text-xs font-medium text-foreground ${imageTint[mission.color]}`}
+            className={`inline-block rounded-full px-3 py-1 text-xs font-semibold text-foreground ${solid[mission.color]}`}
           >
-            {mission.framework}
+            {mission.ods}
           </span>
-        )}
-      </div>
+          <h3 className="mt-3 font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+            {mission.title}
+          </h3>
 
-      <h3 className="mt-3 font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-        {mission.title}
-      </h3>
-
-      {/* Imagen a media tarjeta a la izquierda; Perú y mundo a su derecha.
-          Así lo importante queda arriba y se scrollea menos. */}
-      <div className="mt-5 grid gap-5 sm:grid-cols-2 sm:items-stretch">
-        <div
-          className={`flex aspect-[16/9] w-full flex-col items-center justify-center gap-2 rounded-2xl sm:aspect-auto sm:min-h-[12rem] ${imageTint[mission.color]}`}
-        >
-          <ImageIcon className="h-8 w-8 text-foreground" strokeWidth={1.25} />
-          <span className="text-xs font-medium text-foreground">
-            Imagen por definir
-          </span>
-        </div>
-
-        <div className="flex flex-col justify-center gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
-              En el Perú
-            </p>
-            <p className="mt-1.5 leading-relaxed text-foreground">
-              {mission.peru}
-            </p>
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-foreground">
-              En el mundo
-            </p>
-            <p className="mt-1.5 leading-relaxed text-foreground">
-              {mission.world}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div className={`mt-5 rounded-2xl p-5 ${imageTint[mission.color]}`}>
-        {mission.stats ? (
-          <>
-            <div
-              className={`grid gap-x-6 gap-y-4 ${
-                mission.stats.length > 1 ? "sm:grid-cols-2" : ""
-              }`}
-            >
-              {mission.stats.map((stat) => (
-                <div key={stat.label}>
-                  <p className="text-3xl font-bold text-foreground">
-                    <StatCounter
-                      to={stat.value}
-                      decimals={stat.decimals}
-                      suffix={stat.suffix}
-                    />
-                  </p>
-                  <p className="text-sm text-foreground">{stat.label}</p>
-                </div>
-              ))}
+          {mission.stat ? (
+            <div className="mt-5">
+              <p className="text-4xl font-bold leading-none text-foreground sm:text-5xl">
+                <StatCounter
+                  to={mission.stat.value}
+                  decimals={mission.stat.decimals}
+                  suffix={mission.stat.suffix}
+                />
+              </p>
+              <p className="mt-2 text-base leading-snug text-foreground">
+                {mission.stat.label}
+              </p>
+              {mission.source && (
+                <p className="mt-1 text-xs text-foreground">
+                  Fuente: {mission.source}
+                </p>
+              )}
             </div>
-            {mission.context && (
-              <p className="mt-4 leading-relaxed text-foreground">
-                {mission.context}
-              </p>
-            )}
-            {mission.source && (
-              <p className="mt-3 text-xs text-foreground">
-                Fuente: {mission.source}
-              </p>
-            )}
-          </>
-        ) : (
-          <p className="text-sm font-medium text-foreground">
-            {mission.note ?? "Dato y fuente pendientes"}
-          </p>
-        )}
+          ) : (
+            <p className="mt-5 text-base font-medium text-foreground">
+              {mission.note ?? "Dato y fuente pendientes"}
+            </p>
+          )}
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {[
+              { icon: MapPin, label: "En el Perú", text: mission.peru },
+              { icon: Globe, label: "En el mundo", text: mission.world },
+            ].map(({ icon: Icon, label, text }) => (
+              <div key={label} className={`rounded-2xl p-4 ${tint[mission.color]}`}>
+                <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-foreground">
+                  <Icon className="h-4 w-4" strokeWidth={1.75} />
+                  {label}
+                </p>
+                <p className="mt-2 leading-snug text-foreground">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </article>
   );
 }
 
 export function MissionBoard() {
-  const [activeId, setActiveId] = useState<string>(missions[0].id);
-  const active = missions.find((m) => m.id === activeId) ?? missions[0];
-  const reduceMotion = useReducedMotion();
+  const [groupId, setGroupId] = useState(groups[0].id);
+  const [missionId, setMissionId] = useState(groups[0].missionIds[0]);
+
+  const group = groups.find((g) => g.id === groupId) ?? groups[0];
+  const groupMissions = group.missionIds
+    .map((id) => missions.find((m) => m.id === id))
+    .filter((m): m is Mission => Boolean(m));
+  const active = groupMissions.find((m) => m.id === missionId) ?? groupMissions[0];
+
+  const selectGroup = (id: string) => {
+    const next = groups.find((g) => g.id === id);
+    if (!next) return;
+    setGroupId(id);
+    setMissionId(next.missionIds[0]);
+  };
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,26rem)_1fr] lg:items-start lg:gap-12">
-      {/* Cada misión es una barra. La elegida se llena de color de izquierda
-          a derecha, como una barra de gráfico; las demás retroceden un poco
-          a la izquierda y se aclaran (solo la superficie: el texto sigue
-          negro y legible). En mobile el detalle se abre bajo la barra. */}
-      <ul className="flex flex-col gap-3">
-        {missions.map((mission) => {
-          const isActive = mission.id === activeId;
+    <div>
+      {/* Paso 1: elegir un tema. Cuatro pestañas en vez de once elementos. */}
+      <div
+        role="tablist"
+        aria-label="Temas de las misiones"
+        className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap"
+      >
+        {groups.map((g) => {
+          const selected = g.id === groupId;
           return (
-            <li key={mission.id}>
-              <motion.button
-                type="button"
-                onClick={() => setActiveId(mission.id)}
-                aria-expanded={isActive}
-                aria-controls={`mission-${mission.id}`}
-                animate={{ x: isActive ? 0 : -10 }}
-                whileHover={{ x: isActive ? 0 : -4 }}
-                transition={{ duration: reduceMotion ? 0 : 0.25, ease: "easeOut" }}
-                className={`relative flex w-full items-center gap-4 overflow-hidden rounded-2xl py-4 pl-6 pr-4 text-left transition-[background-color,box-shadow] duration-300 ${
-                  isActive ? "bg-white shadow-lg shadow-azul/25" : "bg-white/55"
-                }`}
-              >
+            <button
+              key={g.id}
+              type="button"
+              role="tab"
+              aria-selected={selected}
+              onClick={() => selectGroup(g.id)}
+              className="relative rounded-full px-5 py-3 text-sm font-semibold text-foreground sm:text-base"
+            >
+              {selected && (
                 <motion.span
+                  layoutId="group-pill"
                   aria-hidden
-                  initial={false}
-                  animate={{ scaleX: isActive ? 1 : 0 }}
-                  transition={{
-                    duration: reduceMotion ? 0 : 0.55,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  className={`absolute inset-0 origin-left ${fillColor[mission.color]}`}
+                  className="absolute inset-0 rounded-full bg-verde"
+                  transition={{ type: "spring", stiffness: 420, damping: 36 }}
                 />
+              )}
+              {!selected && (
                 <span
                   aria-hidden
-                  className={`absolute inset-y-0 left-0 w-2 ${fillColor[mission.color]}`}
+                  className="absolute inset-0 rounded-full bg-white/60"
                 />
-                <span className="relative text-sm font-semibold tabular-nums text-foreground">
-                  {mission.number}
-                </span>
-                <span className="relative font-medium leading-snug text-foreground">
-                  {mission.title}
-                </span>
-              </motion.button>
+              )}
+              <span className="relative">{g.label}</span>
+            </button>
+          );
+        })}
+      </div>
 
-              <AnimatePresence initial={false}>
-                {isActive && (
-                  <motion.div
-                    id={`mission-${mission.id}`}
-                    key="detail"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
+      {/* Paso 2: elegir una misión del tema (2 a 4 fotos circulares). */}
+      <ul className="mt-8 flex justify-between gap-x-2 sm:justify-start sm:gap-x-10">
+        {groupMissions.map((mission) => {
+          const selected = mission.id === active.id;
+          return (
+            <li key={mission.id}>
+              <button
+                type="button"
+                onClick={() => setMissionId(mission.id)}
+                aria-pressed={selected}
+                className="group flex w-[4.75rem] flex-col items-center gap-2 text-center sm:w-28"
+              >
+                <span className="relative block h-16 w-16 sm:h-24 sm:w-24">
+                  <motion.span
+                    aria-hidden
+                    initial={false}
+                    animate={{ scale: selected ? 1 : 0.6, opacity: selected ? 1 : 0 }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
-                    className="overflow-hidden lg:hidden"
+                    className={`absolute -bottom-1.5 -right-1.5 h-[85%] w-[85%] rounded-full ${solid[mission.color]}`}
+                  />
+                  <span
+                    className={`relative block h-full w-full overflow-hidden rounded-full transition-all duration-300 ${
+                      selected ? "" : "opacity-70 group-hover:opacity-100"
+                    }`}
                   >
-                    <div className="pt-3">
-                      <MissionDetail mission={mission} />
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    <MissionPhoto mission={mission} />
+                  </span>
+                </span>
+                <span
+                  className={`text-sm leading-tight text-foreground ${
+                    selected ? "font-semibold" : "font-medium"
+                  }`}
+                >
+                  {mission.name}
+                </span>
+              </button>
             </li>
           );
         })}
       </ul>
 
-      <div className="hidden lg:sticky lg:top-28 lg:block">
+      {/* Paso 3: el detalle de la misión elegida. */}
+      <div className="mt-8" aria-live="polite">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={active.id}

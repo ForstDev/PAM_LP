@@ -15,6 +15,7 @@ import { waLink } from "@/lib/whatsapp";
 const navLinks = [
   { href: "#quienes-somos", label: "¿Quiénes somos?" },
   { href: "#problematicas", label: "Problemáticas" },
+  { href: "#donaciones", label: "Donaciones" },
   { href: "#productos", label: "Productos" },
   { href: "#afiliacion", label: "Afiliación" },
 ];
@@ -109,8 +110,8 @@ export function Header() {
               transition={{ duration: 0.35, ease: "easeOut" }}
               style={{
                 transformOrigin: "top right",
-                width: "min(85vw, 400px)",
-                height: "min(85vw, 400px)",
+                width: "min(100vw, 440px)",
+                height: "min(100vw, 440px)",
                 borderBottomLeftRadius: "100%",
               }}
               className="fixed right-0 top-0 z-40 bg-verde/85 shadow-xl backdrop-blur-sm lg:hidden"
