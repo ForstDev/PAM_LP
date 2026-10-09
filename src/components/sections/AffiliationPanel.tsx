@@ -61,7 +61,7 @@ export function AffiliationPanel() {
               role="tab"
               aria-selected={selected}
               onClick={() => setAudience(tab.id)}
-              className="relative rounded-full px-4 py-3 text-sm font-semibold text-foreground sm:px-6"
+              className="relative whitespace-nowrap rounded-full px-4 py-3 text-sm font-semibold text-foreground sm:px-5"
             >
               {selected && (
                 <motion.span

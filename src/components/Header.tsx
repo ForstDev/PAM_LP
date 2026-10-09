@@ -52,7 +52,7 @@ export function Header() {
             />
           </Link>
 
-          <nav className="hidden items-center justify-center gap-7 lg:flex">
+          <nav className="hidden items-center justify-center gap-7 whitespace-nowrap xl:flex">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -80,7 +80,7 @@ export function Header() {
               onClick={() => setMobileOpen((open) => !open)}
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-              className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full text-foreground lg:hidden"
+              className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full text-foreground xl:hidden"
             >
               {mobileOpen ? (
                 <X className="h-6 w-6" strokeWidth={1.75} />
@@ -101,7 +101,7 @@ export function Header() {
               type="button"
               aria-label="Cerrar menú"
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 z-40 lg:hidden"
+              className="fixed inset-0 z-40 xl:hidden"
             />
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -114,7 +114,7 @@ export function Header() {
                 height: "min(100vw, 440px)",
                 borderBottomLeftRadius: "100%",
               }}
-              className="fixed right-0 top-0 z-40 bg-verde/85 shadow-xl backdrop-blur-sm lg:hidden"
+              className="fixed right-0 top-0 z-40 bg-verde/85 shadow-xl backdrop-blur-sm xl:hidden"
             >
               <div className="flex h-full flex-col items-end justify-start gap-1.5 pt-20 pr-6 text-right">
                 {navLinks.map((link) => (

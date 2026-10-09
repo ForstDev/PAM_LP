@@ -30,18 +30,17 @@ export function NgoSection() {
               className="w-full"
               circleClassName="-bottom-5 -left-5 h-[85%] w-[85%]"
             >
-              {/* Ilustración del manual de marca: negro con las manos
-                  "calando" el fondo, que es el verde de la marca. */}
-              <div className="aspect-square w-full overflow-hidden rounded-full border-[10px] border-black bg-verde">
-                <Image
-                  src="/manos-alianza.svg"
-                  alt="Manos unidas en círculo, símbolo de alianza"
-                  width={1600}
-                  height={1066}
-                  className="h-full w-full object-cover object-[50%_55%]"
-                  sizes="(min-width: 1024px) 448px, 320px"
-                />
-              </div>
+              {/* Ilustración del manual de marca, rasterizada y recortada hacia
+                  adentro: el calco SVG original dejaba un borde transparente
+                  que se veía como un anillo verde dentro del círculo. */}
+              <Image
+                src="/manos-alianza.webp"
+                alt="Manos unidas en círculo, símbolo de alianza"
+                width={900}
+                height={900}
+                className="aspect-square w-full rounded-full object-cover"
+                sizes="(min-width: 1024px) 448px, 320px"
+              />
             </SignatureCircle>
             <div
               aria-hidden
