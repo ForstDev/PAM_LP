@@ -30,12 +30,11 @@ export function NgoSection() {
               className="w-full"
               circleClassName="-bottom-5 -left-5 h-[85%] w-[85%]"
             >
-              {/* Ilustración del manual de marca, rasterizada y recortada hacia
-                  adentro: el calco SVG original dejaba un borde transparente
-                  que se veía como un anillo verde dentro del círculo. */}
+              {/* Foto en color (JPG original del cliente), recortada en cuadrado
+                  y centrada en las manos; el círculo lo da rounded-full. */}
               <Image
-                src="/manos-alianza.webp"
-                alt="Manos unidas en círculo, símbolo de alianza"
+                src="/manos-circulo.webp"
+                alt="Personas sentadas en círculo uniendo sus manos sobre el pasto"
                 width={900}
                 height={900}
                 className="aspect-square w-full rounded-full object-cover"
