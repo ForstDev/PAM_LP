@@ -1,42 +1,63 @@
 "use client";
 
 import { useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
 import { waLink } from "@/lib/whatsapp";
-import { groups } from "./issuesData";
 
-type Audience = "ong" | "bodega";
+type Audience = "ong" | "marca";
 
 const tabs: { id: Audience; label: string }[] = [
-  { id: "ong", label: "Soy una organización" },
-  { id: "bodega", label: "Tengo una bodega" },
+  { id: "ong", label: "Organizaciones" },
+  { id: "marca", label: "Marcas y bodegas" },
 ];
 
-const content = {
+// Contenido de los brochures del manual: «para ONGs» (10.3) y «para marcas»
+// (10.5). Misma estructura en ambos para que el cambio sea suave.
+const panels: Record<
+  Audience,
+  {
+    title: string;
+    impact: string;
+    steps: { title: string; text: string }[];
+    cta: string;
+    message: string;
+  }
+> = {
   ong: {
     title: "¿Representas una organización con una causa social?",
-    impact: "Súmate para formar el cambio",
+    impact: "Tu causa, en cada compra.",
+    steps: [
+      { title: "Conversamos", text: "Nos cuentas tu causa y lo que más necesitas." },
+      { title: "Validamos", text: "Revisamos la acreditación y el sustento de tu organización." },
+      { title: "Acordamos", text: "Definimos juntos cómo se asignan y reportan los fondos." },
+      { title: "Contamos tu historia", text: "Presentamos tu causa a nuestra comunidad." },
+    ],
     cta: "Quiero sumar mi organización",
     message:
       "Hola, represento a una organización con una causa social y quiero conversar sobre una alianza.",
   },
-  bodega: {
-    title: "¿Tienes una bodega y quieres ayudar?",
-    impact: "Suma tu bodega a la causa",
-    cta: "Quiero sumar mi bodega",
+  marca: {
+    title: "¿Tienes una marca o una bodega?",
+    impact: "Vende más. Ayuda más.",
+    steps: [
+      { title: "Conversamos", text: "Nos presentas tu marca o bodega y tus productos." },
+      { title: "Acordamos", text: "Definimos precios, stock, envíos y condiciones." },
+      { title: "Publicamos", text: "Tus productos llegan a la tienda con tu historia." },
+      { title: "Compartimos el impacto", text: "Te contamos lo que generaron tus ventas." },
+    ],
+    cta: "Quiero sumar mi marca o bodega",
     message:
-      "Hola, tengo una bodega y quiero conversar sobre cómo sumarme a la causa vendiendo productos de primera necesidad.",
+      "Hola, tengo una marca o bodega y quiero conversar sobre cómo vender con ustedes y sumarme a la causa.",
   },
-} as const;
+};
 
 /**
- * Bloque de afiliación con dos públicos: organizaciones sociales y bodegas
- * aliadas. Un selector arriba cambia el contenido sin alargar la sección.
+ * Afiliación con dos públicos. Los dos paneles ocupan la misma celda de la
+ * grilla: el bloque siempre mide lo del panel más alto y el cambio entre
+ * pestañas es un fundido, sin saltos de altura.
  */
 export function AffiliationPanel() {
   const [audience, setAudience] = useState<Audience>("ong");
-  const current = content[audience];
 
   return (
     <div>
@@ -57,9 +78,11 @@ export function AffiliationPanel() {
           return (
             <button
               key={tab.id}
+              id={`tab-${tab.id}`}
               type="button"
               role="tab"
               aria-selected={selected}
+              aria-controls={`panel-${tab.id}`}
               onClick={() => setAudience(tab.id)}
               className="relative whitespace-nowrap rounded-full px-4 py-3 text-sm font-semibold text-foreground sm:px-5"
             >
@@ -77,72 +100,69 @@ export function AffiliationPanel() {
         })}
       </div>
 
-      <div className="mt-6 min-h-[22rem]" aria-live="polite">
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={audience}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-          >
-            <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
-              {current.title}
-            </h2>
-            <p className="text-impact mt-4 text-2xl sm:text-3xl">
-              {current.impact}
-            </p>
-
-            {audience === "ong" ? (
-              <>
-                <p className="mt-7 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
-                  Temas en los que podemos apoyarte
-                </p>
-                <ul className="mt-3 grid grid-cols-2 gap-3">
-                  {groups.map((group) => (
-                    <li
-                      key={group.id}
-                      className="rounded-2xl bg-white px-4 py-3 shadow-sm shadow-azul/20"
-                    >
-                      <p className="font-semibold text-foreground">
-                        {group.label}
-                      </p>
-                      <p className="text-sm text-foreground">
-                        {group.missionIds.length} misiones
-                      </p>
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href="#problematicas"
-                  className="group mt-4 inline-flex items-center gap-1.5 py-2 text-sm font-medium text-foreground"
-                >
-                  <span className="border-b border-foreground">
-                    Ver las 11 misiones
-                  </span>
-                  <ArrowRight
-                    className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                    strokeWidth={1.75}
-                  />
-                </a>
-              </>
-            ) : (
-              <p className="mt-7 max-w-md text-lg leading-relaxed text-foreground">
-                Tus productos de primera necesidad pueden ayudar a las causas.
-                Cuéntanos de tu bodega y conversamos cómo sumarla.
-              </p>
-            )}
-
-            <a
-              href={waLink(current.message)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105"
+      <div className="mt-6 grid">
+        {tabs.map(({ id }) => {
+          const panel = panels[id];
+          const isActive = id === audience;
+          return (
+            <div
+              key={id}
+              id={`panel-${id}`}
+              role="tabpanel"
+              aria-labelledby={`tab-${id}`}
+              aria-hidden={!isActive}
+              inert={!isActive}
+              className={`[grid-area:1/1] transition-[opacity,transform,visibility] duration-300 ease-out ${
+                isActive
+                  ? "visible translate-y-0 opacity-100"
+                  : "invisible translate-y-2 opacity-0"
+              }`}
             >
-              {current.cta}
-            </a>
-          </motion.div>
-        </AnimatePresence>
+              <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+                {panel.title}
+              </h2>
+              <p className="text-impact mt-4 text-2xl sm:text-3xl">
+                {panel.impact}
+              </p>
+
+              <p className="mt-7 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
+                Así empezamos
+              </p>
+              <ol className="mt-3 grid gap-3 sm:grid-cols-2">
+                {panel.steps.map((step, index) => (
+                  <li
+                    key={step.title}
+                    className="flex gap-3 rounded-2xl bg-white p-4 shadow-sm shadow-azul/20"
+                  >
+                    <span
+                      aria-hidden
+                      className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-verde text-sm font-bold text-foreground"
+                    >
+                      {index + 1}
+                    </span>
+                    <span>
+                      <span className="block font-semibold text-foreground">
+                        {step.title}
+                      </span>
+                      <span className="mt-0.5 block text-sm leading-snug text-foreground">
+                        {step.text}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+
+              <a
+                href={waLink(panel.message)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105 active:scale-95"
+              >
+                {panel.cta}
+              </a>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

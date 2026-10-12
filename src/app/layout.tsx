@@ -44,19 +44,19 @@ const freeserif = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
-  title: "AyudemosMás Perú | Es hora de ayudar.",
+  title: "AyudemosMás | Es hora de ayudar.",
   description:
-    "Transformamos tu compra en ayuda real. Compra productos de primera necesidad y el 100% de las ganancias va a organizaciones sociales del Perú. Puesta en marcha: 17 de octubre de 2026.",
+    "AyudemosMás es un entorno multiplataforma solidario: el 100% de nuestras ganancias va a organizaciones que trabajan en diversas causas. Puesta en marcha: 17 de octubre de 2026.",
   keywords: [
-    "e-commerce solidario Perú",
-    "AyudemosMás Perú",
-    "tienda benéfica Perú",
+    "entorno multiplataforma solidario",
+    "AyudemosMás",
+    "delivery solidario Perú",
     "comprar y ayudar",
     "tienda que dona sus ganancias",
-    "hambre en el Perú",
+    "comercio solidario Perú",
   ],
   openGraph: {
-    title: "AyudemosMás Perú | E-commerce solidario",
+    title: "AyudemosMás | Entorno multiplataforma solidario",
     description:
       "Transformamos tu compra en ayuda real. Es hora de ayudar.",
     url: site.domain,
@@ -74,8 +74,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "NGO",
   name: site.name,
-  alternateName: "AyudemosMás",
-  url: site.domain,
+    url: site.domain,
   email: site.email,
   slogan: "Transformamos tu compra en ayuda real.",
 };

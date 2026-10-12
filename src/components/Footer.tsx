@@ -32,17 +32,17 @@ export function Footer() {
             <Image
               src="/logo-horizontal.svg"
               alt={site.name}
-              width={504}
-              height={90}
+              width={456}
+              height={99}
               className="h-10 w-auto brightness-0 invert"
             />
             <p className="mt-4 text-sm leading-relaxed text-white">
-              {site.claim}. Parte del movimiento cultural MÁS: Proyectos
-              Benéficos.
+              {site.claim}. Parte de MÁS, un movimiento cultural.
             </p>
             <p className="mt-4 font-serif text-2xl italic text-white">
               {site.tagline}
             </p>
+            <p className="mt-1 text-sm text-white">{site.reach}</p>
           </div>
 
           <div className="text-sm">
@@ -50,7 +50,7 @@ export function Footer() {
             <ul className="mt-1 text-white">
               <li>
                 <a
-                  href={waLink("Hola, quisiera más información sobre AyudemosMás Perú.")}
+                  href={waLink("Hola, quisiera más información sobre AyudemosMás.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block py-3 hover:text-white"

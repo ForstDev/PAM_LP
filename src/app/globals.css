@@ -9,7 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Paleta oficial — Manual de Marca AyudemosMás Perú */
+  /* Paleta oficial — Manual de Marca AyudemosMás */
   --color-verde: #7fdbc2; /* Verde Esperanza — primario, CTAs, logo */
   --color-celeste: #66c0da; /* secundario */
   --color-azul: #7ba4db; /* nuevo secundario — manual de marca actualizado, sept. 2026 */
@@ -24,9 +24,6 @@
 
 html {
   scroll-behavior: smooth;
-  /* Alto del header sticky (h-20): al saltar a una sección desde el menú,
-     el contenido queda justo debajo y no tapado por la línea del header. */
-  scroll-padding-top: 5rem;
 }
 
 body {

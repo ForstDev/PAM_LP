@@ -8,7 +8,7 @@ export function HeroSection() {
       <div className="absolute inset-0">
         <Image
           src="/hero-construccion.webp"
-          alt="Voluntarios de AyudemosMás Perú construyendo juntos"
+          alt="Voluntarios de AyudemosMás construyendo juntos"
           fill
           priority
           fetchPriority="high"

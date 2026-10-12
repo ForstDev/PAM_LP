@@ -6,7 +6,7 @@ export function IssuesSection() {
   return (
     <section
       id="problematicas"
-      className="relative isolate overflow-hidden bg-celeste/20 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
+      className="scroll-mt-5 sm:-scroll-mt-3 relative isolate overflow-hidden bg-celeste/20 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="bottom-16 -left-16 h-64 w-64 bg-verde/20 blur-2xl" />
       <GlowOrb className="top-16 right-1/4 h-56 w-56 bg-azul/15 blur-2xl" />

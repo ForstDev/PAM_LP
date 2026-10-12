@@ -11,10 +11,20 @@ const fadeUp = {
 export function HeroContent() {
   return (
     <div className="relative mx-auto flex min-h-[92vh] max-w-[84rem] flex-col justify-end px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:px-8">
+      <motion.p
+        initial={fadeUp.initial}
+        animate={fadeUp.animate}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
+        className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white sm:text-sm"
+      >
+        <span aria-hidden className="h-0.5 w-8 bg-verde" />
+        Entorno multiplataforma solidario
+      </motion.p>
+
       <motion.h1
         initial={fadeUp.initial}
         animate={fadeUp.animate}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
         className="max-w-2xl font-serif text-[clamp(2rem,4.5vw+1rem,4rem)] font-bold italic leading-tight text-white"
       >
         Transformamos tu compra en ayuda real
@@ -26,8 +36,8 @@ export function HeroContent() {
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
         className="mt-6 max-w-xl text-lg leading-relaxed text-white/90"
       >
-        El e-commerce solidario donde cada compra se convierte en ayuda
-        directa para quienes más lo necesitan.
+        Pide, compra y muy pronto vende: el 100% de nuestras ganancias va a
+        organizaciones que trabajan en diversas causas.
       </motion.p>
 
       <motion.div
@@ -40,7 +50,7 @@ export function HeroContent() {
           href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105"
+          className="inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105 active:scale-95"
         >
           Comprar y ayudar
         </a>

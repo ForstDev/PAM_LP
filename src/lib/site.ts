@@ -1,7 +1,8 @@
-// Datos oficiales del Manual de Marca AyudemosMás Perú (versión actualizada).
+// Datos oficiales del Manual de Marca AyudemosMás (versión actualizada).
 export const site = {
-  name: "AyudemosMás Perú",
-  claim: "E-commerce solidario",
+  name: "AyudemosMás",
+  claim: "Entorno multiplataforma solidario",
+  reach: "Ayudemos al Perú y al mundo.",
   tagline: "Es hora de ayudar.",
   domain: "https://ayudemosmas.com.pe",
   email: "contacto@ayudemosmas.com",

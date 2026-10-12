@@ -4,19 +4,20 @@ import { SignatureCircle } from "@/components/SignatureCircle";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
 import { RecambioFeature } from "./RecambioFeature";
+import { BrandRoadmap } from "./BrandRoadmap";
 
 const pillars = [
   {
     icon: HandHeart,
     color: "verde" as const,
     title: "Ayuda inmediata",
-    text: "Los fondos llegan directo a las causas, sin intermediarios en el camino.",
+    text: "Los fondos llegan directo a organizaciones que trabajan en diversas causas, sin intermediarios en el camino.",
   },
   {
     icon: TrendingUp,
     color: "celeste" as const,
-    title: "Un nuevo ingreso para las ONGs",
-    text: "Cada compra suma a una fuente de ingresos que se sostiene en el tiempo, no a una donación aislada.",
+    title: "Ayuda constante",
+    text: "Una nueva fuente de ingresos para las ONG, que se sostiene con cada compra y no depende de una donación aislada.",
   },
   {
     // Único lugar de toda la landing donde se menciona política, por pedido
@@ -24,7 +25,7 @@ const pillars = [
     icon: Scale,
     color: "azul" as const,
     title: "Ayudar no tiene partido",
-    text: "Somos parte del movimiento cultural MÁS, no político ni partidario. Somos ciudadanos independientes.",
+    text: "Somos parte de MÁS, un movimiento cultural de ciudadanos independientes, no político ni partidario.",
   },
 ];
 
@@ -32,7 +33,7 @@ export function WhoWeAre() {
   return (
     <section
       id="quienes-somos"
-      className="relative isolate overflow-hidden bg-celeste/10 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
+      className="scroll-mt-[3.25rem] sm:scroll-mt-5 relative isolate overflow-hidden bg-celeste/10 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="-right-12 top-16 h-56 w-56 bg-verde/20 blur-2xl" />
       <GlowOrb className="bottom-16 -left-10 h-52 w-52 bg-azul/25 blur-2xl" />
@@ -45,7 +46,7 @@ export function WhoWeAre() {
         >
           <Image
             src="/hero-construccion.webp"
-            alt="Equipo de AyudemosMás Perú"
+            alt="Equipo de AyudemosMás"
             width={480}
             height={480}
             className="aspect-square w-full rounded-[2.5rem] object-cover"
@@ -57,9 +58,9 @@ export function WhoWeAre() {
             Un puente entre tu compra diaria y la ayuda directa
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground">
-            Somos AyudemosMás Perú, parte del movimiento cultural MÁS.
-            Destinamos el 100% de nuestras ganancias a causas sociales del
-            Perú.
+            Somos AyudemosMás, un entorno multiplataforma solidario y parte
+            del movimiento cultural MÁS. Destinamos el 100% de nuestras
+            ganancias a organizaciones que trabajan en diversas causas.
           </p>
         </Reveal>
       </div>
@@ -99,6 +100,8 @@ export function WhoWeAre() {
           })}
         </div>
       </div>
+
+      <BrandRoadmap />
 
       <RecambioFeature />
     </section>
