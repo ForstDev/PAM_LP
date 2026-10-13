@@ -11,13 +11,13 @@ const pillars = [
     icon: HandHeart,
     color: "verde" as const,
     title: "Ayuda inmediata",
-    text: "Los fondos llegan directo a organizaciones que trabajan en diversas causas, sin intermediarios en el camino.",
+    text: "El dinero llega directo a organizaciones que trabajan en diversas causas, sin intermediarios.",
   },
   {
     icon: TrendingUp,
     color: "celeste" as const,
     title: "Ayuda constante",
-    text: "Una nueva fuente de ingresos para las ONG, que se sostiene con cada compra y no depende de una donación aislada.",
+    text: "Cada compra suma a un ingreso nuevo para las ONG, que no depende de donaciones de una sola vez.",
   },
   {
     // Único lugar de toda la landing donde se menciona política, por pedido
@@ -33,7 +33,7 @@ export function WhoWeAre() {
   return (
     <section
       id="quienes-somos"
-      className="scroll-mt-[3.25rem] sm:scroll-mt-5 relative isolate overflow-hidden bg-celeste/10 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
+      className="scroll-mt-14 sm:scroll-mt-6 relative isolate overflow-hidden bg-celeste/10 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="-right-12 top-16 h-56 w-56 bg-verde/20 blur-2xl" />
       <GlowOrb className="bottom-16 -left-10 h-52 w-52 bg-azul/25 blur-2xl" />
@@ -58,9 +58,9 @@ export function WhoWeAre() {
             Un puente entre tu compra diaria y la ayuda directa
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground">
-            Somos AyudemosMás, un entorno multiplataforma solidario y parte
-            del movimiento cultural MÁS. Destinamos el 100% de nuestras
-            ganancias a organizaciones que trabajan en diversas causas.
+            Somos AyudemosMás, parte del movimiento cultural MÁS. Nacimos
+            para que comprar lo que ya necesitas también sirva para ayudar a
+            otros.
           </p>
         </Reveal>
       </div>
@@ -68,8 +68,7 @@ export function WhoWeAre() {
       <div className="relative mx-auto mt-16 max-w-[84rem] border-t border-foreground/10 pt-14">
         <Reveal>
           <p className="max-w-2xl text-xl font-semibold leading-snug text-foreground">
-            En lo inmediato, ayuda real. A largo plazo, una fuente que no se
-            agota.
+            Ayudamos ahora y buscamos que esa ayuda dure.
           </p>
         </Reveal>
 

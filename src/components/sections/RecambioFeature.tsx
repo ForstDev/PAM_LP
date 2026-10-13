@@ -25,8 +25,8 @@ export function RecambioFeature() {
             diálogo plural y apartidario.
           </p>
           <p className="mt-4 max-w-xl text-lg leading-relaxed text-foreground">
-            Por eso asistimos a una conversación de Recambio en la Cumbre Perú
-            Sostenible 2026 para aprender sobre democracia y sostenibilidad.
+            Por eso fuimos a una conversación de Recambio en la Cumbre Perú
+            Sostenible 2026, para aprender sobre democracia y sostenibilidad.
           </p>
           <a
             href="https://www.recambio.pe/"

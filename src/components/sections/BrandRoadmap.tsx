@@ -56,8 +56,8 @@ export function BrandRoadmap() {
           Empezamos con delivery. Vamos por más.
         </h3>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed text-foreground">
-          Cada canal se suma al anterior y todos donan el 100% de sus
-          ganancias.
+          Después del delivery vienen las tiendas y un espacio para vender lo
+          tuyo. En todos, las ganancias van a ayudar.
         </p>
       </Reveal>
 

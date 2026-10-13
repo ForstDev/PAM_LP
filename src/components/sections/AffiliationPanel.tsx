@@ -128,7 +128,7 @@ export function AffiliationPanel() {
               <p className="mt-7 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                 Así empezamos
               </p>
-              <ol className="mt-3 grid gap-3 sm:grid-cols-2">
+              <ol className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
                 {panel.steps.map((step, index) => (
                   <li
                     key={step.title}

@@ -6,7 +6,7 @@ import { waLink } from "@/lib/whatsapp";
 
 export function CatalogSection() {
   return (
-    <section id="productos" className="scroll-mt-5 sm:-scroll-mt-3 relative isolate overflow-hidden bg-white px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
+    <section id="productos" className="scroll-mt-6 sm:-scroll-mt-2 relative isolate overflow-hidden bg-white px-4 py-20 sm:px-6 sm:py-28 lg:px-8">
       <GlowOrb className="-left-16 top-16 h-56 w-56 bg-verde/15 blur-2xl" />
 
       <div className="relative mx-auto max-w-[84rem]">

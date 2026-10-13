@@ -36,8 +36,8 @@ export function HeroContent() {
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
         className="mt-6 max-w-xl text-lg leading-relaxed text-white/90"
       >
-        Pide, compra y muy pronto vende: el 100% de nuestras ganancias va a
-        organizaciones que trabajan en diversas causas.
+        Pide, compra y muy pronto vende con nosotros. El 100% de nuestras
+        ganancias va a organizaciones que trabajan en diversas causas.
       </motion.p>
 
       <motion.div

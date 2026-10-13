@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
@@ -20,44 +20,10 @@ const navLinks = [
   { href: "#afiliacion", label: "Afiliación" },
 ];
 
-const buyMessage = "Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?";
-
-/**
- * Sección visible en pantalla: marca el enlace activo del menú para que el
- * usuario sepa siempre en qué parte de la página está.
- */
-function useActiveSection(ids: string[]) {
-  const [active, setActive] = useState<string | null>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) setActive(entry.target.id);
-        }
-      },
-      // Una franja en el centro de la pantalla decide qué sección manda.
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    const top = document.getElementById("top");
-    const sections = ids
-      .map((id) => document.getElementById(id))
-      .filter((el): el is HTMLElement => Boolean(el));
-    sections.forEach((el) => observer.observe(el));
-    if (top) observer.observe(top);
-    return () => observer.disconnect();
-  }, [ids]);
-
-  return active;
-}
-
-const sectionIds = navLinks.map((link) => link.href.slice(1));
-
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { scrollY, scrollYProgress } = useScroll();
-  const active = useActiveSection(sectionIds);
+  const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 8);
@@ -65,68 +31,46 @@ export function Header() {
 
   return (
     <>
-      {/* Barra de progreso de lectura, muy fina, en el borde superior. */}
-      <motion.div
-        aria-hidden
-        style={{ scaleX: scrollYProgress }}
-        className="fixed inset-x-0 top-0 z-50 h-[3px] origin-left bg-verde"
-      />
-
-      {/* Header flotante en forma de píldora: se despega del borde, deja ver
-          el contenido detrás y gana sombra al hacer scroll. */}
       <motion.header
         initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4"
+        className={`sticky top-0 z-40 border-b bg-white/90 backdrop-blur-sm transition-shadow duration-300 ${
+          scrolled ? "border-black/5 shadow-sm" : "border-transparent"
+        }`}
       >
-        <div
-          className={`mx-auto flex h-16 max-w-[84rem] items-center justify-between gap-3 rounded-full bg-white/85 pl-4 pr-2 ring-1 ring-black/5 backdrop-blur-md transition-shadow duration-300 sm:pl-6 ${
-            scrolled ? "shadow-lg shadow-navy/15" : "shadow-sm"
-          }`}
-        >
+        <div className="mx-auto grid h-20 max-w-[90rem] grid-cols-[auto_1fr_auto] items-center gap-4 px-4 sm:px-6 lg:px-10">
           {/* El logo siempre lleva al inicio (hero) de la landing. */}
-          <Link href="#top" className="flex flex-shrink-0 items-center" aria-label="AyudemosMás, ir al inicio">
+          <Link href="#top" className="flex items-center gap-2 justify-self-start">
             <Image
               src="/logo-horizontal.svg"
-              alt="AyudemosMás"
+              alt="AyudemosMás Perú"
               width={456}
               height={99}
-              className="h-8 w-auto sm:h-9"
+              className="h-12 w-auto sm:h-14"
               priority
             />
           </Link>
 
-          <nav aria-label="Secciones" className="hidden items-center gap-1 lg:flex">
-            {navLinks.map((link) => {
-              const isActive = active === link.href.slice(1);
-              return (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  aria-current={isActive ? "true" : undefined}
-                  className="relative whitespace-nowrap rounded-full px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-verde/20 xl:px-4"
-                >
-                  {isActive && (
-                    <motion.span
-                      layoutId="nav-active"
-                      aria-hidden
-                      className="absolute inset-0 rounded-full bg-verde/45"
-                      transition={{ type: "spring", stiffness: 420, damping: 36 }}
-                    />
-                  )}
-                  <span className="relative">{link.label}</span>
-                </a>
-              );
-            })}
+          <nav className="hidden items-center justify-center gap-7 whitespace-nowrap xl:flex">
+            {navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="group relative text-sm font-medium text-foreground transition-colors hover:text-foreground"
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-verde transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              </a>
+            ))}
           </nav>
 
-          <div className="flex flex-shrink-0 items-center gap-1">
+          <div className="flex items-center gap-2 justify-self-end">
             <a
-              href={waLink(buyMessage)}
+              href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden rounded-full bg-verde px-5 py-3 text-sm font-semibold text-foreground transition-transform hover:scale-105 active:scale-95 sm:inline-block"
+              className="hidden rounded-full bg-verde px-5 py-3 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block"
             >
               Comprar y ayudar
             </a>
@@ -136,7 +80,7 @@ export function Header() {
               onClick={() => setMobileOpen((open) => !open)}
               aria-expanded={mobileOpen}
               aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-              className="flex h-12 w-12 items-center justify-center rounded-full text-foreground transition-colors hover:bg-verde/20 lg:hidden"
+              className="relative z-50 flex h-11 w-11 items-center justify-center rounded-full text-foreground xl:hidden"
             >
               {mobileOpen ? (
                 <X className="h-6 w-6" strokeWidth={1.75} />
@@ -149,8 +93,7 @@ export function Header() {
       </motion.header>
 
       {/* Menú mobile — cuarto de círculo verde translúcido que se abre desde
-          la esquina superior derecha, por debajo de la píldora del header
-          (así el botón de cerrar siempre queda a la vista). */}
+          la esquina superior derecha, encima de todo (incluido el header). */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -158,7 +101,7 @@ export function Header() {
               type="button"
               aria-label="Cerrar menú"
               onClick={() => setMobileOpen(false)}
-              className="fixed inset-0 z-30 lg:hidden"
+              className="fixed inset-0 z-40 xl:hidden"
             />
             <motion.div
               initial={{ scale: 0, opacity: 0 }}
@@ -171,9 +114,9 @@ export function Header() {
                 height: "clamp(380px, 100vw, 440px)",
                 borderBottomLeftRadius: "100%",
               }}
-              className="fixed right-0 top-0 z-30 bg-verde/90 shadow-xl backdrop-blur-sm lg:hidden"
+              className="fixed right-0 top-0 z-40 bg-verde/85 shadow-xl backdrop-blur-sm xl:hidden"
             >
-              <div className="flex h-full flex-col items-end justify-start gap-0.5 pr-6 pt-[5.5rem] text-right">
+              <div className="flex h-full flex-col items-end justify-start gap-0.5 pt-20 pr-6 text-right">
                 {navLinks.map((link) => (
                   <a
                     key={link.href}
@@ -186,11 +129,11 @@ export function Header() {
                 ))}
 
                 <a
-                  href={waLink(buyMessage)}
+                  href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMobileOpen(false)}
-                  className="mt-2 rounded-full bg-celeste px-4 py-3 text-center text-sm font-semibold text-foreground sm:hidden"
+                  className="mt-2 rounded-full bg-celeste px-4 py-3 text-center text-sm font-semibold text-foreground"
                 >
                   Comprar y ayudar
                 </a>

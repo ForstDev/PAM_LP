@@ -16,30 +16,20 @@ export function FinalCta() {
           La ayuda empieza aquí
         </h2>
         <p className="mt-4 text-lg text-foreground">
-          Escríbenos por cualquier duda, propuesta o idea. Y si quieres
-          sumarte como voluntario, también te esperamos.
+          ¿Tienes una duda, una propuesta o quieres ser voluntario?
+          Escríbenos y te respondemos.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <motion.a
-            href={waLink("Hola, me gustaría conversar con AyudemosMás.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            animate={{ scale: [1, 1.035, 1] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-            whileHover={{ scale: 1.08 }}
-            className="inline-block rounded-full bg-celeste px-8 py-4 text-base font-semibold text-foreground"
-          >
-            Escríbenos
-          </motion.a>
-          <a
-            href={waLink("Hola, quiero sumarme como voluntario en AyudemosMás.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block rounded-full bg-white px-8 py-4 text-base font-semibold text-foreground shadow-sm transition-transform hover:scale-105 active:scale-95"
-          >
-            Quiero ser voluntario
-          </a>
-        </div>
+        <motion.a
+          href={waLink("Hola, AyudemosMás. Les escribo porque ")}
+          target="_blank"
+          rel="noopener noreferrer"
+          animate={{ scale: [1, 1.035, 1] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+          whileHover={{ scale: 1.08 }}
+          className="mt-8 inline-block rounded-full bg-celeste px-8 py-4 text-base font-semibold text-foreground"
+        >
+          Escríbenos por WhatsApp
+        </motion.a>
       </Reveal>
     </section>
   );

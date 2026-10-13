@@ -120,7 +120,7 @@ export function DonationGrowth() {
   return (
     <section
       id="donaciones"
-      className="scroll-mt-5 sm:-scroll-mt-3 relative isolate overflow-hidden bg-verde/15 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
+      className="scroll-mt-6 sm:-scroll-mt-2 relative isolate overflow-hidden bg-verde/15 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="-right-16 top-20 h-64 w-64 bg-celeste/25 blur-2xl" />
       <GlowOrb className="bottom-20 -left-12 h-48 w-48 bg-azul/20 blur-2xl" />
@@ -138,8 +138,8 @@ export function DonationGrowth() {
             ¿A quién llega tu ayuda?
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-foreground">
-            Mientras más compras, más ayuda llega. Los montos reales se
-            publicarán cada mes desde las primeras ventas.
+            Mientras más compras, más ayuda llega. Publicaremos los montos
+            reales cada mes, desde las primeras ventas.
           </p>
 
           {/* Tarjetas seleccionables: resaltan su línea en el gráfico. */}
@@ -387,8 +387,8 @@ export function DonationGrowth() {
             Así llega tu ayuda
           </h3>
           <p className="mt-2 max-w-2xl text-foreground">
-            Cada compra podrá responder «¿qué pasó con mi compra?», con
-            reportes abiertos y periódicos.
+            Vas a poder saber qué pasó con tu compra: publicaremos reportes
+            abiertos y periódicos.
           </p>
         </Reveal>
         <ol className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">

@@ -6,7 +6,7 @@ export function IssuesSection() {
   return (
     <section
       id="problematicas"
-      className="scroll-mt-5 sm:-scroll-mt-3 relative isolate overflow-hidden bg-celeste/20 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
+      className="scroll-mt-6 sm:-scroll-mt-2 relative isolate overflow-hidden bg-celeste/20 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="bottom-16 -left-16 h-64 w-64 bg-verde/20 blur-2xl" />
       <GlowOrb className="top-16 right-1/4 h-56 w-56 bg-azul/15 blur-2xl" />
@@ -17,8 +17,8 @@ export function IssuesSection() {
             Los desafíos que nos mueven a ayudar
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">
-            Cada compra impulsa causas en el Perú y en el mundo. Elige un tema
-            y conoce la ayuda que recibe.
+            Estas son las causas que apoyamos en el Perú y en el mundo. Elige
+            un tema y mira qué está pasando y cómo ayudamos.
           </p>
         </Reveal>
 
