@@ -37,7 +37,7 @@ export function Footer() {
               className="h-10 w-auto brightness-0 invert"
             />
             <p className="mt-4 text-sm leading-relaxed text-white">
-              {site.claim}. Parte de MÁS, un movimiento cultural.
+              {site.claim}. Parte de MÁS, un movimiento caritativo.
             </p>
             <p className="mt-4 font-serif text-2xl italic text-white">
               {site.tagline}

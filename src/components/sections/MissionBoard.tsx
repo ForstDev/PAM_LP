@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { Globe, ImageIcon, MapPin } from "lucide-react";
 import { StatCounter } from "@/components/StatCounter";
 import { groups, missions, type Mission } from "./issuesData";
@@ -148,7 +148,7 @@ export function MissionBoard() {
               className="relative rounded-full px-5 py-3 text-sm font-semibold text-foreground sm:text-base"
             >
               {selected && (
-                <motion.span
+                <m.span
                   layoutId="group-pill"
                   aria-hidden
                   className="absolute inset-0 rounded-full bg-verde"
@@ -180,7 +180,7 @@ export function MissionBoard() {
                 className="group flex w-[4.75rem] flex-col items-center gap-2 text-center sm:w-28"
               >
                 <span className="relative block h-16 w-16 sm:h-24 sm:w-24">
-                  <motion.span
+                  <m.span
                     aria-hidden
                     initial={false}
                     animate={{ scale: selected ? 1 : 0.6, opacity: selected ? 1 : 0 }}
@@ -211,7 +211,7 @@ export function MissionBoard() {
       {/* Paso 3: el detalle de la misión elegida. */}
       <div className="mt-8" aria-live="polite">
         <AnimatePresence mode="wait" initial={false}>
-          <motion.div
+          <m.div
             key={active.id}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -219,7 +219,7 @@ export function MissionBoard() {
             transition={{ duration: 0.25, ease: "easeOut" }}
           >
             <MissionDetail mission={active} />
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       </div>
     </div>

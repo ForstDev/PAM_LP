@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import { MotionProvider } from "@/components/MotionProvider";
+import { jsonLd } from "@/lib/jsonld";
 import "./globals.css";
 
 // Tipografías reales del manual de marca — autohospedadas, no sustitutos de
 // Google Fonts. Outfit es variable (cubre todo el rango de grosor); FreeSerif
 // es estática, así que se declaran sus 4 cortes (regular/bold/italic/bold
-// italic) tal como los define el manual.
+// italic) tal como los define el manual. Los archivos son WOFF2 recortados a
+// caracteres latinos (el TTF original pesaba 1,8 MB; ahora ~100 KB en total).
 const outfit = localFont({
-  src: "../fonts/outfit/Outfit-VariableFont_wght.ttf",
+  src: "../fonts/outfit/Outfit-VariableFont_wght.woff2",
   variable: "--font-outfit",
   weight: "100 900",
   display: "swap",
@@ -18,22 +20,22 @@ const outfit = localFont({
 const freeserif = localFont({
   src: [
     {
-      path: "../fonts/freeserif/FreeSerif.ttf",
+      path: "../fonts/freeserif/FreeSerif.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../fonts/freeserif/FreeSerifBold.ttf",
+      path: "../fonts/freeserif/FreeSerifBold.woff2",
       weight: "700",
       style: "normal",
     },
     {
-      path: "../fonts/freeserif/FreeSerifItalic.ttf",
+      path: "../fonts/freeserif/FreeSerifItalic.woff2",
       weight: "400",
       style: "italic",
     },
     {
-      path: "../fonts/freeserif/FreeSerifBoldItalic.ttf",
+      path: "../fonts/freeserif/FreeSerifBoldItalic.woff2",
       weight: "700",
       style: "italic",
     },
@@ -44,9 +46,10 @@ const freeserif = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
-  title: "AyudemosMás | Es hora de ayudar.",
+  title: "AyudemosMás | Entorno multiplataforma solidario en Perú",
   description:
-    "AyudemosMás es un entorno multiplataforma solidario: el 100% de nuestras ganancias va a organizaciones que trabajan en diversas causas. Puesta en marcha: 17 de octubre de 2026.",
+    "Delivery y tiendas solidarias del movimiento MÁS. El 100% de nuestras ganancias va a organizaciones que trabajan en diversas causas. Es hora de ayudar.",
+  alternates: { canonical: "/" },
   keywords: [
     "entorno multiplataforma solidario",
     "AyudemosMás",
@@ -56,9 +59,9 @@ export const metadata: Metadata = {
     "comercio solidario Perú",
   ],
   openGraph: {
-    title: "AyudemosMás | Entorno multiplataforma solidario",
+    title: "AyudemosMás | Es hora de ayudar.",
     description:
-      "Transformamos tu compra en ayuda real. Es hora de ayudar.",
+      "Entorno multiplataforma solidario: delivery y tiendas que donan el 100% de sus ganancias.",
     url: site.domain,
     siteName: site.name,
     locale: "es_PE",
@@ -68,15 +71,6 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "NGO",
-  name: site.name,
-    url: site.domain,
-  email: site.email,
-  slogan: "Transformamos tu compra en ayuda real.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

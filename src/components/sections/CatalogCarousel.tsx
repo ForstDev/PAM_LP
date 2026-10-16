@@ -1,7 +1,7 @@
 "use client";
 
 import useEmblaCarousel from "embla-carousel-react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import {
   Apple,
   Carrot,
@@ -47,7 +47,7 @@ export function CatalogCarousel() {
           return (
             // Por ahora son botones sin destino: todavía no hay tienda a la que
             // llevar (cuando exista la URL de la tienda, aquí va el enlace).
-            <motion.button
+            <m.button
               type="button"
               key={category.name}
               initial={{ opacity: 0, y: 20 }}
@@ -71,7 +71,7 @@ export function CatalogCarousel() {
               <p className="text-lg font-semibold text-foreground">
                 {category.name}
               </p>
-            </motion.button>
+            </m.button>
           );
         })}
       </div>

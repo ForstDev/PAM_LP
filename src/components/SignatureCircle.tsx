@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import type { ReactNode } from "react";
 
 type Color = "verde" | "celeste" | "azul";
@@ -28,7 +28,7 @@ export function SignatureCircle({
 }) {
   return (
     <div className={`relative ${className}`}>
-      <motion.div
+      <m.div
         aria-hidden
         initial={{ opacity: 0, scale: 0.85 }}
         whileInView={{ opacity: 1, scale: 1 }}
@@ -36,7 +36,7 @@ export function SignatureCircle({
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={`absolute rounded-full ${colorMap[color]} ${circleClassName}`}
       />
-      <motion.div
+      <m.div
         initial={{ opacity: 0, scale: 0.94 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.4 }}
@@ -44,7 +44,7 @@ export function SignatureCircle({
         className="relative"
       >
         {children}
-      </motion.div>
+      </m.div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { Reveal } from "@/components/Reveal";
 
 type Channel = {
@@ -17,15 +17,15 @@ const channels: Channel[] = [
   {
     name: "AyudemosMás Delivery",
     status: "Ahora",
-    text: "Te llevamos lo que necesites. Un canal de ventas para restaurantes, productos sostenibles y emprendimientos de impacto aliados.",
+    text: "Te llevamos lo que necesites. Un canal de ventas para restaurantes y productos de primera necesidad.",
     claim: "Aquí pedir delivery también es ayudar.",
   },
   {
     name: "AyudemosMás Tiendas",
     status: "Próximamente",
-    text: "Tiendas virtuales por categoría para emprendimientos de impacto aliados.",
+    text: "Tiendas virtuales por categoría de productos y servicios.",
     items: ["Supermarket", "Tecnología", "Moda"],
-    claim: "Aquí comprar también es ayudar.",
+    claim: "Aquí usar tiendas virtuales también es ayudar.",
   },
   {
     name: "AyudemosMás Vende",
@@ -63,7 +63,7 @@ export function BrandRoadmap() {
 
       <ol className="relative mt-10 grid gap-5 md:grid-cols-3 md:gap-6 md:pt-10">
         {/* Línea de tiempo: horizontal en escritorio, vertical en celular. */}
-        <motion.span
+        <m.span
           aria-hidden
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
@@ -71,7 +71,7 @@ export function BrandRoadmap() {
           transition={{ duration: 0.9, ease: "easeOut" }}
           className="absolute left-[16.6%] right-[16.6%] top-[0.6rem] hidden h-0.5 origin-left bg-foreground/20 md:block"
         />
-        <motion.span
+        <m.span
           aria-hidden
           initial={{ scaleY: 0 }}
           whileInView={{ scaleY: 1 }}
@@ -83,7 +83,7 @@ export function BrandRoadmap() {
         {channels.map((channel, index) => {
           const isNow = channel.status === "Ahora";
           return (
-            <motion.li
+            <m.li
               key={channel.name}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ export function BrandRoadmap() {
                 />
               </span>
 
-              <motion.div
+              <m.div
                 whileHover={{ y: -4 }}
                 transition={{ duration: 0.2 }}
                 className={`flex h-full flex-col rounded-3xl p-6 ${
@@ -146,8 +146,8 @@ export function BrandRoadmap() {
                 <p className="text-impact mt-auto pt-5 text-lg font-bold">
                   {channel.claim}
                 </p>
-              </motion.div>
-            </motion.li>
+              </m.div>
+            </m.li>
           );
         })}
       </ol>

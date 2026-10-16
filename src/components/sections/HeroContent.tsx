@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { waLink } from "@/lib/whatsapp";
 
 const fadeUp = {
@@ -11,7 +11,7 @@ const fadeUp = {
 export function HeroContent() {
   return (
     <div className="relative mx-auto flex min-h-[92vh] max-w-[84rem] flex-col justify-end px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:px-8">
-      <motion.p
+      <m.p
         initial={fadeUp.initial}
         animate={fadeUp.animate}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
@@ -19,18 +19,18 @@ export function HeroContent() {
       >
         <span aria-hidden className="h-0.5 w-8 bg-verde" />
         Entorno multiplataforma solidario
-      </motion.p>
+      </m.p>
 
-      <motion.h1
+      <m.h1
         initial={fadeUp.initial}
         animate={fadeUp.animate}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.15 }}
         className="max-w-2xl font-serif text-[clamp(2rem,4.5vw+1rem,4rem)] font-bold italic leading-tight text-white"
       >
         Transformamos tu compra en ayuda real
-      </motion.h1>
+      </m.h1>
 
-      <motion.p
+      <m.p
         initial={fadeUp.initial}
         animate={fadeUp.animate}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
@@ -38,9 +38,9 @@ export function HeroContent() {
       >
         Pide, compra y muy pronto vende con nosotros. El 100% de nuestras
         ganancias va a organizaciones que trabajan en diversas causas.
-      </motion.p>
+      </m.p>
 
-      <motion.div
+      <m.div
         initial={fadeUp.initial}
         animate={fadeUp.animate}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
@@ -54,7 +54,7 @@ export function HeroContent() {
         >
           Comprar y ayudar
         </a>
-      </motion.div>
+      </m.div>
     </div>
   );
 }

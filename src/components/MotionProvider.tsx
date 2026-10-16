@@ -1,13 +1,20 @@
 "use client";
 
-import { MotionConfig } from "motion/react";
+import { LazyMotion, MotionConfig } from "motion/react";
 import type { ReactNode } from "react";
 
+const loadFeatures = () =>
+  import("./motionFeatures").then((mod) => mod.default);
+
 /**
- * Respeta prefers-reduced-motion en todas las animaciones de Motion del
- * sitio (Reveal, círculos, barras): con la preferencia activa se quitan los
- * desplazamientos y escalas y solo quedan los cambios de opacidad.
+ * Carga Motion de forma diferida (los componentes usan `m`, la versión
+ * liviana) y respeta prefers-reduced-motion en todas las animaciones: con la
+ * preferencia activa se quitan desplazamientos y escalas.
  */
 export function MotionProvider({ children }: { children: ReactNode }) {
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  return (
+    <LazyMotion features={loadFeatures}>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </LazyMotion>
+  );
 }

@@ -3,7 +3,6 @@ import { HandHeart, TrendingUp, Scale } from "lucide-react";
 import { SignatureCircle } from "@/components/SignatureCircle";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
-import { RecambioFeature } from "./RecambioFeature";
 import { BrandRoadmap } from "./BrandRoadmap";
 
 const pillars = [
@@ -25,7 +24,7 @@ const pillars = [
     icon: Scale,
     color: "azul" as const,
     title: "Ayudar no tiene partido",
-    text: "Somos parte de MÁS, un movimiento cultural de ciudadanos independientes, no político ni partidario.",
+    text: "Somos parte de MÁS, un movimiento caritativo de ciudadanos independientes, no político ni partidario.",
   },
 ];
 
@@ -55,12 +54,12 @@ export function WhoWeAre() {
 
         <Reveal delay={0.1}>
           <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-            Un puente entre tu compra diaria y la ayuda directa
+            Hagamos crecer la economía solidaria con las plataformas de
+            AyudemosMás
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground">
-            Somos AyudemosMás, parte del movimiento cultural MÁS. Nacimos
-            para que comprar lo que ya necesitas también sirva para ayudar a
-            otros.
+            Somos AyudemosMás, parte del movimiento caritativo MÁS. Nacimos
+            para hacer que nuestras acciones del día a día ayuden a otros.
           </p>
         </Reveal>
       </div>
@@ -102,7 +101,6 @@ export function WhoWeAre() {
 
       <BrandRoadmap />
 
-      <RecambioFeature />
     </section>
   );
 }

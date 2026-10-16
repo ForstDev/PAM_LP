@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { StatCounter } from "@/components/StatCounter";
 
 /**
@@ -16,14 +16,14 @@ export function ProfitCounter() {
       <p className="text-5xl font-bold text-foreground sm:text-6xl">
         <StatCounter to={100} suffix="%" onComplete={() => setDone(true)} />
       </p>
-      <motion.p
+      <m.p
         initial={{ opacity: 0, y: 6 }}
         animate={done ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4, ease: "easeOut" }}
         className="mt-1 max-w-[13rem] text-xs leading-snug text-foreground"
       >
         de las ganancias va a organizaciones y causas sociales.
-      </motion.p>
+      </m.p>
     </div>
   );
 }

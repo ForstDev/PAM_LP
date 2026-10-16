@@ -4,12 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from "motion/react";
+import { AnimatePresence, m, useMotionValueEvent, useScroll } from "motion/react";
 import { waLink } from "@/lib/whatsapp";
 
 const navLinks = [
@@ -31,7 +26,7 @@ export function Header() {
 
   return (
     <>
-      <motion.header
+      <m.header
         initial={{ y: -16, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -70,7 +65,7 @@ export function Header() {
               href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden rounded-full bg-verde px-5 py-3 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block"
+              className="hidden rounded-full bg-verde px-5 py-3.5 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block"
             >
               Comprar y ayudar
             </a>
@@ -90,7 +85,7 @@ export function Header() {
             </button>
           </div>
         </div>
-      </motion.header>
+      </m.header>
 
       {/* Menú mobile — cuarto de círculo verde translúcido que se abre desde
           la esquina superior derecha, encima de todo (incluido el header). */}
@@ -103,7 +98,7 @@ export function Header() {
               onClick={() => setMobileOpen(false)}
               className="fixed inset-0 z-40 xl:hidden"
             />
-            <motion.div
+            <m.div
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0, opacity: 0 }}
@@ -138,7 +133,7 @@ export function Header() {
                   Comprar y ayudar
                 </a>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

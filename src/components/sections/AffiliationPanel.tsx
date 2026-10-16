@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { waLink } from "@/lib/whatsapp";
 
 type Audience = "ong" | "marca";
@@ -87,7 +87,7 @@ export function AffiliationPanel() {
               className="relative whitespace-nowrap rounded-full px-4 py-3 text-sm font-semibold text-foreground sm:px-5"
             >
               {selected && (
-                <motion.span
+                <m.span
                   layoutId="affiliation-pill"
                   aria-hidden
                   className="absolute inset-0 rounded-full bg-verde"

@@ -2,7 +2,7 @@
 export const site = {
   name: "AyudemosMás",
   claim: "Entorno multiplataforma solidario",
-  reach: "Ayudemos al Perú y al mundo.",
+  reach: "Ayudemos al Perú y al MUNDO.",
   tagline: "Es hora de ayudar.",
   domain: "https://ayudemosmas.com.pe",
   email: "contacto@ayudemosmas.com",

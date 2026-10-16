@@ -2,7 +2,6 @@ import { CatalogCarousel } from "./CatalogCarousel";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
 import { ProfitCounter } from "./ProfitCounter";
-import { waLink } from "@/lib/whatsapp";
 
 export function CatalogSection() {
   return (
@@ -13,8 +12,18 @@ export function CatalogSection() {
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <Reveal>
             <h2 className="max-w-2xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-              Lo que ya compras cada semana, ahora también ayuda
+              Lo que ya compras cada semana, ahora también ayuda…{" "}
+              <span className="inline-block rounded-full bg-verde px-4 py-1 align-middle font-sans text-base font-bold uppercase tracking-[0.14em] text-foreground sm:text-lg">
+                Próximamente
+              </span>
             </h2>
+            <p className="mt-5 max-w-3xl text-lg leading-relaxed text-foreground">
+              Estos productos los podrás pedir por delivery desde{" "}
+              <strong className="font-semibold">Vanemar</strong>, el minimarket
+              con el que empezamos. Y muy pronto nos aliaremos con más markets
+              y restaurantes, para que pidas delivery de todo lo que necesitas
+              y, al mismo tiempo, ayudes.
+            </p>
           </Reveal>
 
           <Reveal delay={0.1}>
@@ -25,17 +34,6 @@ export function CatalogSection() {
         <div className="mt-12">
           <CatalogCarousel />
         </div>
-
-        <Reveal delay={0.1} className="mt-10">
-          <a
-            href={waLink("Hola, quiero consultar los productos disponibles.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105"
-          >
-            Consultar productos por WhatsApp
-          </a>
-        </Reveal>
       </div>
     </section>
   );
