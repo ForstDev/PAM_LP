@@ -2,6 +2,7 @@ import Image from "next/image";
 import { HandHeart, TrendingUp, Scale } from "lucide-react";
 import { SignatureCircle } from "@/components/SignatureCircle";
 import { Reveal } from "@/components/Reveal";
+import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { GlowOrb } from "@/components/GlowOrb";
 import { BrandRoadmap } from "./BrandRoadmap";
 
@@ -53,7 +54,8 @@ export function WhoWeAre() {
         </SignatureCircle>
 
         <Reveal delay={0.1}>
-          <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+          <SectionEyebrow>Quiénes somos</SectionEyebrow>
+          <h2 className="mt-5 font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             Hagamos crecer la economía solidaria con las plataformas de
             AyudemosMás
           </h2>

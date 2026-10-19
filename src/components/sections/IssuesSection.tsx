@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/Reveal";
+import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { GlowOrb } from "@/components/GlowOrb";
 import { MissionBoard } from "./MissionBoard";
 
@@ -13,7 +14,8 @@ export function IssuesSection() {
 
       <div className="relative mx-auto max-w-[84rem]">
         <Reveal>
-          <h2 className="max-w-3xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+          <SectionEyebrow>Problemáticas</SectionEyebrow>
+          <h2 className="mt-5 max-w-3xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
             Los desafíos que nos mueven a ayudar
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">

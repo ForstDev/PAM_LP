@@ -1,5 +1,6 @@
 import { CatalogCarousel } from "./CatalogCarousel";
 import { Reveal } from "@/components/Reveal";
+import { SectionEyebrow } from "@/components/SectionEyebrow";
 import { GlowOrb } from "@/components/GlowOrb";
 import { ProfitCounter } from "./ProfitCounter";
 
@@ -11,7 +12,8 @@ export function CatalogSection() {
       <div className="relative mx-auto max-w-[84rem]">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <Reveal>
-            <h2 className="max-w-2xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+            <SectionEyebrow>Productos</SectionEyebrow>
+            <h2 className="mt-5 max-w-2xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
               Lo que ya compras cada semana, ahora también ayuda…{" "}
               <span className="inline-block rounded-full bg-verde px-4 py-1 align-middle font-sans text-base font-bold uppercase tracking-[0.14em] text-foreground sm:text-lg">
                 Próximamente
