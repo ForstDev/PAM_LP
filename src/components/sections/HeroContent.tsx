@@ -11,16 +11,6 @@ const fadeUp = {
 export function HeroContent() {
   return (
     <div className="relative mx-auto flex min-h-[92vh] max-w-[84rem] flex-col justify-end px-4 pb-20 pt-32 sm:px-6 sm:pb-28 lg:px-8">
-      <m.p
-        initial={fadeUp.initial}
-        animate={fadeUp.animate}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.05 }}
-        className="mb-5 flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em] text-white sm:text-sm"
-      >
-        <span aria-hidden className="h-0.5 w-8 bg-verde" />
-        Entorno multiplataforma solidario
-      </m.p>
-
       <m.h1
         initial={fadeUp.initial}
         animate={fadeUp.animate}

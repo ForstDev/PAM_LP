@@ -5,7 +5,6 @@ import { Mail } from "lucide-react";
 import { site } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
-import { SectionEyebrow } from "@/components/SectionEyebrow";
 
 // Texto alineado a la izquierda y con ancho de línea de ~60 caracteres: los
 // párrafos centrados y largos se leen peor que los alineados a un borde.
@@ -17,8 +16,7 @@ export function FinalCta() {
 
       <div className="relative mx-auto grid max-w-[72rem] gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
         <Reveal>
-          <SectionEyebrow lineClassName="bg-foreground">Movimiento MÁS</SectionEyebrow>
-          <h2 className="mt-5 leading-tight">
+          <h2 className="leading-tight">
             <span className="text-impact block text-4xl font-bold sm:text-6xl">
               La ayuda empieza aquí
             </span>
