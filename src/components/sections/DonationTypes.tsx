@@ -11,7 +11,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
-import { HeartPulse, PawPrint, Utensils, type LucideIcon } from "lucide-react";
+import { HeartPulse, PawPrint, Utensils, X, type LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
@@ -25,6 +25,7 @@ type Cause = {
   image: { src: string; alt: string };
   accent: string;
   tint: string;
+  ring: string;
 };
 
 // Los tres tipos de donación que sostiene AyudemosMás hoy. Se describe en qué
@@ -40,6 +41,7 @@ const causes: Cause[] = [
     image: { src: "/donaciones/alimentacion.webp", alt: "Plato de comida servido en un comedor" },
     accent: "bg-verde",
     tint: "bg-verde/25",
+    ring: "ring-verde",
   },
   {
     area: "Salud",
@@ -50,6 +52,7 @@ const causes: Cause[] = [
     image: { src: "/donaciones/salud.webp", alt: "Pediatra revisando a una niña con el estetoscopio" },
     accent: "bg-celeste",
     tint: "bg-celeste/25",
+    ring: "ring-celeste",
   },
   {
     area: "Animales",
@@ -60,6 +63,7 @@ const causes: Cause[] = [
     image: { src: "/donaciones/animales.webp", alt: "Perros esperando adopción en un albergue" },
     accent: "bg-azul",
     tint: "bg-azul/25",
+    ring: "ring-azul",
   },
 ];
 
@@ -84,17 +88,46 @@ const normalize = (deg: number) => mod(deg + 180, 360) - 180;
 // Redondeo a 2 decimales: el HTML del servidor y el del navegador deben coincidir.
 const round2 = (n: number) => Math.round(n * 100) / 100;
 
-type Geometry = { cx: number; cy: number; R: number; r: number; height: number; pillW: number };
+type Geometry = {
+  cx: number;
+  cy: number;
+  R: number;
+  r: number;
+  height: number;
+  pillW: number;
+  panelW: number;
+  panelBelow: boolean;
+};
 
+// La ruleta queda a la izquierda y deja espacio a la derecha para el panel de
+// información. Si no cabe (tablets angostas), el panel baja bajo la ruleta.
 function geometryFor(width: number): Geometry {
-  const R = Math.min(Math.max(width * 0.24, 170), 230);
+  const R = Math.min(Math.max(width * 0.2, 150), 210);
   const r = R - 74;
   const cx = r + 24;
   const height = Math.round(R * 0.87 * 2 + 150);
-  const pillW = Math.min(440, width - (cx + R) - 12);
-  return { cx, cy: height / 2, R, r, height, pillW };
+  const pillW = width < 1000 ? 240 : 260;
+  const panelW = Math.min(380, width - (cx + R + pillW) - 32);
+  return { cx, cy: height / 2, R, r, height, pillW, panelW, panelBelow: panelW < 300 };
 }
 
+const PANEL_ID = "donacion-detalle";
+const PANEL_TITLE_ID = "donacion-detalle-titulo";
+
+/** Miniatura redonda de la foto de la causa (decorativa). */
+function CauseThumb({ cause }: { cause: Cause }) {
+  return (
+    <Image
+      src={cause.image.src}
+      alt=""
+      width={40}
+      height={40}
+      className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
+    />
+  );
+}
+
+/** Texto y etiquetas de la causa (se despliega en la lista del celular). */
 function CauseBody({ cause }: { cause: Cause }) {
   return (
     <>
@@ -115,13 +148,14 @@ function CauseBody({ cause }: { cause: Cause }) {
   );
 }
 
-/** Una tarjeta de la ruleta: ícono sobre el arco y la cápsula con el texto. */
+/** Una tarjeta de la ruleta: ícono sobre el arco y la cápsula con foto y título. */
 function WheelItem({
   slot,
   rot,
   geo,
   active,
   visible,
+  open,
   onSelect,
 }: {
   slot: number;
@@ -129,6 +163,7 @@ function WheelItem({
   geo: Geometry;
   active: boolean;
   visible: boolean;
+  open: boolean;
   onSelect: () => void;
 }) {
   const cause = causes[slot % causes.length];
@@ -162,32 +197,17 @@ function WheelItem({
         type="button"
         onClick={onSelect}
         tabIndex={visible ? 0 : -1}
-        aria-expanded={active}
+        aria-expanded={open && active}
+        aria-controls={PANEL_ID}
         style={{ width: geo.pillW }}
-        className={`-ml-7 rounded-[1.75rem] py-3 pl-11 pr-6 text-left transition-[background-color,box-shadow] duration-300 ${
+        className={`-ml-7 flex h-[4.5rem] items-center gap-3 rounded-[1.75rem] pl-11 pr-5 text-left transition-[background-color,box-shadow] duration-300 ${
           active ? "bg-white shadow-xl shadow-navy/15" : "bg-white/60 hover:bg-white"
-        }`}
+        } ${open && active ? `ring-2 ${cause.ring}` : ""}`}
       >
-        <span className="block text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-foreground">
-          {cause.area}
-        </span>
-        <span className="block text-lg font-bold leading-snug text-foreground">
+        <CauseThumb cause={cause} />
+        <span className="line-clamp-2 text-base font-bold leading-snug text-foreground sm:text-lg">
           {cause.title}
         </span>
-        <AnimatePresence initial={false}>
-          {active && (
-            <m.span
-              key="body"
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="block overflow-hidden"
-            >
-              <CauseBody cause={cause} />
-            </m.span>
-          )}
-        </AnimatePresence>
       </button>
     </m.div>
   );
@@ -240,9 +260,85 @@ function CausePhoto({
   );
 }
 
+/**
+ * Panel con la información de la causa abierta. Al cambiar de causa hace un
+ * fundido (la `key` cambia); el contenedor con el id siempre existe para que
+ * `aria-controls` y `aria-live` funcionen.
+ */
+function CausePanel({
+  cause,
+  onClose,
+  className = "",
+  style,
+}: {
+  cause: Cause | null;
+  onClose: () => void;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  return (
+    <div
+      id={PANEL_ID}
+      role="region"
+      aria-live="polite"
+      aria-labelledby={cause ? PANEL_TITLE_ID : undefined}
+      className={className}
+      style={style}
+    >
+      <AnimatePresence mode="wait">
+        {cause && (
+          <m.div
+            key={cause.title}
+            initial={{ opacity: 0, x: 24 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 16 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="relative overflow-hidden rounded-3xl bg-white p-6 shadow-xl shadow-navy/15 sm:p-8"
+          >
+            <span aria-hidden className={`absolute inset-x-0 top-0 h-1.5 ${cause.accent}`} />
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Cerrar"
+              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-navy/10"
+            >
+              <X className="h-5 w-5" strokeWidth={2} />
+            </button>
+            <span className="flex items-center gap-2 pr-12 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
+              <span aria-hidden className={`h-2.5 w-2.5 rounded-full ${cause.accent}`} />
+              {cause.area}
+            </span>
+            <h3
+              id={PANEL_TITLE_ID}
+              className="mt-3 pr-12 font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl"
+            >
+              {cause.title}
+            </h3>
+            <p className="mt-3 max-w-[48ch] text-base leading-relaxed text-foreground sm:text-lg">
+              {cause.text}
+            </p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {cause.helps.map((help) => (
+                <li
+                  key={help}
+                  className={`rounded-full px-3 py-1.5 text-sm font-medium text-foreground ${cause.tint}`}
+                >
+                  {help}
+                </li>
+              ))}
+            </ul>
+          </m.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export function DonationTypes() {
   const reduceMotion = useReducedMotion();
   const [step, setStep] = useState(0);
+  // Causa con la información abierta (0..2) o null si no hay ninguna.
+  const [openId, setOpenId] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
   const [width, setWidth] = useState(0);
   const wheelRef = useRef<HTMLDivElement>(null);
@@ -260,14 +356,26 @@ export function DonationTypes() {
     return () => controls.stop();
   }, [step, rot, reduceMotion]);
 
-  // Avanza sola en loop; se detiene mientras el usuario la mira o la toca.
+  // Avanza sola en loop; se detiene mientras el usuario la mira, la toca o
+  // tiene abierta la información de una causa.
+  const hasOpen = openId !== null;
   useEffect(() => {
-    if (reduceMotion || paused) return;
+    if (reduceMotion || paused || hasOpen) return;
     const id = window.setInterval(() => {
       if (!document.hidden) setStep((s) => s + 1);
     }, AUTO_MS);
     return () => window.clearInterval(id);
-  }, [reduceMotion, paused]);
+  }, [reduceMotion, paused, hasOpen]);
+
+  // Escape cierra la información abierta.
+  useEffect(() => {
+    if (!hasOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenId(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [hasOpen]);
 
   useEffect(() => {
     const el = wheelRef.current;
@@ -290,7 +398,31 @@ export function DonationTypes() {
     setStep((s) => s + mod(index - s, causes.length));
   };
 
+  // Clic en una cápsula de la ruleta: la lleva al centro y abre su información;
+  // si ya estaba abierta, la cierra.
+  const toggleSlot = (slot: number) => {
+    const index = slot % causes.length;
+    if (openId === index) {
+      setOpenId(null);
+      return;
+    }
+    selectSlot(slot);
+    setOpenId(index);
+  };
+
+  // Lo mismo en la lista del celular.
+  const toggleCause = (index: number) => {
+    if (openId === index) {
+      setOpenId(null);
+      return;
+    }
+    selectCause(index);
+    setOpenId(index);
+  };
+
   const geo = geometryFor(width || 900);
+  const openCause = openId === null ? null : causes[openId];
+  const closePanel = () => setOpenId(null);
 
   return (
     <section
@@ -360,11 +492,30 @@ export function DonationTypes() {
                   geo={geo}
                   active={slot === activeSlot}
                   visible={Math.abs(offset) <= 1}
-                  onSelect={() => selectSlot(slot)}
+                  open={openId === slot % causes.length}
+                  onSelect={() => toggleSlot(slot)}
                 />
               );
             })}
+
+            {!geo.panelBelow && (
+              <CausePanel
+                cause={openCause}
+                onClose={closePanel}
+                className="absolute right-0 top-1/2 z-30 -translate-y-1/2"
+                style={{ width: geo.panelW }}
+              />
+            )}
           </div>
+
+          {/* Tablets angostas: el panel va debajo de la ruleta. */}
+          {geo.panelBelow && (
+            <CausePanel
+              cause={openCause}
+              onClose={closePanel}
+              className="relative mt-6 hidden w-full max-w-xl md:block"
+            />
+          )}
 
           {/* Celular: misma idea en vertical, con la foto arriba. */}
           <div className="mt-8 md:hidden">
@@ -377,6 +528,8 @@ export function DonationTypes() {
               {causes.map((cause, index) => {
                 const Icon = cause.icon;
                 const active = cause === activeCause;
+                const open = openId === index;
+                const bodyId = `donacion-movil-${index}`;
                 return (
                   <li key={cause.title} className="relative flex items-start">
                     <span
@@ -389,22 +542,24 @@ export function DonationTypes() {
                     </span>
                     <button
                       type="button"
-                      onClick={() => selectCause(index)}
-                      aria-expanded={active}
+                      onClick={() => toggleCause(index)}
+                      aria-expanded={open}
+                      aria-controls={bodyId}
                       className={`-ml-6 flex-1 rounded-[1.5rem] py-3 pl-9 pr-4 text-left transition-[background-color,box-shadow] duration-300 ${
                         active ? "bg-white shadow-lg shadow-navy/15" : "bg-white/60"
                       }`}
                     >
-                      <span className="block text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-foreground">
-                        {cause.area}
-                      </span>
-                      <span className="block font-bold leading-snug text-foreground">
-                        {cause.title}
+                      <span className="flex items-center gap-3">
+                        <CauseThumb cause={cause} />
+                        <span className="block font-bold leading-snug text-foreground">
+                          {cause.title}
+                        </span>
                       </span>
                       <AnimatePresence initial={false}>
-                        {active && (
+                        {open && (
                           <m.span
                             key="body"
+                            id={bodyId}
                             initial={{ height: 0, opacity: 0 }}
                             animate={{ height: "auto", opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
