@@ -32,6 +32,13 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/* Tailwind v4 ya no pone cursor de mano a los botones: lo devolvemos para
+   que todo lo clicable lo indique. */
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]) {
+  cursor: pointer;
+}
+
 /* Doble anillo (blanco + oscuro) para que el foco se vea sobre cualquier
    fondo de la página — claro, de color o la foto oscura del hero. */
 a:focus-visible,

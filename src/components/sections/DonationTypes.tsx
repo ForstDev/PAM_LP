@@ -11,7 +11,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
-import { HeartPulse, PawPrint, Utensils, X, type LucideIcon } from "lucide-react";
+import { HeartPulse, PawPrint, Plus, Utensils, X, type LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
@@ -106,7 +106,8 @@ function geometryFor(width: number): Geometry {
   const r = R - 74;
   const cx = r + 24;
   const height = Math.round(R * 0.87 * 2 + 150);
-  const pillW = width < 1000 ? 240 : 260;
+  // Ancho suficiente para miniatura + título en dos líneas + indicador «+».
+  const pillW = width < 1000 ? 280 : 300;
   const panelW = Math.min(380, width - (cx + R + pillW) - 32);
   return { cx, cy: height / 2, R, r, height, pillW, panelW, panelBelow: panelW < 300 };
 }
@@ -124,6 +125,30 @@ function CauseThumb({ cause }: { cause: Cause }) {
       height={40}
       className="h-10 w-10 flex-shrink-0 rounded-full object-cover"
     />
+  );
+}
+
+/**
+ * Indicador «+» al final de cada cápsula: avisa que se puede tocar. Gira 45°
+ * (queda como «×») cuando su información está abierta. Mientras `pulse` sea
+ * true, un anillo late detrás para invitar a la primera interacción.
+ */
+function PlusBadge({ cause, open, pulse }: { cause: Cause; open: boolean; pulse: boolean }) {
+  return (
+    <span
+      aria-hidden
+      className={`relative ml-auto flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-110 ${cause.tint}`}
+    >
+      {pulse && (
+        <span className={`absolute inset-0 rounded-full opacity-60 motion-safe:animate-ping ${cause.accent}`} />
+      )}
+      <Plus
+        className={`relative h-4 w-4 text-foreground transition-transform duration-300 ${
+          open ? "rotate-45" : ""
+        }`}
+        strokeWidth={2.25}
+      />
+    </span>
   );
 }
 
@@ -156,6 +181,7 @@ function WheelItem({
   active,
   visible,
   open,
+  pulse,
   onSelect,
 }: {
   slot: number;
@@ -164,6 +190,7 @@ function WheelItem({
   active: boolean;
   visible: boolean;
   open: boolean;
+  pulse: boolean;
   onSelect: () => void;
 }) {
   const cause = causes[slot % causes.length];
@@ -200,14 +227,17 @@ function WheelItem({
         aria-expanded={open && active}
         aria-controls={PANEL_ID}
         style={{ width: geo.pillW }}
-        className={`-ml-7 flex h-[4.5rem] items-center gap-3 rounded-[1.75rem] pl-11 pr-5 text-left transition-[background-color,box-shadow] duration-300 ${
-          active ? "bg-white shadow-xl shadow-navy/15" : "bg-white/60 hover:bg-white"
+        className={`group -ml-7 flex h-[4.5rem] items-center gap-3 rounded-[1.75rem] pl-11 pr-4 text-left transition-[transform,background-color,box-shadow] duration-200 hover:translate-x-1 ${
+          active
+            ? "bg-white shadow-xl shadow-navy/15"
+            : "bg-white/60 hover:bg-white hover:shadow-lg hover:shadow-navy/10"
         } ${open && active ? `ring-2 ${cause.ring}` : ""}`}
       >
         <CauseThumb cause={cause} />
-        <span className="line-clamp-2 text-base font-bold leading-snug text-foreground sm:text-lg">
+        <span className="line-clamp-2 text-base font-bold leading-snug text-foreground">
           {cause.title}
         </span>
+        <PlusBadge cause={cause} open={open && active} pulse={pulse} />
       </button>
     </m.div>
   );
@@ -339,6 +369,8 @@ export function DonationTypes() {
   const [step, setStep] = useState(0);
   // Causa con la información abierta (0..2) o null si no hay ninguna.
   const [openId, setOpenId] = useState<number | null>(null);
+  // Pasa a true la primera vez que se abre una causa: apaga la pista del latido.
+  const [hasInteracted, setHasInteracted] = useState(false);
   const [paused, setPaused] = useState(false);
   const [width, setWidth] = useState(0);
   const wheelRef = useRef<HTMLDivElement>(null);
@@ -408,6 +440,7 @@ export function DonationTypes() {
     }
     selectSlot(slot);
     setOpenId(index);
+    setHasInteracted(true);
   };
 
   // Lo mismo en la lista del celular.
@@ -418,6 +451,7 @@ export function DonationTypes() {
     }
     selectCause(index);
     setOpenId(index);
+    setHasInteracted(true);
   };
 
   const geo = geometryFor(width || 900);
@@ -493,6 +527,7 @@ export function DonationTypes() {
                   active={slot === activeSlot}
                   visible={Math.abs(offset) <= 1}
                   open={openId === slot % causes.length}
+                  pulse={slot === activeSlot && !hasInteracted}
                   onSelect={() => toggleSlot(slot)}
                 />
               );
@@ -545,8 +580,10 @@ export function DonationTypes() {
                       onClick={() => toggleCause(index)}
                       aria-expanded={open}
                       aria-controls={bodyId}
-                      className={`-ml-6 flex-1 rounded-[1.5rem] py-3 pl-9 pr-4 text-left transition-[background-color,box-shadow] duration-300 ${
-                        active ? "bg-white shadow-lg shadow-navy/15" : "bg-white/60"
+                      className={`group -ml-6 flex-1 rounded-[1.5rem] py-3 pl-9 pr-4 text-left transition-[transform,background-color,box-shadow] duration-200 hover:translate-x-1 ${
+                        active
+                          ? "bg-white shadow-lg shadow-navy/15"
+                          : "bg-white/60 hover:shadow-lg hover:shadow-navy/10"
                       }`}
                     >
                       <span className="flex items-center gap-3">
@@ -554,6 +591,7 @@ export function DonationTypes() {
                         <span className="block font-bold leading-snug text-foreground">
                           {cause.title}
                         </span>
+                        <PlusBadge cause={cause} open={open} pulse={active && !hasInteracted} />
                       </span>
                       <AnimatePresence initial={false}>
                         {open && (
