@@ -25,7 +25,7 @@ const pillars = [
     icon: Scale,
     color: "azul" as const,
     title: "Ayudar no tiene partido",
-    text: "Somos parte de MÁS, un movimiento caritativo de ciudadanos independientes, no político ni partidario.",
+    text: "Somos parte de MÁS, un movimiento cultural humanitario de ciudadanos independientes, no político ni partidario.",
   },
 ];
 
@@ -39,19 +39,27 @@ export function WhoWeAre() {
       <GlowOrb className="bottom-16 -left-10 h-52 w-52 bg-azul/25 blur-2xl" />
 
       <div className="relative mx-auto grid max-w-[84rem] items-center gap-12 lg:grid-cols-2">
-        <SignatureCircle
-          color="celeste"
-          className="mx-auto w-full max-w-sm"
-          circleClassName="-left-8 -top-8 h-[75%] w-[75%]"
-        >
-          <Image
-            src="/hero-construccion.webp"
-            alt="Equipo de AyudemosMás"
-            width={480}
-            height={480}
-            className="aspect-square w-full rounded-[2.5rem] object-cover"
-          />
-        </SignatureCircle>
+        {/* Recorte circular del manual de marca. El encuadre se corre un poco a
+            la derecha para que entren las caras de ambos lados del stand. */}
+        <figure className="mx-auto w-full max-w-sm">
+          <SignatureCircle
+            color="celeste"
+            className="w-full"
+            circleClassName="-left-8 -top-8 h-[75%] w-[75%]"
+          >
+            <Image
+              src="/cumbre-ong.webp"
+              alt="Conversación con ONGs en un stand de la Cumbre Perú Sostenible"
+              width={480}
+              height={480}
+              className="aspect-square w-full rounded-full object-cover object-[52%_60%]"
+            />
+          </SignatureCircle>
+          <figcaption className="mt-5 text-center text-sm leading-relaxed text-foreground lg:text-left">
+            Conversamos con varias ONGs en la Cumbre Perú Sostenible, en
+            septiembre de 2026.
+          </figcaption>
+        </figure>
 
         <Reveal delay={0.1}>
           <SectionEyebrow>Quiénes somos</SectionEyebrow>
@@ -60,8 +68,9 @@ export function WhoWeAre() {
             AyudemosMás
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground">
-            Somos AyudemosMás, parte del movimiento caritativo MÁS. Nacimos
-            para hacer que nuestras acciones del día a día ayuden a otros.
+            Somos AyudemosMás, parte de MÁS, un movimiento cultural
+            humanitario. Nacimos para hacer que nuestras acciones del día a día
+            ayuden a otros.
           </p>
         </Reveal>
       </div>

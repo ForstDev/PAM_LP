@@ -45,28 +45,35 @@ function MissionPhoto({ mission }: { mission: Mission }) {
 
 function MissionDetail({ mission }: { mission: Mission }) {
   return (
-    <article className="rounded-3xl bg-white p-6 shadow-xl shadow-azul/20 sm:p-8">
-      <div className="grid items-center gap-8 md:grid-cols-[minmax(0,15rem)_1fr] lg:gap-12">
-        <div className="relative mx-auto w-full max-w-[12rem] md:max-w-none">
+    <article className="rounded-3xl bg-white p-5 shadow-xl shadow-azul/20 sm:p-8">
+      {/* En celular: cabecera en fila (foto de 5rem + chip y título) y debajo
+          la cifra y las cajas a todo el ancho. Desde md: la foto grande ocupa
+          la primera columna en todas las filas y el texto queda centrado en
+          vertical en la segunda (las filas 1fr de arriba y abajo lo centran),
+          igual que el diseño original de escritorio. */}
+      <div className="grid grid-cols-[5rem_minmax(0,1fr)] items-center gap-x-4 md:grid-cols-[minmax(0,15rem)_1fr] md:grid-rows-[1fr_auto_auto_1fr] md:gap-x-8 lg:gap-x-12">
+        <div className="relative w-20 md:col-start-1 md:row-span-4 md:row-start-1 md:mx-auto md:w-full">
           <div
             aria-hidden
-            className={`absolute -bottom-3 -right-3 h-[80%] w-[80%] rounded-full ${solid[mission.color]}`}
+            className={`absolute -bottom-1.5 -right-1.5 h-[80%] w-[80%] rounded-full md:-bottom-3 md:-right-3 ${solid[mission.color]}`}
           />
           <div className="relative">
             <MissionPhoto mission={mission} />
           </div>
         </div>
 
-        <div>
+        <div className="md:col-start-2 md:row-start-2">
           <span
             className={`inline-block rounded-full px-3 py-1 text-xs font-semibold text-foreground ${solid[mission.color]}`}
           >
             {mission.ods}
           </span>
-          <h3 className="mt-3 font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+          <h3 className="mt-3 font-serif text-xl font-bold leading-tight text-foreground md:text-3xl">
             {mission.title}
           </h3>
+        </div>
 
+        <div className="col-span-2 md:col-span-1 md:col-start-2 md:row-start-3">
           {mission.stat ? (
             <div className="mt-5">
               <p className="text-4xl font-bold leading-none text-foreground sm:text-5xl">
@@ -76,7 +83,7 @@ function MissionDetail({ mission }: { mission: Mission }) {
                   suffix={mission.stat.suffix}
                 />
               </p>
-              <p className="mt-2 text-base leading-snug text-foreground">
+              <p className="mt-2 text-sm leading-snug text-foreground md:text-base">
                 {mission.stat.label}
               </p>
               {mission.source && (
@@ -91,17 +98,23 @@ function MissionDetail({ mission }: { mission: Mission }) {
             </p>
           )}
 
-          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {/* Por debajo de sm las dos cajas se juntan en una sola caja tintada
+              con una línea fina entre los bloques; desde sm siguen las dos
+              cajas lado a lado. */}
+          <div className="mt-6 grid gap-4 max-sm:gap-0 max-sm:divide-y max-sm:divide-foreground/10 max-sm:overflow-hidden max-sm:rounded-2xl sm:grid-cols-2">
             {[
               { icon: MapPin, label: "En el Perú", text: mission.peru },
               { icon: Globe, label: "En el mundo", text: mission.world },
             ].map(({ icon: Icon, label, text }) => (
-              <div key={label} className={`rounded-2xl p-4 ${tint[mission.color]}`}>
+              <div
+                key={label}
+                className={`rounded-2xl p-4 max-sm:rounded-none ${tint[mission.color]}`}
+              >
                 <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-foreground">
                   <Icon className="h-4 w-4" strokeWidth={1.75} />
                   {label}
                 </p>
-                <p className="mt-2 leading-snug text-foreground">{text}</p>
+                <p className="mt-2 leading-snug text-foreground max-sm:text-sm">{text}</p>
               </div>
             ))}
           </div>
@@ -145,7 +158,7 @@ export function MissionBoard() {
               role="tab"
               aria-selected={selected}
               onClick={() => selectGroup(g.id)}
-              className="relative rounded-full px-5 py-3 text-sm font-semibold text-foreground sm:text-base"
+              className="relative min-h-11 rounded-full px-5 py-3 text-sm font-semibold text-foreground sm:text-base"
             >
               {selected && (
                 <m.span
@@ -167,7 +180,9 @@ export function MissionBoard() {
         })}
       </div>
 
-      {/* Paso 2: elegir una misión del tema (2 a 4 fotos circulares). */}
+      {/* Paso 2: elegir una misión del tema (2 a 4 fotos circulares).
+          Por debajo de sm cada botón mide 4rem y el círculo 56 px para que
+          las 4 miniaturas quepan sin cortarse desde 320 px de ancho. */}
       <ul className="mt-8 flex justify-between gap-x-2 sm:justify-start sm:gap-x-10">
         {groupMissions.map((mission) => {
           const selected = mission.id === active.id;
@@ -177,9 +192,9 @@ export function MissionBoard() {
                 type="button"
                 onClick={() => setMissionId(mission.id)}
                 aria-pressed={selected}
-                className="group flex w-[4.75rem] flex-col items-center gap-2 text-center sm:w-28"
+                className="group flex w-16 flex-col items-center gap-2 text-center sm:w-28"
               >
-                <span className="relative block h-16 w-16 sm:h-24 sm:w-24">
+                <span className="relative block h-14 w-14 sm:h-24 sm:w-24">
                   <m.span
                     aria-hidden
                     initial={false}
@@ -196,7 +211,7 @@ export function MissionBoard() {
                   </span>
                 </span>
                 <span
-                  className={`text-sm leading-tight text-foreground ${
+                  className={`text-xs leading-tight text-foreground sm:text-sm ${
                     selected ? "font-semibold" : "font-medium"
                   }`}
                 >

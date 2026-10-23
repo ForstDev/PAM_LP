@@ -9,9 +9,9 @@ import { waLink } from "@/lib/whatsapp";
 
 const navLinks = [
   { href: "#quienes-somos", label: "¿Quiénes somos?" },
+  { href: "#productos", label: "Productos" },
   { href: "#problematicas", label: "Problemáticas" },
   { href: "#donaciones", label: "Donaciones" },
-  { href: "#productos", label: "Productos" },
   { href: "#afiliacion", label: "Afiliación" },
 ];
 

@@ -37,7 +37,8 @@ export function Footer() {
               className="h-10 w-auto brightness-0 invert"
             />
             <p className="mt-4 text-sm leading-relaxed text-white">
-              {site.claim}. Parte de MÁS, un movimiento caritativo.
+              Transformamos tu compra en ayuda real. Parte de MÁS, un
+              movimiento cultural humanitario.
             </p>
             <p className="mt-4 font-serif text-2xl italic text-white">
               {site.tagline}
@@ -86,8 +87,19 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-white/20 pt-6 text-xs text-white">
-          <p>© {new Date().getFullYear()} {site.name}. {site.claim}.</p>
+        <div className="mt-12 border-t border-white/20 pt-6 text-xs text-white">
+          {/* Copyright y firma de FORST en la misma fila desde sm; en celular
+              la firma baja debajo del copyright, alineada a la izquierda. */}
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <p>© {new Date().getFullYear()} {site.name}.</p>
+            <Image
+              src="/powered-by-forst.png"
+              alt="Powered by FORST"
+              width={600}
+              height={97}
+              className="h-5 w-auto"
+            />
+          </div>
           {/* TODO: texto de política de privacidad/acuerdos legales — pendiente
               de que el cliente confirme el contenido real antes de publicarlo. */}
         </div>

@@ -46,7 +46,6 @@ button:focus-visible {
   outline: 2px solid white;
   outline-offset: 2px;
   box-shadow: 0 0 0 4px var(--color-foreground);
-  border-radius: 2px;
 }
 
 /* Frases de impacto — FreeSerif (real, autohospedada) en itálica, negro

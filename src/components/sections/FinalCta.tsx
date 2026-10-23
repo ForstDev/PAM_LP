@@ -28,14 +28,14 @@ export function FinalCta() {
 
         <Reveal delay={0.1}>
           <p className="max-w-[60ch] text-lg leading-relaxed text-foreground">
-            MÁS es un movimiento caritativo inspirado en las enseñanzas de
-            Margot sobre compasión y generosidad. Nació para resolver la crisis
-            global de donaciones, donde la necesidad crece rápido y el
-            financiamiento depende de muy pocas personas.
+            MÁS es un movimiento cultural humanitario inspirado en las
+            enseñanzas de Margot sobre compasión y generosidad. Nació ante la
+            crisis global de donaciones: la necesidad crece rápido y el
+            financiamiento está en caída.
           </p>
           <p className="mt-4 max-w-[60ch] border-l-4 border-foreground pl-4 text-lg font-semibold leading-relaxed text-foreground">
-            AyudemosMás es una alternativa para descentralizar las donaciones:
-            la ayuda no debe depender de unos pocos, sino de todos.
+            AyudemosMás multiplica la ayuda que reciben caridades y ONGs con
+            una nueva fuente de fondos: la promoción de la economía solidaria.
           </p>
           <m.a
             href={`mailto:${site.alliancesEmail}`}

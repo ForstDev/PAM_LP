@@ -1,7 +1,7 @@
 "use client";
 
 import { m } from "motion/react";
-import { waLink } from "@/lib/whatsapp";
+import { site } from "@/lib/site";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -26,8 +26,8 @@ export function HeroContent() {
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.25 }}
         className="mt-6 max-w-xl text-lg leading-relaxed text-white/90"
       >
-        Pide, compra y muy pronto vende con nosotros. El 100% de nuestras
-        ganancias va a organizaciones que trabajan en diversas causas.
+        El 100% de nuestras ganancias va a organizaciones que trabajan en
+        diversas causas sociales.
       </m.p>
 
       <m.div
@@ -37,12 +37,12 @@ export function HeroContent() {
         className="mt-8"
       >
         <a
-          href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
+          href={site.instagram}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105 active:scale-95"
+          className="inline-block rounded-full bg-verde px-6 py-4 text-center text-[0.9375rem] font-semibold text-foreground transition-transform sm:px-8 sm:text-base hover:scale-105 active:scale-95"
         >
-          Comprar y ayudar
+          Sé parte de nuestro punto de partida
         </a>
       </m.div>
     </div>

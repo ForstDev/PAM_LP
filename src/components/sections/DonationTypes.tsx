@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import Image from "next/image";
 import {
   AnimatePresence,
@@ -11,7 +11,7 @@ import {
   useTransform,
   type MotionValue,
 } from "motion/react";
-import { HeartPulse, PawPrint, Plus, Utensils, X, type LucideIcon } from "lucide-react";
+import { ChevronRight, HeartPulse, PawPrint, Utensils, type LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
 import { SectionEyebrow } from "@/components/SectionEyebrow";
@@ -106,7 +106,7 @@ function geometryFor(width: number): Geometry {
   const r = R - 74;
   const cx = r + 24;
   const height = Math.round(R * 0.87 * 2 + 150);
-  // Ancho suficiente para miniatura + título en dos líneas + indicador «+».
+  // Ancho suficiente para miniatura + título en dos líneas + indicador «›».
   const pillW = width < 1000 ? 280 : 300;
   const panelW = Math.min(380, width - (cx + R + pillW) - 32);
   return { cx, cy: height / 2, R, r, height, pillW, panelW, panelBelow: panelW < 300 };
@@ -129,22 +129,24 @@ function CauseThumb({ cause }: { cause: Cause }) {
 }
 
 /**
- * Indicador «+» al final de cada cápsula: avisa que se puede tocar. Gira 45°
- * (queda como «×») cuando su información está abierta. Mientras `pulse` sea
- * true, un anillo late detrás para invitar a la primera interacción.
+ * Indicador «›» al final de cada cápsula: avisa que se puede tocar. En la
+ * cápsula activa el círculo toma el color sólido de la causa. Mientras `pulse`
+ * sea true, un anillo late detrás para invitar a la primera interacción.
  */
-function PlusBadge({ cause, open, pulse }: { cause: Cause; open: boolean; pulse: boolean }) {
+function ChevronBadge({ cause, active, pulse }: { cause: Cause; active: boolean; pulse: boolean }) {
   return (
     <span
       aria-hidden
-      className={`relative ml-auto flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-110 ${cause.tint}`}
+      className={`relative ml-auto flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full transition-[transform,background-color] duration-200 ${
+        active ? cause.accent : `${cause.tint} group-hover:scale-110`
+      }`}
     >
       {pulse && (
         <span className={`absolute inset-0 rounded-full opacity-60 motion-safe:animate-ping ${cause.accent}`} />
       )}
-      <Plus
-        className={`relative h-4 w-4 text-foreground transition-transform duration-300 ${
-          open ? "rotate-45" : ""
+      <ChevronRight
+        className={`relative h-4 w-4 text-foreground transition-transform duration-200 ${
+          active ? "" : "group-hover:translate-x-0.5"
         }`}
         strokeWidth={2.25}
       />
@@ -156,19 +158,17 @@ function PlusBadge({ cause, open, pulse }: { cause: Cause; open: boolean; pulse:
 function CauseBody({ cause }: { cause: Cause }) {
   return (
     <>
-      <span className="mt-2 block text-sm leading-relaxed text-foreground sm:text-base">
-        {cause.text}
-      </span>
-      <span className="mt-3 flex flex-wrap gap-1.5">
+      <p className="text-sm leading-relaxed text-foreground sm:text-base">{cause.text}</p>
+      <ul className="mt-3 flex flex-wrap gap-1.5">
         {cause.helps.map((help) => (
-          <span
+          <li
             key={help}
             className={`rounded-full px-2.5 py-1 text-xs font-medium text-foreground ${cause.tint}`}
           >
             {help}
-          </span>
+          </li>
         ))}
-      </span>
+      </ul>
     </>
   );
 }
@@ -180,7 +180,6 @@ function WheelItem({
   geo,
   active,
   visible,
-  open,
   pulse,
   onSelect,
 }: {
@@ -189,7 +188,6 @@ function WheelItem({
   geo: Geometry;
   active: boolean;
   visible: boolean;
-  open: boolean;
   pulse: boolean;
   onSelect: () => void;
 }) {
@@ -224,20 +222,20 @@ function WheelItem({
         type="button"
         onClick={onSelect}
         tabIndex={visible ? 0 : -1}
-        aria-expanded={open && active}
+        aria-pressed={active}
         aria-controls={PANEL_ID}
         style={{ width: geo.pillW }}
         className={`group -ml-7 flex h-[4.5rem] items-center gap-3 rounded-[1.75rem] pl-11 pr-4 text-left transition-[transform,background-color,box-shadow] duration-200 hover:translate-x-1 ${
           active
-            ? "bg-white shadow-xl shadow-navy/15"
+            ? `bg-white shadow-xl shadow-navy/15 ring-2 ${cause.ring}`
             : "bg-white/60 hover:bg-white hover:shadow-lg hover:shadow-navy/10"
-        } ${open && active ? `ring-2 ${cause.ring}` : ""}`}
+        }`}
       >
         <CauseThumb cause={cause} />
         <span className="line-clamp-2 text-base font-bold leading-snug text-foreground">
           {cause.title}
         </span>
-        <PlusBadge cause={cause} open={open && active} pulse={pulse} />
+        <ChevronBadge cause={cause} active={active} pulse={pulse} />
       </button>
     </m.div>
   );
@@ -291,74 +289,68 @@ function CausePhoto({
 }
 
 /**
- * Panel con la información de la causa abierta. Al cambiar de causa hace un
- * fundido (la `key` cambia); el contenedor con el id siempre existe para que
- * `aria-controls` y `aria-live` funcionen.
+ * Panel con la información de la causa activa (siempre hay una). Al cambiar de
+ * causa hace un fundido (la `key` cambia); el contenedor con el id siempre
+ * existe para que `aria-controls` funcione. Solo anuncia los cambios a lectores
+ * de pantalla cuando los provoca el usuario (`announce`), no el giro automático.
  */
 function CausePanel({
   cause,
-  onClose,
+  announce,
+  panelRef,
   className = "",
   style,
 }: {
-  cause: Cause | null;
-  onClose: () => void;
+  cause: Cause;
+  announce: boolean;
+  panelRef?: (el: HTMLDivElement | null) => void;
   className?: string;
   style?: CSSProperties;
 }) {
   return (
     <div
+      ref={panelRef}
       id={PANEL_ID}
       role="region"
-      aria-live="polite"
-      aria-labelledby={cause ? PANEL_TITLE_ID : undefined}
+      aria-live={announce ? "polite" : "off"}
+      aria-labelledby={PANEL_TITLE_ID}
       className={className}
       style={style}
     >
-      <AnimatePresence mode="wait">
-        {cause && (
-          <m.div
-            key={cause.title}
-            initial={{ opacity: 0, x: 24 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 16 }}
-            transition={{ duration: 0.3, ease: "easeOut" }}
-            className="relative overflow-hidden rounded-3xl bg-white p-6 shadow-xl shadow-navy/15 sm:p-8"
+      <AnimatePresence mode="wait" initial={false}>
+        <m.div
+          key={cause.title}
+          initial={{ opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 16 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+          className="relative overflow-hidden rounded-3xl bg-white p-6 shadow-xl shadow-navy/15 sm:p-8"
+        >
+          <span aria-hidden className={`absolute inset-x-0 top-0 h-1.5 ${cause.accent}`} />
+          <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
+            <span aria-hidden className={`h-2.5 w-2.5 rounded-full ${cause.accent}`} />
+            {cause.area}
+          </span>
+          <h3
+            id={PANEL_TITLE_ID}
+            className="mt-3 font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl"
           >
-            <span aria-hidden className={`absolute inset-x-0 top-0 h-1.5 ${cause.accent}`} />
-            <button
-              type="button"
-              onClick={onClose}
-              aria-label="Cerrar"
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full text-foreground transition-colors hover:bg-navy/10"
-            >
-              <X className="h-5 w-5" strokeWidth={2} />
-            </button>
-            <span className="flex items-center gap-2 pr-12 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
-              <span aria-hidden className={`h-2.5 w-2.5 rounded-full ${cause.accent}`} />
-              {cause.area}
-            </span>
-            <h3
-              id={PANEL_TITLE_ID}
-              className="mt-3 pr-12 font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl"
-            >
-              {cause.title}
-            </h3>
-            <p className="mt-3 max-w-[48ch] text-base leading-relaxed text-foreground sm:text-lg">
-              {cause.text}
-            </p>
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {cause.helps.map((help) => (
-                <li
-                  key={help}
-                  className={`rounded-full px-3 py-1.5 text-sm font-medium text-foreground ${cause.tint}`}
-                >
-                  {help}
-                </li>
-              ))}
-            </ul>
-          </m.div>
-        )}
+            {cause.title}
+          </h3>
+          <p className="mt-3 max-w-[48ch] text-base leading-relaxed text-foreground sm:text-lg">
+            {cause.text}
+          </p>
+          <ul className="mt-5 flex flex-wrap gap-2">
+            {cause.helps.map((help) => (
+              <li
+                key={help}
+                className={`rounded-full px-3 py-1.5 text-sm font-medium text-foreground ${cause.tint}`}
+              >
+                {help}
+              </li>
+            ))}
+          </ul>
+        </m.div>
       </AnimatePresence>
     </div>
   );
@@ -367,16 +359,23 @@ function CausePanel({
 export function DonationTypes() {
   const reduceMotion = useReducedMotion();
   const [step, setStep] = useState(0);
-  // Causa con la información abierta (0..2) o null si no hay ninguna.
-  const [openId, setOpenId] = useState<number | null>(null);
-  // Pasa a true la primera vez que se abre una causa: apaga la pista del latido.
+  // Pasa a true con el primer toque del usuario: apaga el latido y detiene
+  // para siempre el giro automático (el usuario queda en control).
   const [hasInteracted, setHasInteracted] = useState(false);
-  const [paused, setPaused] = useState(false);
+  // Pausas del giro automático: mouse encima y foco de teclado dentro.
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [focusPaused, setFocusPaused] = useState(false);
   const [width, setWidth] = useState(0);
+  // Alto del panel flotante, para que nunca desborde el contenedor de la ruleta.
+  const [panelH, setPanelH] = useState(0);
+  const [panelEl, setPanelEl] = useState<HTMLDivElement | null>(null);
   const wheelRef = useRef<HTMLDivElement>(null);
   const rot = useMotionValue(0);
 
-  const activeCause = causes[mod(step, causes.length)];
+  // La causa activa es la que está al centro de la ruleta; su información se
+  // muestra siempre en el panel (escritorio) o desplegada (celular).
+  const activeIndex = mod(step, causes.length);
+  const activeCause = causes[activeIndex];
   const activeSlot = mod(step, SLOTS);
 
   // Gira la ruleta hasta la posición del paso actual.
@@ -388,26 +387,19 @@ export function DonationTypes() {
     return () => controls.stop();
   }, [step, rot, reduceMotion]);
 
-  // Avanza sola en loop; se detiene mientras el usuario la mira, la toca o
-  // tiene abierta la información de una causa.
-  const hasOpen = openId !== null;
+  // Avanza sola en loop hasta la primera interacción. Se pausa mientras el
+  // mouse está encima o el foco está dentro. Solo corre con la ruleta a la
+  // vista (width > 0): en el celular la ruleta está oculta y la lista no debe
+  // desplegarse y plegarse sola.
+  const paused = hoverPaused || focusPaused;
+  const wheelShown = width > 0;
   useEffect(() => {
-    if (reduceMotion || paused || hasOpen) return;
+    if (reduceMotion || hasInteracted || paused || !wheelShown) return;
     const id = window.setInterval(() => {
       if (!document.hidden) setStep((s) => s + 1);
     }, AUTO_MS);
     return () => window.clearInterval(id);
-  }, [reduceMotion, paused, hasOpen]);
-
-  // Escape cierra la información abierta.
-  useEffect(() => {
-    if (!hasOpen) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenId(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [hasOpen]);
+  }, [reduceMotion, hasInteracted, paused, wheelShown]);
 
   useEffect(() => {
     const el = wheelRef.current;
@@ -417,46 +409,47 @@ export function DonationTypes() {
     return () => ro.disconnect();
   }, []);
 
-  const selectSlot = useCallback(
-    (slot: number) => {
-      let delta = mod(slot - step, SLOTS);
-      if (delta > SLOTS / 2) delta -= SLOTS;
-      setStep((s) => s + delta);
-    },
-    [step],
-  );
+  useEffect(() => {
+    if (!panelEl) return;
+    const ro = new ResizeObserver(([entry]) => {
+      const h = Math.ceil(entry.contentRect.height);
+      // Durante el cambio de causa puede medir 0 un instante: se ignora.
+      if (h > 0) setPanelH(h);
+    });
+    ro.observe(panelEl);
+    return () => ro.disconnect();
+  }, [panelEl]);
 
-  const selectCause = (index: number) => {
-    setStep((s) => s + mod(index - s, causes.length));
-  };
-
-  // Clic en una cápsula de la ruleta: la lleva al centro y abre su información;
-  // si ya estaba abierta, la cierra.
-  const toggleSlot = (slot: number) => {
-    const index = slot % causes.length;
-    if (openId === index) {
-      setOpenId(null);
-      return;
-    }
-    selectSlot(slot);
-    setOpenId(index);
+  // Clic en una cápsula de la ruleta: la lleva al centro por el camino corto.
+  // Si ya es la activa no cambia nada (solo cuenta como interacción).
+  const selectSlot = (slot: number) => {
     setHasInteracted(true);
+    if (slot === activeSlot) return;
+    let delta = mod(slot - step, SLOTS);
+    if (delta > SLOTS / 2) delta -= SLOTS;
+    setStep((s) => s + delta);
   };
 
   // Lo mismo en la lista del celular.
-  const toggleCause = (index: number) => {
-    if (openId === index) {
-      setOpenId(null);
-      return;
-    }
-    selectCause(index);
-    setOpenId(index);
+  const selectCause = (index: number) => {
     setHasInteracted(true);
+    if (index === activeIndex) return;
+    setStep((s) => s + mod(index - s, causes.length));
   };
 
-  const geo = geometryFor(width || 900);
-  const openCause = openId === null ? null : causes[openId];
-  const closePanel = () => setOpenId(null);
+  const onPointerEnter = (e: PointerEvent) => {
+    if (e.pointerType === "mouse") setHoverPaused(true);
+  };
+  const onPointerLeave = (e: PointerEvent) => {
+    if (e.pointerType === "mouse") setHoverPaused(false);
+  };
+
+  const baseGeo = geometryFor(width || 900);
+  // El contenedor crece si el panel flotante es más alto que la ruleta; la
+  // ruleta y el panel quedan centrados verticalmente.
+  const wheelH = baseGeo.panelBelow ? baseGeo.height : Math.max(baseGeo.height, panelH + 32);
+  const geo: Geometry = { ...baseGeo, height: wheelH, cy: wheelH / 2 };
+  const fadeIn = `transition-opacity duration-300 ${wheelShown ? "opacity-100" : "opacity-0"}`;
 
   return (
     <section
@@ -479,15 +472,16 @@ export function DonationTypes() {
         </Reveal>
 
         <div
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          onFocusCapture={() => setPaused(true)}
-          onBlurCapture={() => setPaused(false)}
+          onPointerEnter={onPointerEnter}
+          onPointerLeave={onPointerLeave}
+          onFocusCapture={() => setFocusPaused(true)}
+          onBlurCapture={() => setFocusPaused(false)}
         >
-          {/* Escritorio y tablet: ruleta semicircular. */}
+          {/* Escritorio y tablet: ruleta semicircular. Invisible hasta medir
+              el ancho, para que las cápsulas no salten de posición. */}
           <div
             ref={wheelRef}
-            className="relative mt-8 hidden w-full md:block"
+            className={`relative mt-8 hidden w-full md:block ${fadeIn}`}
             style={{ height: geo.height }}
           >
             <svg aria-hidden className="absolute inset-0 h-full w-full overflow-visible">
@@ -500,7 +494,7 @@ export function DonationTypes() {
                 strokeOpacity="0.35"
                 strokeWidth="1.5"
                 strokeDasharray="6 8"
-                className={reduceMotion ? "" : "animate-[spin_60s_linear_infinite]"}
+                className="motion-safe:animate-[spin_60s_linear_infinite]"
                 style={{ transformOrigin: `${geo.cx}px ${geo.cy}px` }}
               />
             </svg>
@@ -518,25 +512,27 @@ export function DonationTypes() {
 
             {Array.from({ length: SLOTS }, (_, slot) => {
               const offset = mod(slot - step + SLOTS / 2, SLOTS) - SLOTS / 2;
+              const active = slot === activeSlot;
+              const visible = Math.abs(offset) <= 1;
               return (
                 <WheelItem
                   key={slot}
                   slot={slot}
                   rot={rot}
                   geo={geo}
-                  active={slot === activeSlot}
-                  visible={Math.abs(offset) <= 1}
-                  open={openId === slot % causes.length}
-                  pulse={slot === activeSlot && !hasInteracted}
-                  onSelect={() => toggleSlot(slot)}
+                  active={active}
+                  visible={visible}
+                  pulse={visible && !active && !hasInteracted}
+                  onSelect={() => selectSlot(slot)}
                 />
               );
             })}
 
             {!geo.panelBelow && (
               <CausePanel
-                cause={openCause}
-                onClose={closePanel}
+                cause={activeCause}
+                announce={hasInteracted}
+                panelRef={setPanelEl}
                 className="absolute right-0 top-1/2 z-30 -translate-y-1/2"
                 style={{ width: geo.panelW }}
               />
@@ -546,9 +542,9 @@ export function DonationTypes() {
           {/* Tablets angostas: el panel va debajo de la ruleta. */}
           {geo.panelBelow && (
             <CausePanel
-              cause={openCause}
-              onClose={closePanel}
-              className="relative mt-6 hidden w-full max-w-xl md:block"
+              cause={activeCause}
+              announce={hasInteracted}
+              className={`relative mt-6 hidden w-full max-w-xl md:block ${fadeIn}`}
             />
           )}
 
@@ -562,8 +558,7 @@ export function DonationTypes() {
               />
               {causes.map((cause, index) => {
                 const Icon = cause.icon;
-                const active = cause === activeCause;
-                const open = openId === index;
+                const active = index === activeIndex;
                 const bodyId = `donacion-movil-${index}`;
                 return (
                   <li key={cause.title} className="relative flex items-start">
@@ -575,40 +570,42 @@ export function DonationTypes() {
                     >
                       <Icon className="h-6 w-6 text-foreground" strokeWidth={1.75} />
                     </span>
-                    <button
-                      type="button"
-                      onClick={() => toggleCause(index)}
-                      aria-expanded={open}
-                      aria-controls={bodyId}
-                      className={`group -ml-6 flex-1 rounded-[1.5rem] py-3 pl-9 pr-4 text-left transition-[transform,background-color,box-shadow] duration-200 hover:translate-x-1 ${
+                    <div
+                      className={`-ml-6 min-w-0 flex-1 rounded-[1.5rem] transition-[transform,background-color,box-shadow] duration-200 hover:translate-x-1 ${
                         active
                           ? "bg-white shadow-lg shadow-navy/15"
                           : "bg-white/60 hover:shadow-lg hover:shadow-navy/10"
                       }`}
                     >
-                      <span className="flex items-center gap-3">
+                      <button
+                        type="button"
+                        onClick={() => selectCause(index)}
+                        aria-pressed={active}
+                        aria-controls={bodyId}
+                        className="group flex w-full items-center gap-3 rounded-[1.5rem] py-3 pl-9 pr-4 text-left"
+                      >
                         <CauseThumb cause={cause} />
-                        <span className="block font-bold leading-snug text-foreground">
+                        <span className="min-w-0 font-bold leading-snug text-foreground">
                           {cause.title}
                         </span>
-                        <PlusBadge cause={cause} open={open} pulse={active && !hasInteracted} />
-                      </span>
-                      <AnimatePresence initial={false}>
-                        {open && (
-                          <m.span
-                            key="body"
-                            id={bodyId}
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.35, ease: "easeOut" }}
-                            className="block overflow-hidden"
-                          >
-                            <CauseBody cause={cause} />
-                          </m.span>
-                        )}
-                      </AnimatePresence>
-                    </button>
+                        <ChevronBadge cause={cause} active={active} pulse={!active && !hasInteracted} />
+                      </button>
+                      {/* Siempre montado (el id existe para aria-controls);
+                          plegado y fuera del árbol accesible si no es el activo. */}
+                      <m.div
+                        id={bodyId}
+                        initial={false}
+                        animate={active ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: "easeOut" }}
+                        aria-hidden={!active}
+                        inert={!active}
+                        className="overflow-hidden"
+                      >
+                        <div className="pb-3 pl-9 pr-4">
+                          <CauseBody cause={cause} />
+                        </div>
+                      </m.div>
+                    </div>
                   </li>
                 );
               })}

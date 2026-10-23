@@ -12,7 +12,7 @@ export function ProfitCounter() {
   const [done, setDone] = useState(false);
 
   return (
-    <div className="flex-shrink-0 text-right">
+    <div className="flex-shrink-0 text-left sm:text-right">
       <p className="text-5xl font-bold text-foreground sm:text-6xl">
         <StatCounter to={100} suffix="%" onComplete={() => setDone(true)} />
       </p>
