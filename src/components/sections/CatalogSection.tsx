@@ -19,7 +19,7 @@ export function CatalogSection() {
               Lo que ya compras cada semana,<br className="hidden md:inline" /> ahora
               también ayuda…
             </h2>
-            <p className="text-impact mt-4 text-2xl sm:text-3xl">
+            <p className="text-impact mt-4 text-xl sm:text-2xl">
               Muy pronto… más productos en AyudemosMás Delivery
             </p>
             <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-foreground">

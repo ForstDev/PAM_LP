@@ -5,7 +5,7 @@ import { m } from "motion/react";
 import { Check } from "lucide-react";
 import { StatCounter } from "@/components/StatCounter";
 
-const values = ["Cero crueldad animal", "Opciones vegetarianas", "Opciones veganas"];
+const values = ["Opciones vegetarianas", "Cero crueldad animal", "Opciones veganas"];
 
 /**
  * Número puro (sin fondo) que cuenta de 0 a 100, y solo después de terminar
@@ -25,9 +25,9 @@ export function ProfitCounter() {
         initial={{ opacity: 0, y: 6 }}
         animate={done ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="mt-1 max-w-[13rem] text-xs leading-snug text-foreground"
+        className="mt-1 max-w-[15rem] text-xs leading-snug text-foreground"
       >
-        de las ganancias va a organizaciones y causas sociales.
+        de las ganancias va a organizaciones<br />y causas sociales.
       </m.p>
       <ul className="mt-5 space-y-2">
         {values.map((value) => (
