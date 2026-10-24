@@ -56,8 +56,9 @@ export function BrandRoadmap() {
           Empezamos con delivery. Vamos por más.
         </h3>
         <p className="mt-3 max-w-2xl text-lg leading-relaxed text-foreground">
-          Después del delivery vienen las tiendas y un espacio para vender lo
-          tuyo. En todos, las ganancias van a ayudar.
+          Después del delivery vienen las tiendas y un espacio para{" "}
+          <br className="hidden lg:inline" />
+          vender lo tuyo. En todos, las ganancias van a ayudar.
         </p>
       </Reveal>
 
@@ -135,7 +136,7 @@ export function BrandRoadmap() {
                     {channel.items.map((item) => (
                       <li
                         key={item}
-                        className="flex items-center gap-2 text-sm font-semibold text-foreground"
+                        className="flex items-center gap-2 text-sm text-foreground"
                       >
                         <span aria-hidden className={`h-2 w-2 rounded-full ${dotColor[index]}`} />
                         AyudemosMás {item}
@@ -143,7 +144,7 @@ export function BrandRoadmap() {
                     ))}
                   </ul>
                 )}
-                <p className="text-impact mt-auto pt-5 text-lg font-bold">
+                <p className="text-impact mt-auto pt-5 text-lg">
                   {channel.claim}
                 </p>
               </m.div>

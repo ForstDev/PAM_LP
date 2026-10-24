@@ -46,7 +46,7 @@ export function Footer() {
             <p className="mt-1 text-sm text-white">{site.reach}</p>
           </div>
 
-          <div className="text-sm">
+          <div className="text-sm sm:w-56">
             <p className="font-semibold text-white">Contacto</p>
             <ul className="mt-1 text-white">
               <li>
@@ -88,17 +88,28 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-white/20 pt-6 text-xs text-white">
-          {/* Copyright y firma de FORST en la misma fila desde sm; en celular
-              la firma baja debajo del copyright, alineada a la izquierda. */}
+          {/* Copyright y firma de FORST en la misma fila desde sm; desde sm el
+              logo de FORST se alinea con la columna de Contacto (mismo ancho) y
+              enlaza al sitio de FORST. En celular la firma baja debajo del
+              copyright, alineada a la izquierda. */}
           <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p>© {new Date().getFullYear()} {site.name}.</p>
-            <Image
-              src="/powered-by-forst.png"
-              alt="Powered by FORST"
-              width={600}
-              height={97}
-              className="h-5 w-auto"
-            />
+            <div className="sm:w-56">
+              <a
+                href="https://web-forst.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block transition-opacity hover:opacity-80"
+              >
+                <Image
+                  src="/powered-by-forst.png"
+                  alt="Powered by FORST"
+                  width={600}
+                  height={97}
+                  className="h-7 w-auto"
+                />
+              </a>
+            </div>
           </div>
           {/* TODO: texto de política de privacidad/acuerdos legales — pendiente
               de que el cliente confirme el contenido real antes de publicarlo. */}

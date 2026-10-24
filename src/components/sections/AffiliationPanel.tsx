@@ -17,6 +17,8 @@ const panels: Record<
   Audience,
   {
     title: string;
+    /** Corte opcional del título en dos líneas (solo donde ambas caben). */
+    titleLines?: [string, string];
     impact: string;
     steps: { title: string; text: string }[];
     cta: string;
@@ -25,6 +27,7 @@ const panels: Record<
 > = {
   ong: {
     title: "¿Representas una organización con una causa social?",
+    titleLines: ["¿Representas una organización", "con una causa social?"],
     impact: "Tu causa, en cada compra.",
     steps: [
       { title: "Conversamos", text: "Nos cuentas tu causa y lo que más necesitas." },
@@ -118,8 +121,16 @@ export function AffiliationPanel() {
                   : "invisible translate-y-2 opacity-0"
               }`}
             >
-              <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
-                {panel.title}
+              <h2 className="font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-[2.875rem]">
+                {panel.titleLines ? (
+                  <>
+                    {panel.titleLines[0]}
+                    <br className="hidden sm:max-lg:inline xl:inline" />{" "}
+                    {panel.titleLines[1]}
+                  </>
+                ) : (
+                  panel.title
+                )}
               </h2>
               <p className="text-impact mt-4 text-2xl sm:text-3xl">
                 {panel.impact}

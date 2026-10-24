@@ -7,13 +7,14 @@ export function HeroSection() {
     <section id="top" className="relative isolate overflow-hidden bg-navy">
       <div className="absolute inset-0">
         <Image
-          src="/hero-voluntarios.webp"
+          src="/hero-voluntarios-v2.webp"
           alt="Voluntarios de AyudemosMás construyendo juntos"
           fill
           priority
           fetchPriority="high"
           className="object-cover"
           sizes="100vw"
+          quality={85}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-navy/95 via-navy/55 to-navy/20" />
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-navy/70 to-transparent" />

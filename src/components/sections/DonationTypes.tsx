@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
+import { Fragment, useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import Image from "next/image";
 import {
   AnimatePresence,
@@ -19,7 +19,12 @@ import { SectionEyebrow } from "@/components/SectionEyebrow";
 type Cause = {
   area: string;
   title: string;
-  text: string;
+  /**
+   * Texto en «escalera»: la primera línea es la más larga y cada una mide
+   * igual o menos que la anterior (medido en píxeles a text-lg). La más ancha
+   * mide ~265 px, así que solo se apilan donde la tarjeta deja ese ancho.
+   */
+  lines: string[];
   helps: string[];
   icon: LucideIcon;
   image: { src: string; alt: string };
@@ -35,7 +40,12 @@ const causes: Cause[] = [
   {
     area: "Alimentación",
     title: "Familias que pasan hambre",
-    text: "Llevamos comida a familias que no tienen lo suficiente, a través de comedores y programas de seguridad alimentaria.",
+    lines: [
+      "Llevamos comida a familias que",
+      "no tienen lo suficiente, a través",
+      "de comedores y programas",
+      "de seguridad alimentaria.",
+    ],
     helps: ["Comedores y ollas comunes", "Canastas de víveres", "Nutrición infantil"],
     icon: Utensils,
     image: { src: "/donaciones/alimentacion.webp", alt: "Plato de comida servido en un comedor" },
@@ -46,7 +56,13 @@ const causes: Cause[] = [
   {
     area: "Salud",
     title: "Hospitales y sus pacientes",
-    text: "Apoyamos la atención médica de quienes viven lejos de un hospital, con campañas itinerantes y la lucha contra la anemia.",
+    lines: [
+      "Apoyamos la atención médica",
+      "de quienes viven lejos de un",
+      "hospital, con campañas",
+      "itinerantes y la lucha",
+      "contra la anemia.",
+    ],
     helps: ["Campañas médicas", "Lucha contra la anemia", "Medicinas e insumos"],
     icon: HeartPulse,
     image: { src: "/donaciones/salud.webp", alt: "Pediatra revisando a una niña con el estetoscopio" },
@@ -57,7 +73,12 @@ const causes: Cause[] = [
   {
     area: "Animales",
     title: "Animales en abandono",
-    text: "Damos una segunda oportunidad a perros y gatos de la calle con esterilizaciones, rescates y apoyo a albergues.",
+    lines: [
+      "Damos una segunda oportunidad",
+      "a perros y gatos de la calle con",
+      "esterilizaciones, rescates",
+      "y apoyo a albergues.",
+    ],
     helps: ["Esterilización", "Rescate", "Albergues"],
     icon: PawPrint,
     image: { src: "/donaciones/animales.webp", alt: "Perros esperando adopción en un albergue" },
@@ -112,6 +133,10 @@ function geometryFor(width: number): Geometry {
   return { cx, cy: height / 2, R, r, height, pillW, panelW, panelBelow: panelW < 300 };
 }
 
+// Ancho mínimo del panel flotante (con su p-8) para apilar las líneas del
+// texto: 265 px de la línea más larga + 64 px de padding + margen.
+const PANEL_LINES_MIN_W = 340;
+
 const PANEL_ID = "donacion-detalle";
 const PANEL_TITLE_ID = "donacion-detalle-titulo";
 
@@ -154,11 +179,29 @@ function ChevronBadge({ cause, active, pulse }: { cause: Cause; active: boolean;
   );
 }
 
+/**
+ * Líneas del texto de la causa. `lineClass` decide dónde se apilan: "block"
+ * las apila siempre; "inline" las deja fluir como un párrafo normal (el
+ * espacio entre ellas mantiene el corte natural de palabras).
+ */
+function CauseLines({ lines, lineClass }: { lines: string[]; lineClass: string }) {
+  return lines.map((line, i) => (
+    <Fragment key={line}>
+      <span className={lineClass}>{line}</span>
+      {i < lines.length - 1 ? " " : null}
+    </Fragment>
+  ));
+}
+
 /** Texto y etiquetas de la causa (se despliega en la lista del celular). */
 function CauseBody({ cause }: { cause: Cause }) {
   return (
     <>
-      <p className="text-sm leading-relaxed text-foreground sm:text-base">{cause.text}</p>
+      {/* Apiladas desde 360 px: en pantallas más angostas la línea más
+          larga no entra y el texto fluye normal. */}
+      <p className="text-sm leading-relaxed text-foreground sm:text-base">
+        <CauseLines lines={cause.lines} lineClass="inline min-[360px]:block" />
+      </p>
       <ul className="mt-3 flex flex-wrap gap-1.5">
         {cause.helps.map((help) => (
           <li
@@ -297,12 +340,15 @@ function CausePhoto({
 function CausePanel({
   cause,
   announce,
+  stacked,
   panelRef,
   className = "",
   style,
 }: {
   cause: Cause;
   announce: boolean;
+  /** true si el panel es lo bastante ancho para apilar las líneas del texto. */
+  stacked: boolean;
   panelRef?: (el: HTMLDivElement | null) => void;
   className?: string;
   style?: CSSProperties;
@@ -338,7 +384,7 @@ function CausePanel({
             {cause.title}
           </h3>
           <p className="mt-3 max-w-[48ch] text-base leading-relaxed text-foreground sm:text-lg">
-            {cause.text}
+            <CauseLines lines={cause.lines} lineClass={stacked ? "block" : "inline"} />
           </p>
           <ul className="mt-5 flex flex-wrap gap-2">
             {cause.helps.map((help) => (
@@ -454,7 +500,7 @@ export function DonationTypes() {
   return (
     <section
       id="donaciones"
-      className="scroll-mt-6 sm:-scroll-mt-2 relative isolate overflow-hidden bg-verde/15 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
+      className="relative isolate overflow-hidden bg-verde/15 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="-right-16 top-20 h-64 w-64 bg-celeste/25 blur-2xl" />
       <GlowOrb className="bottom-1/3 -left-12 h-48 w-48 bg-azul/20 blur-2xl" />
@@ -532,6 +578,7 @@ export function DonationTypes() {
               <CausePanel
                 cause={activeCause}
                 announce={hasInteracted}
+                stacked={geo.panelW >= PANEL_LINES_MIN_W}
                 panelRef={setPanelEl}
                 className="absolute right-0 top-1/2 z-30 -translate-y-1/2"
                 style={{ width: geo.panelW }}
@@ -544,6 +591,7 @@ export function DonationTypes() {
             <CausePanel
               cause={activeCause}
               announce={hasInteracted}
+              stacked
               className={`relative mt-6 hidden w-full max-w-xl md:block ${fadeIn}`}
             />
           )}
@@ -621,7 +669,7 @@ export function DonationTypes() {
             Así llega tu ayuda
           </h3>
           <p className="mt-2 max-w-[60ch] text-foreground">
-            Vas a poder saber qué pasó con tu compra: publicaremos reportes
+            Vas a poder saber qué pasó con tu compra. Publicaremos reportes
             abiertos y periódicos.
           </p>
         </Reveal>

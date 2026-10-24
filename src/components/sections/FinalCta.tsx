@@ -14,10 +14,10 @@ export function FinalCta() {
       <GlowOrb className="left-8 top-16 h-56 w-56 bg-celeste/20 blur-2xl sm:h-64 sm:w-64" />
       <GlowOrb className="bottom-16 right-8 h-48 w-48 bg-celeste/50 blur-2xl sm:h-56 sm:w-56" />
 
-      <div className="relative mx-auto grid max-w-[72rem] gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16">
+      <div className="relative mx-auto grid max-w-[72rem] gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:gap-16">
         <Reveal>
           <h2 className="leading-tight">
-            <span className="text-impact block text-4xl font-bold sm:text-6xl">
+            <span className="text-impact block text-balance text-4xl font-bold sm:text-6xl">
               La ayuda empieza aquí
             </span>
             <span className="mt-4 block text-xl font-semibold text-foreground sm:text-2xl">
@@ -30,24 +30,25 @@ export function FinalCta() {
           <p className="max-w-[60ch] text-lg leading-relaxed text-foreground">
             MÁS es un movimiento cultural humanitario inspirado en las
             enseñanzas de Margot sobre compasión y generosidad. Nació ante la
-            crisis global de donaciones: la necesidad crece rápido y el
+            crisis global de donaciones. La necesidad crece rápido y el
             financiamiento está en caída.
           </p>
-          <p className="mt-4 max-w-[60ch] border-l-4 border-foreground pl-4 text-lg font-semibold leading-relaxed text-foreground">
-            AyudemosMás multiplica la ayuda que reciben caridades y ONGs con
-            una nueva fuente de fondos: la promoción de la economía solidaria.
-          </p>
+        </Reveal>
+      </div>
+
+      <Reveal delay={0.15}>
+        <div className="relative mt-12 flex justify-center">
           <m.a
             href={`mailto:${site.alliancesEmail}`}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-celeste px-7 py-4 text-base font-semibold text-foreground"
+            className="inline-flex max-w-full items-center gap-2 rounded-full bg-celeste px-5 py-4 text-sm font-semibold text-foreground sm:px-7 sm:text-base"
           >
             <Mail className="h-5 w-5" strokeWidth={1.75} />
             Escríbenos a {site.alliancesEmail}
           </m.a>
-        </Reveal>
-      </div>
+        </div>
+      </Reveal>
     </section>
   );
 }

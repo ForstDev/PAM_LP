@@ -21,7 +21,13 @@ const tint = {
 
 // Foto circular de la misión. Mientras no esté la foto, un marcador del
 // mismo color mantiene el espacio y la forma.
-function MissionPhoto({ mission }: { mission: Mission }) {
+function MissionPhoto({
+  mission,
+  sizes = "(min-width: 768px) 240px, 80px",
+}: {
+  mission: Mission;
+  sizes?: string;
+}) {
   if (!mission.image) {
     return (
       <div
@@ -38,7 +44,7 @@ function MissionPhoto({ mission }: { mission: Mission }) {
       width={480}
       height={480}
       className="aspect-square w-full rounded-full object-cover"
-      sizes="(min-width: 768px) 240px, 192px"
+      sizes={sizes}
     />
   );
 }
@@ -147,7 +153,7 @@ export function MissionBoard() {
       <div
         role="tablist"
         aria-label="Temas de las misiones"
-        className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap"
+        className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:justify-center"
       >
         {groups.map((g) => {
           const selected = g.id === groupId;
@@ -180,62 +186,70 @@ export function MissionBoard() {
         })}
       </div>
 
-      {/* Paso 2: elegir una misión del tema (2 a 4 fotos circulares).
-          Por debajo de sm cada botón mide 4rem y el círculo 56 px para que
-          las 4 miniaturas quepan sin cortarse desde 320 px de ancho. */}
-      <ul className="mt-8 flex justify-between gap-x-2 sm:justify-start sm:gap-x-10">
-        {groupMissions.map((mission) => {
-          const selected = mission.id === active.id;
-          return (
-            <li key={mission.id}>
-              <button
-                type="button"
-                onClick={() => setMissionId(mission.id)}
-                aria-pressed={selected}
-                className="group flex w-16 flex-col items-center gap-2 text-center sm:w-28"
-              >
-                <span className="relative block h-14 w-14 sm:h-24 sm:w-24">
-                  <m.span
-                    aria-hidden
-                    initial={false}
-                    animate={{ scale: selected ? 1 : 0.6, opacity: selected ? 1 : 0 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    className={`absolute -bottom-1.5 -right-1.5 h-[85%] w-[85%] rounded-full ${solid[mission.color]}`}
-                  />
+      {/* Pasos 2 y 3. Por debajo de lg: fila de miniaturas sobre la tarjeta.
+          Desde lg: columna vertical de miniaturas a la izquierda y la tarjeta
+          a la derecha, ambas alineadas arriba. */}
+      <div className="mt-8 lg:mt-10 lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-start lg:gap-8 xl:gap-10">
+        {/* Paso 2: elegir una misión del tema (2 a 4 fotos circulares).
+            Por debajo de sm cada botón mide 4rem y el círculo 56 px para que
+            las 4 miniaturas quepan sin cortarse desde 320 px de ancho. */}
+        <ul className="flex justify-between gap-x-2 sm:justify-start sm:gap-x-10 lg:-ml-5 lg:flex-col xl:-ml-6 lg:justify-start lg:gap-x-0 lg:gap-y-3">
+          {groupMissions.map((mission) => {
+            const selected = mission.id === active.id;
+            return (
+              <li key={mission.id}>
+                <button
+                  type="button"
+                  onClick={() => setMissionId(mission.id)}
+                  aria-pressed={selected}
+                  className="group flex w-16 flex-col items-center gap-2 text-center sm:w-28 lg:gap-1.5"
+                >
+                  <span className="relative block h-14 w-14 sm:h-24 sm:w-24 lg:h-18 lg:w-18 xl:h-16 xl:w-16">
+                    <m.span
+                      aria-hidden
+                      initial={false}
+                      animate={{ scale: selected ? 1 : 0.6, opacity: selected ? 1 : 0 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className={`absolute -bottom-1.5 -right-1.5 h-[85%] w-[85%] rounded-full ${solid[mission.color]}`}
+                    />
+                    <span
+                      className={`relative block h-full w-full overflow-hidden rounded-full transition-all duration-300 ${
+                        selected ? "" : "opacity-70 group-hover:opacity-100"
+                      }`}
+                    >
+                      <MissionPhoto
+                        mission={mission}
+                        sizes="(min-width: 1024px) 72px, (min-width: 640px) 96px, 56px"
+                      />
+                    </span>
+                  </span>
                   <span
-                    className={`relative block h-full w-full overflow-hidden rounded-full transition-all duration-300 ${
-                      selected ? "" : "opacity-70 group-hover:opacity-100"
+                    className={`text-xs leading-tight text-foreground sm:text-sm ${
+                      selected ? "font-semibold" : "font-medium"
                     }`}
                   >
-                    <MissionPhoto mission={mission} />
+                    {mission.name}
                   </span>
-                </span>
-                <span
-                  className={`text-xs leading-tight text-foreground sm:text-sm ${
-                    selected ? "font-semibold" : "font-medium"
-                  }`}
-                >
-                  {mission.name}
-                </span>
-              </button>
-            </li>
-          );
-        })}
-      </ul>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
 
-      {/* Paso 3: el detalle de la misión elegida. */}
-      <div className="mt-8" aria-live="polite">
-        <AnimatePresence mode="wait" initial={false}>
-          <m.div
-            key={active.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-          >
-            <MissionDetail mission={active} />
-          </m.div>
-        </AnimatePresence>
+        {/* Paso 3: el detalle de la misión elegida. */}
+        <div className="mt-8 lg:mt-0" aria-live="polite">
+          <AnimatePresence mode="wait" initial={false}>
+            <m.div
+              key={active.id}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <MissionDetail mission={active} />
+            </m.div>
+          </AnimatePresence>
+        </div>
       </div>
     </div>
   );

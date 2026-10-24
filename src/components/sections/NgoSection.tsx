@@ -8,7 +8,7 @@ export function NgoSection() {
   return (
     <section
       id="afiliacion"
-      className="scroll-mt-6 sm:-scroll-mt-2 relative isolate overflow-hidden bg-celeste/8 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
+      className="relative isolate overflow-hidden bg-celeste/8 px-4 py-20 sm:px-6 sm:py-28 lg:px-8"
     >
       <GlowOrb className="-right-16 top-1/2 h-80 w-80 -translate-y-1/2 bg-verde/20 blur-2xl" />
 
@@ -38,7 +38,7 @@ export function NgoSection() {
                 width={900}
                 height={900}
                 className="aspect-square w-full rounded-full object-cover"
-                sizes="(min-width: 1024px) 448px, 320px"
+                sizes="(min-width: 1024px) 448px, (min-width: 448px) 384px, calc(100vw - 2rem)"
               />
             </SignatureCircle>
             <div
