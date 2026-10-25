@@ -14,7 +14,7 @@ export function FinalCta() {
       <GlowOrb className="bottom-16 right-8 h-48 w-48 bg-celeste/30 blur-2xl sm:h-56 sm:w-56" />
 
       <div className="relative mx-auto max-w-[84rem]">
-        <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-16">
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-16">
           <Reveal>
             <h2 className="leading-tight">
               <span className="text-impact block text-balance text-4xl font-bold sm:text-6xl">
