@@ -58,6 +58,35 @@ button:focus-visible {
   color: #000000;
 }
 
+/* Política de privacidad (footer): ventana flotante con <dialog> nativo.
+   Fondo con el Hale Navy de la marca (#434b56) al 60 % y desenfoque; la
+   página no se desplaza mientras la ventana está abierta. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+.privacy-dialog::backdrop {
+  background: rgb(67 75 86 / 0.6);
+  backdrop-filter: blur(4px);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .privacy-dialog[open] {
+    animation: privacy-in 200ms ease-out;
+  }
+
+  @keyframes privacy-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

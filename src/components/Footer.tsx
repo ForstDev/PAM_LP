@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { site } from "@/lib/site";
 import { waLink } from "@/lib/whatsapp";
+import { PrivacyDialog } from "./PrivacyDialog";
 
 // Lucide quitó los íconos de marcas (incluido Instagram) de su set —
 // se dibuja a mano, mismo grosor de trazo que el resto de íconos del sitio.
@@ -93,7 +94,11 @@ export function Footer() {
               enlaza al sitio de FORST. En celular la firma baja debajo del
               copyright, alineada a la izquierda. */}
           <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <p>© {new Date().getFullYear()} {site.name}.</p>
+            <div className="flex flex-wrap items-center gap-x-2">
+              <p>© {new Date().getFullYear()} {site.name}.</p>
+              <span aria-hidden>·</span>
+              <PrivacyDialog />
+            </div>
             <div className="sm:w-56">
               <a
                 href="https://web-forst.vercel.app/"
@@ -111,8 +116,6 @@ export function Footer() {
               </a>
             </div>
           </div>
-          {/* TODO: texto de política de privacidad/acuerdos legales — pendiente
-              de que el cliente confirme el contenido real antes de publicarlo. */}
         </div>
       </div>
     </footer>
