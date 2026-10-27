@@ -54,8 +54,8 @@ export function WhoWeAre() {
       <GlowOrb className="bottom-16 -left-10 h-52 w-52 bg-azul/25 blur-2xl" />
 
       <div className="relative mx-auto grid max-w-[84rem] items-center gap-12 lg:grid-cols-2">
-        {/* Recorte circular del manual de marca. La foto ya viene recortada en
-            cuadrado para que entren las caras de todas las personas del stand. */}
+        {/* Recorte circular del manual de marca. La foto viene recortada en
+            cuadrado, con el borde superior a la altura de las cabezas. */}
         <figure className="mx-auto w-full max-w-sm">
           <SignatureCircle
             color="celeste"
@@ -63,7 +63,7 @@ export function WhoWeAre() {
             circleClassName="-left-8 -top-8 h-[75%] w-[75%]"
           >
             <Image
-              src="/quienes-somos-cumbre-v2.webp"
+              src="/quienes-somos-cumbre-v6.webp"
               alt="Conversación con ONGs en un stand de la Cumbre Perú Sostenible"
               width={480}
               height={480}

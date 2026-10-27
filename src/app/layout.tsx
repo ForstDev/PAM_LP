@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AyudemosMás | Es hora de ayudar.",
     description:
-      "Entorno multiplataforma solidario: delivery y tiendas que donan el 100% de sus ganancias.",
+      "Entorno multiplataforma solidario con delivery y tiendas que donan el 100% de sus ganancias.",
     url: site.domain,
     siteName: site.name,
     locale: "es_PE",
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className={`${outfit.variable} ${freeserif.variable} h-full antialiased`}>
+    <html lang="es-PE" className={`${outfit.variable} ${freeserif.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <MotionProvider>{children}</MotionProvider>
         <script

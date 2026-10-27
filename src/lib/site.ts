@@ -34,8 +34,8 @@ export const site = {
   instagramHandle: "@ayudemosmas.oficial",
 } as const;
 
-/** Tienda de AyudemosMás Delivery (Shopify). Mientras sea null, los botones de compra no redirigen. */
-export const SHOP_URL: string | null = null;
+/** Tienda de AyudemosMás Delivery en Shopify. Los botones que usan ShopLink la abren en una pestaña nueva. */
+export const SHOP_URL: string | null = "https://delivery.ayudemosmas.org/";
 
 /** Número real de WhatsApp Business — todos los CTA de la landing lo usan. */
 export const WHATSAPP_NUMBER = "51938973251";

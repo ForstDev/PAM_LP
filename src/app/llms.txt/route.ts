@@ -1,8 +1,11 @@
-import { site, WHATSAPP_NUMBER } from "@/lib/site";
+import { site, SHOP_URL, WHATSAPP_NUMBER } from "@/lib/site";
 
 // Resumen en Markdown para asistentes de IA (propuesta llms.txt). Se genera
 // en el build, como robots.txt y sitemap.xml, y toma el dominio de site.ts.
 export const dynamic = "force-static";
+
+const shopSentence = SHOP_URL ? ` Pide en nuestra tienda en línea ${SHOP_URL}` : "";
+const shopContact = SHOP_URL ? `\n- Tienda de delivery ${SHOP_URL}` : "";
 
 const body = `# ${site.name}
 
@@ -21,7 +24,7 @@ ${site.name} es parte de MÁS, un movimiento cultural humanitario de ciudadanos 
 
 ## Plataformas
 
-- ${site.name} Delivery, disponible ahora. Te llevamos productos de primera necesidad y comida de restaurantes. Empezaremos con Vanemar, nuestro minimarket aliado, con frutas, verduras, lácteos, pastas, abarrotes y bebidas.
+- ${site.name} Delivery, disponible ahora. Te llevamos productos de primera necesidad y comida de restaurantes. Empezaremos con Vanemar, nuestro minimarket aliado, con frutas, verduras, lácteos, pastas, abarrotes y bebidas.${shopSentence}
 - ${site.name} Tiendas, próximamente. Tiendas virtuales por categoría, como supermercado, tecnología y moda.
 - ${site.name} Vende, próximamente. Un espacio para vender lo que ya no usas o alquilar lo tuyo.
 
@@ -37,7 +40,7 @@ Organizaciones con una causa social, marcas y bodegas pueden sumarse. Escríbeno
 
 ## Contacto
 
-- Sitio web ${site.domain}
+- Sitio web ${site.domain}${shopContact}
 - WhatsApp https://wa.me/${WHATSAPP_NUMBER}
 - Correo ${site.email}
 - Alianzas ${site.alliancesEmail}

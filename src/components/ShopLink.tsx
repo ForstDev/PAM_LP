@@ -8,8 +8,8 @@ type ShopLinkProps = {
 };
 
 /**
- * Botón de compra. Lleva a la tienda (Shopify) cuando SHOP_URL está definido;
- * mientras tanto se muestra igual pero no redirige a ningún lado.
+ * Botón de compra. Abre la tienda (Shopify) en una pestaña nueva; si SHOP_URL
+ * se deja en null, se muestra igual pero no redirige a ningún lado.
  */
 export function ShopLink({ className, children, onClick }: ShopLinkProps) {
   if (SHOP_URL) {
