@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { m } from "motion/react";
-import { waLink } from "@/lib/whatsapp";
+import { site } from "@/lib/site";
 
 type Audience = "ong" | "marca";
 
@@ -22,7 +22,8 @@ const panels: Record<
     impact: string;
     steps: { title: string; text: string }[];
     cta: string;
-    message: string;
+    /** Asunto del correo a alianzas. */
+    subject: string;
   }
 > = {
   ong: {
@@ -36,8 +37,7 @@ const panels: Record<
       { title: "Contamos tu historia", text: "Presentamos tu causa a nuestra comunidad." },
     ],
     cta: "Quiero sumar mi organización",
-    message:
-      "Hola, represento a una organización con una causa social y quiero conversar sobre una alianza.",
+    subject: "Quiero sumar mi organización a AyudemosMás",
   },
   marca: {
     title: "¿Tienes una marca o una bodega?",
@@ -49,8 +49,7 @@ const panels: Record<
       { title: "Compartimos el impacto", text: "Te contamos lo que generaron tus ventas." },
     ],
     cta: "Quiero sumar mi marca o bodega",
-    message:
-      "Hola, tengo una marca o bodega y quiero conversar sobre cómo vender con ustedes y sumarme a la causa.",
+    subject: "Quiero sumar mi marca o bodega a AyudemosMás",
   },
 };
 
@@ -164,9 +163,7 @@ export function AffiliationPanel() {
               </ol>
 
               <a
-                href={waLink(panel.message)}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${site.alliancesEmail}?subject=${encodeURIComponent(panel.subject)}`}
                 className="mt-8 inline-block rounded-full bg-verde px-8 py-4 text-base font-semibold text-foreground transition-transform hover:scale-105 active:scale-95"
               >
                 {panel.cta}

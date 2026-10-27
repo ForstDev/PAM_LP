@@ -23,7 +23,7 @@ export function CatalogSection() {
               Muy pronto… más productos en AyudemosMás Delivery
             </p>
             <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-foreground">
-              Empezamos con Vanemar, nuestro minimarket aliado,
+              Empezaremos con Vanemar, nuestro minimarket aliado,
               <br className="hidden md:inline" /> y pronto sumaremos más markets y
               restaurantes.
             </p>

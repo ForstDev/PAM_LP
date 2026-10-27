@@ -25,16 +25,16 @@ export type MissionGroup = {
 };
 
 // Las 11 misiones confirmadas por el cliente (Tablero Oficial de Misiones).
-// Cifras y fuentes copiadas tal cual del tablero. Fotos: Pexels (licencia
-// libre para uso comercial, sin atribución obligatoria); IDs de origen:
-// pobreza 4115447, hambre 6994946, agua 11612595, género 4834133, salud
-// 7578797, escuelas 8618015, salud mental 1149923, Amazonía 29152688,
-// animales 30129027, paz 32034569, tecnología 6482236. Se agrupan en 4 temas para
+// Cifras y fuentes copiadas tal cual del tablero. Fotos libres para uso
+// comercial, sin atribución obligatoria. Pexels: hambre 6994946, agua
+// 11612595, género 4834133, salud 7578797, escuelas 7396380, salud mental
+// 1149923, Amazonía 33425565, animales 30129027, paz 32034569. Unsplash:
+// tecnología _7ceGXTAtyQ. Pobreza: imagen del cliente. Se agrupan en 4 temas para
 // que nadie tenga que recorrer 11 elementos seguidos.
 export const missions: Mission[] = [
   {
     id: "pobreza",
-    image: { src: "/misiones/pobreza.webp", alt: "Vista aérea de viviendas precarias con techos de calamina" },
+    image: { src: "/misiones/pobreza-vivienda.webp", alt: "Manos de una persona mayor sosteniendo unas pocas monedas" },
     name: "Pobreza",
     title: "Reducción de la pobreza y mayor acceso a vivienda digna",
     ods: "ODS 1, 8, 10 y 11",
@@ -118,7 +118,7 @@ export const missions: Mission[] = [
   },
   {
     id: "escuelas",
-    image: { src: "/misiones/escuelas.webp", alt: "Niña sonriendo en su carpeta con útiles escolares" },
+    image: { src: "/misiones/escuelas-acoso.webp", alt: "Estudiantes rodean a una compañera que baja la cabeza en su carpeta" },
     name: "Sin acoso escolar",
     title: "Escuelas seguras y libres de acoso escolar",
     ods: "ODS 4",
@@ -151,20 +151,20 @@ export const missions: Mission[] = [
   },
   {
     id: "amazonia",
-    image: { src: "/misiones/amazonia.webp", alt: "Vista aérea de un río entre la selva amazónica con un bote" },
+    image: { src: "/misiones/amazonia-incendios.webp", alt: "Brigadista combatiendo un incendio forestal entre pastizales secos" },
     name: "Amazonía",
-    title: "Protección de la Amazonía y acción por el clima",
-    ods: "ODS 7, 12, 13 y 15",
-    peru: "Brigadas contra la deforestación ilegal y energía solar para comunidades amazónicas.",
-    world: "Tecnologías de captura de carbono y consumo responsable.",
+    title: "Protección de la Amazonía ante incendios forestales y crisis climática",
+    ods: "ODS 13 y 15",
+    peru: "Brigadas forestales, prevención de quemas y reforestación en Cusco y otras regiones afectadas por incendios.",
+    world: "Alertas tempranas de incendios por satélite y restauración de bosques.",
     color: "celeste",
     stat: {
-      value: 3.2,
-      decimals: 1,
-      suffix: " millones",
-      label: "de hectáreas de bosque amazónico perdidas entre 2001 y 2024",
+      value: 11700,
+      suffix: "",
+      label:
+        "hectáreas de cobertura natural, aproximadamente, perdidas por incendios forestales en 2026 hasta el 17 de octubre",
     },
-    source: "Minam, Geobosques",
+    source: "Indeci, COEN 2026",
   },
   {
     id: "animales",
@@ -201,7 +201,7 @@ export const missions: Mission[] = [
   },
   {
     id: "tecnologia",
-    image: { src: "/misiones/tecnologia.webp", alt: "Niña aprendiendo las letras con una laptop en el sofá" },
+    image: { src: "/misiones/tecnologia-futuro.webp", alt: "Un niño toca con su dedo una mano robótica" },
     name: "Tecnología ética",
     title: "Tecnología ética al servicio de las personas",
     ods: "ODS 9",

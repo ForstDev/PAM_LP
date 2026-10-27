@@ -61,7 +61,7 @@ export default async function OpengraphImage() {
               color: "#434B56",
             }}
           >
-            ayudemosmas.com.pe
+            {site.instagramHandle}
           </div>
         </div>
       </div>

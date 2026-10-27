@@ -5,12 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, m, useMotionValueEvent, useScroll } from "motion/react";
-import { waLink } from "@/lib/whatsapp";
+import { ShopLink } from "@/components/ShopLink";
 
 const navLinks = [
   { href: "#quienes-somos", label: "¿Quiénes somos?" },
-  { href: "#problematicas", label: "Problemáticas" },
   { href: "#productos", label: "Productos" },
+  { href: "#problematicas", label: "Problemáticas" },
   { href: "#donaciones", label: "Donaciones" },
   { href: "#afiliacion", label: "Afiliación" },
 ];
@@ -61,14 +61,9 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-2 justify-self-end">
-            <a
-              href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden rounded-full bg-verde px-5 py-3.5 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block"
-            >
-              Comprar y ayudar
-            </a>
+            <ShopLink className="hidden whitespace-nowrap rounded-full bg-verde px-5 py-3.5 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block">
+              Sé parte
+            </ShopLink>
 
             <button
               type="button"
@@ -123,15 +118,12 @@ export function Header() {
                   </a>
                 ))}
 
-                <a
-                  href={waLink("Hola, quiero comprar y ayudar. ¿Me ayudan con el catálogo?")}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <ShopLink
                   onClick={() => setMobileOpen(false)}
-                  className="mt-2 rounded-full bg-celeste px-4 py-3 text-center text-sm font-semibold text-foreground"
+                  className="mt-2 whitespace-nowrap rounded-full bg-celeste px-4 py-3 text-center text-sm font-semibold text-foreground"
                 >
-                  Comprar y ayudar
-                </a>
+                  Sé parte
+                </ShopLink>
               </div>
             </m.div>
           </>

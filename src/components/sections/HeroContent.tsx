@@ -1,7 +1,7 @@
 "use client";
 
 import { m } from "motion/react";
-import { site } from "@/lib/site";
+import { ShopLink } from "@/components/ShopLink";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -36,14 +36,11 @@ export function HeroContent() {
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
         className="mt-8"
       >
-        <a
-          href={site.instagram}
-          target="_blank"
-          rel="noopener noreferrer"
+        <ShopLink
           className="inline-block rounded-full bg-verde px-6 py-4 text-center text-[0.9375rem] font-semibold text-foreground transition-transform sm:px-8 sm:text-base hover:scale-105 active:scale-95"
         >
           Sé parte de nuestro punto de partida
-        </a>
+        </ShopLink>
       </m.div>
     </div>
   );

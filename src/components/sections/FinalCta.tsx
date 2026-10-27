@@ -29,7 +29,7 @@ export function FinalCta() {
           <Reveal delay={0.1} className="lg:justify-self-end">
             <p className="max-w-[60ch] text-pretty text-lg leading-relaxed text-foreground">
               MÁS es un movimiento cultural humanitario inspirado en las
-              enseñanzas de Margot sobre compasión y generosidad. Nació ante la
+              enseñanzas de Margot Del Pino (1975–2026) sobre compasión y generosidad. Nació ante la
               crisis global de donaciones. La necesidad crece rápido y el
               financiamiento está en caída.
             </p>

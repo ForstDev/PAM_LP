@@ -8,6 +8,8 @@ type Channel = {
   status: "Ahora" | "Próximamente";
   text: string;
   items?: string[];
+  /** Línea final de la lista, sin el prefijo de marca. */
+  more?: string;
   claim: string;
 };
 
@@ -25,6 +27,7 @@ const channels: Channel[] = [
     status: "Próximamente",
     text: "Tiendas virtuales por categoría de productos y servicios.",
     items: ["Supermarket", "Tecnología", "Moda"],
+    more: "Y muchas Más",
     claim: "Aquí usar tiendas virtuales también es ayudar.",
   },
   {
@@ -142,6 +145,12 @@ export function BrandRoadmap() {
                         AyudemosMás {item}
                       </li>
                     ))}
+                    {channel.more && (
+                      <li className="flex items-center gap-2 text-sm text-foreground">
+                        <span aria-hidden className={`h-2 w-2 rounded-full ${dotColor[index]}`} />
+                        {channel.more}
+                      </li>
+                    )}
                   </ul>
                 )}
                 <p className="text-impact mt-auto pt-5 text-lg">

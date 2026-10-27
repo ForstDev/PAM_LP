@@ -1,15 +1,41 @@
+/**
+ * URL pública del sitio (sin barra final), resuelta en build:
+ * 1. NEXT_PUBLIC_SITE_URL: override manual (URL completa) para forzar el dominio.
+ * 2. VERCEL_PROJECT_PRODUCTION_URL: dominio de producción del proyecto en Vercel.
+ *    Cuando se añada el dominio propio en Vercel, se toma automáticamente en el
+ *    siguiente deploy (hasta entonces es el *.vercel.app).
+ * 3. VERCEL_URL: host del deployment concreto.
+ * 4. localhost en desarrollo.
+ */
+function resolveSiteUrl(): string {
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  const production = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+  const deployment = process.env.VERCEL_URL;
+  const url = explicit
+    ? explicit
+    : production
+      ? `https://${production}`
+      : deployment
+        ? `https://${deployment}`
+        : "http://localhost:3000";
+  return url.replace(/\/+$/, "");
+}
+
 // Datos oficiales del Manual de Marca AyudemosMás (versión actualizada).
 export const site = {
   name: "AyudemosMás",
   claim: "Entorno multiplataforma solidario",
-  reach: "Ayudemos al Perú y al MUNDO.",
+  reach: "Ayudemos al Perú y al Mundo.",
   tagline: "Es hora de ayudar.",
-  domain: "https://ayudemosmas.com.pe",
+  domain: resolveSiteUrl(),
   email: "contacto@ayudemosmas.com",
   alliancesEmail: "alianzas@ayudemosmas.com",
-  instagram: "https://www.instagram.com/ayudemosmas.peru/",
-  instagramHandle: "@ayudemosmas.peru",
+  instagram: "https://www.instagram.com/ayudemosmas.oficial/",
+  instagramHandle: "@ayudemosmas.oficial",
 } as const;
+
+/** Tienda de AyudemosMás Delivery (Shopify). Mientras sea null, los botones de compra no redirigen. */
+export const SHOP_URL: string | null = null;
 
 /** Número real de WhatsApp Business — todos los CTA de la landing lo usan. */
 export const WHATSAPP_NUMBER = "51938973251";

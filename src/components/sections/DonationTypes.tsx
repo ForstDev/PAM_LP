@@ -35,7 +35,7 @@ type Cause = {
 
 // Los tres tipos de donación que sostiene AyudemosMás hoy. Se describe en qué
 // consiste cada ayuda; no se nombran organizaciones porque aún no hay
-// alianzas confirmadas. Fotos: Pexels (36318467, 5998455, 4697573).
+// alianzas confirmadas. Fotos: Pexels (20859638, 12193104, 7469274).
 const causes: Cause[] = [
   {
     area: "Alimentación",
@@ -48,7 +48,7 @@ const causes: Cause[] = [
     ],
     helps: ["Comedores y ollas comunes", "Canastas de víveres", "Nutrición infantil"],
     icon: Utensils,
-    image: { src: "/donaciones/alimentacion.webp", alt: "Plato de comida servido en un comedor" },
+    image: { src: "/donaciones/alimentacion-olla.webp", alt: "Mujeres sirviendo comida en una cocina comunitaria" },
     accent: "bg-verde",
     tint: "bg-verde/25",
     ring: "ring-verde",
@@ -65,7 +65,7 @@ const causes: Cause[] = [
     ],
     helps: ["Campañas médicas", "Lucha contra la anemia", "Medicinas e insumos"],
     icon: HeartPulse,
-    image: { src: "/donaciones/salud.webp", alt: "Pediatra revisando a una niña con el estetoscopio" },
+    image: { src: "/donaciones/salud-campana.webp", alt: "Personal de salud tomando la presión arterial a una paciente" },
     accent: "bg-celeste",
     tint: "bg-celeste/25",
     ring: "ring-celeste",
@@ -81,7 +81,7 @@ const causes: Cause[] = [
     ],
     helps: ["Esterilización", "Rescate", "Albergues"],
     icon: PawPrint,
-    image: { src: "/donaciones/animales.webp", alt: "Perros esperando adopción en un albergue" },
+    image: { src: "/donaciones/animales-rescate.webp", alt: "Voluntarios atendiendo a un perro rescatado en una revisión veterinaria" },
     accent: "bg-azul",
     tint: "bg-azul/25",
     ring: "ring-azul",
@@ -511,9 +511,9 @@ export function DonationTypes() {
           <h2 className="mt-5 font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
             ¿A quién llega tu ayuda?
           </h2>
-          <p className="mt-4 max-w-[60ch] text-lg leading-relaxed text-foreground">
-            Hoy, lo que generan tus compras sostiene estas tres causas. Toca
-            una para conocerla.
+          <p className="mt-4 max-w-[60ch] text-balance text-lg leading-relaxed text-foreground">
+            Estos son solo 3 ejemplos de los muchos seres vivos que reciben tu
+            ayuda. Toca uno para conocerlo.
           </p>
         </Reveal>
 

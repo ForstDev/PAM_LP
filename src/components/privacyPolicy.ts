@@ -20,7 +20,7 @@ export const privacyPolicy = {
     },
     {
       title: "Qué datos recibimos",
-      text: "Esta página no tiene formularios ni te pide registrarte. Solo recibimos tus datos cuando tú decides escribirnos por WhatsApp, por correo o por Instagram. En ese caso recibimos tu nombre, tu número de teléfono o tu correo y lo que nos cuentes en tu mensaje. Además, como ocurre en cualquier sitio web, nuestro proveedor de alojamiento registra datos técnicos básicos de la visita, como la dirección IP y el tipo de navegador, para mantener la página segura y funcionando.",
+      text: "Esta página no tiene formularios ni te pide registrarte. Solo recibimos tus datos cuando tú decides escribirnos por correo o por Instagram, o cuando haces un pedido en nuestra tienda de delivery. En ese caso recibimos tu nombre, tus datos de contacto y lo que nos cuentes en tu mensaje o en tu pedido. Además, como ocurre en cualquier sitio web, nuestro proveedor de alojamiento registra datos técnicos básicos de la visita, como la dirección IP y el tipo de navegador, para mantener la página segura y funcionando.",
     },
     {
       title: "Para qué los usamos",
@@ -28,7 +28,7 @@ export const privacyPolicy = {
     },
     {
       title: "Con quién los compartimos",
-      text: "Para funcionar usamos servicios de terceros, como WhatsApp de Meta para los mensajes, nuestro proveedor de correo y Vercel para alojar esta página. Algunos guardan la información en servidores fuera del Perú, y cada uno la trata según su propia política de privacidad. Solo compartimos lo necesario para atenderte.",
+      text: "Para funcionar usamos servicios de terceros, como la plataforma de nuestra tienda en línea para los pedidos, nuestro proveedor de correo y Vercel para alojar esta página. Algunos guardan la información en servidores fuera del Perú, y cada uno la trata según su propia política de privacidad. Solo compartimos lo necesario para atenderte.",
     },
     {
       title: "Cookies",
