@@ -63,7 +63,7 @@ export function WhoWeAre() {
             circleClassName="-left-8 -top-8 h-[75%] w-[75%]"
           >
             <Image
-              src="/quienes-somos-cumbre.webp"
+              src="/quienes-somos-cumbre-v2.webp"
               alt="Conversación con ONGs en un stand de la Cumbre Perú Sostenible"
               width={480}
               height={480}

@@ -3,7 +3,7 @@ import { site } from "@/lib/site";
 
 const IMAGES = [
   "/hero-voluntarios-v3.webp",
-  "/quienes-somos-cumbre.webp",
+  "/quienes-somos-cumbre-v2.webp",
   "/manos-circulo.webp",
   "/opengraph-image",
 ];
