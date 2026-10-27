@@ -27,7 +27,7 @@ export type MissionGroup = {
 // Las 11 misiones confirmadas por el cliente (Tablero Oficial de Misiones).
 // Cifras y fuentes copiadas tal cual del tablero. Fotos libres para uso
 // comercial, sin atribución obligatoria. Pexels: hambre 6994946, agua
-// 11612595, género 4834133, salud 7578797, escuelas 7396380, salud mental
+// 11612595, género 4834133, salud 37191914, escuelas 7396380, salud mental
 // 1149923, Amazonía 33425565, animales 30129027, paz 32034569. Unsplash:
 // tecnología _7ceGXTAtyQ. Pobreza: imagen del cliente. Se agrupan en 4 temas para
 // que nadie tenga que recorrer 11 elementos seguidos.
@@ -101,7 +101,7 @@ export const missions: Mission[] = [
   },
   {
     id: "salud",
-    image: { src: "/misiones/salud.webp", alt: "Médica explicando un resultado a un paciente en consulta" },
+    image: { src: "/misiones/salud-peru.webp", alt: "Enfermera atiende a una señora en una campaña de salud al aire libre en Piura, Perú" },
     name: "Salud",
     title: "Igualdad en el acceso a la salud",
     ods: "ODS 3",

@@ -1,7 +1,7 @@
 "use client";
 
 import { m } from "motion/react";
-import { Mail } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { site } from "@/lib/site";
 import { Reveal } from "@/components/Reveal";
 import { GlowOrb } from "@/components/GlowOrb";
@@ -28,10 +28,10 @@ export function FinalCta() {
 
           <Reveal delay={0.1} className="lg:justify-self-end">
             <p className="max-w-[60ch] text-pretty text-lg leading-relaxed text-foreground">
-              MÁS es un movimiento cultural humanitario inspirado en las
-              enseñanzas de Margot Del Pino (1975–2026) sobre compasión y generosidad. Nació ante la
-              crisis global de donaciones. La necesidad crece rápido y el
-              financiamiento está en caída.
+              MÁS es un movimiento cultural humanitario que nace del amor y de
+              las enseñanzas de Margot Del Pino, quien nos dejó en 2026. Fue una
+              mujer que vivió desde la compasión y la generosidad, y su legado
+              sigue guiando cada paso que&nbsp;damos.
             </p>
           </Reveal>
         </div>
@@ -39,13 +39,15 @@ export function FinalCta() {
         <Reveal delay={0.15}>
           <div className="mt-12 flex justify-center">
             <m.a
-              href={`mailto:${site.alliancesEmail}`}
+              href={site.movementInstagram}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
-              className="inline-flex max-w-full items-center gap-2 rounded-full bg-celeste px-5 py-4 text-sm font-semibold text-foreground sm:px-7 sm:text-base"
+              className="inline-flex max-w-full items-center gap-2 rounded-full bg-celeste px-4 py-4 min-[360px]:px-5 text-sm font-semibold text-foreground sm:px-7 sm:text-base"
             >
-              <Mail className="h-5 w-5" strokeWidth={1.75} />
-              Escríbenos a {site.alliancesEmail}
+              <ArrowUpRight className="h-5 w-5 shrink-0" strokeWidth={1.75} />
+              Descubre más del Movimiento&nbsp;MÁS
             </m.a>
           </div>
         </Reveal>

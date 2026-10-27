@@ -18,8 +18,13 @@ export const jsonLd = {
       description:
         "AyudemosMás es el proyecto benéfico motor del movimiento MÁS: un entorno multiplataforma solidario que dona el 100% de sus ganancias a organizaciones que trabajan en diversas causas.",
       areaServed: "PE",
-      sameAs: [site.instagram],
-      parentOrganization: { "@type": "Organization", name: "MÁS" },
+      sameAs: [site.instagram, site.tiktok],
+      parentOrganization: {
+        "@type": "Organization",
+        name: "MÁS",
+        url: site.movementInstagram,
+        sameAs: [site.movementInstagram, site.movementTiktok],
+      },
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "alianzas",

@@ -1,4 +1,4 @@
-import { site, SHOP_URL, WHATSAPP_NUMBER } from "@/lib/site";
+import { site, SHOP_URL } from "@/lib/site";
 
 // Resumen en Markdown para asistentes de IA (propuesta llms.txt). Se genera
 // en el build, como robots.txt y sitemap.xml, y toma el dominio de site.ts.
@@ -30,7 +30,7 @@ ${site.name} es parte de MÁS, un movimiento cultural humanitario de ciudadanos 
 
 ## Causas que apoyamos
 
-Las donaciones llegan a tres causas principales. Alimentación para familias que pasan hambre, a través de comedores y programas de seguridad alimentaria. Salud para quienes viven lejos de un hospital, con campañas itinerantes y la lucha contra la anemia. Y animales en abandono, con esterilizaciones, rescates y apoyo a albergues.
+Las donaciones llegan a tres causas principales. Alimentación para familias que pasan hambre, a través de comedores y programas de seguridad alimentaria. Salud para quienes viven lejos de un hospital, con campañas itinerantes y la lucha contra la anemia. Y animales en abandono, con rescates y apoyo a albergues.
 
 Además nos mueven problemáticas del Perú y del mundo como la pobreza, el hambre, el acceso a agua segura, la violencia de género, la salud y la salud mental, el acoso escolar, la protección de la Amazonía, el respeto a los animales, la paz y la tecnología ética.
 
@@ -41,10 +41,12 @@ Organizaciones con una causa social, marcas y bodegas pueden sumarse. Escríbeno
 ## Contacto
 
 - Sitio web ${site.domain}${shopContact}
-- WhatsApp https://wa.me/${WHATSAPP_NUMBER}
 - Correo ${site.email}
 - Alianzas ${site.alliancesEmail}
-- Instagram ${site.instagram}
+- Instagram de ${site.name} ${site.instagram}
+- TikTok de ${site.name} ${site.tiktok}
+- Instagram del movimiento MÁS ${site.movementInstagram}
+- TikTok del movimiento MÁS ${site.movementTiktok}
 `;
 
 export function GET() {

@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { site } from "@/lib/site";
-import { waLink } from "@/lib/whatsapp";
 import { PrivacyDialog } from "./PrivacyDialog";
 
 // Lucide quitó los íconos de marcas (incluido Instagram) de su set —
@@ -23,6 +22,53 @@ function InstagramIcon({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+
+// Nota musical (forma del logo de TikTok), mismo estilo de trazo.
+function TikTokIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.75}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <path d="M13 3v13" />
+      <path d="M13 3c0 3 2.2 5 5.5 5" />
+      <circle cx="9.5" cy="16.5" r="3.5" />
+    </svg>
+  );
+}
+
+type Social = { href: string; label: string; network: "Instagram" | "TikTok" };
+
+const socialGroups: { title: string; links: Social[] }[] = [
+  {
+    title: site.name,
+    links: [
+      { href: site.instagram, network: "Instagram", label: `Instagram de ${site.name} (${site.instagramHandle})` },
+      { href: site.tiktok, network: "TikTok", label: `TikTok de ${site.name} (${site.tiktokHandle})` },
+    ],
+  },
+  {
+    title: "Movimiento MÁS",
+    links: [
+      {
+        href: site.movementInstagram,
+        network: "Instagram",
+        label: `Instagram del Movimiento MÁS (${site.movementInstagramHandle})`,
+      },
+      {
+        href: site.movementTiktok,
+        network: "TikTok",
+        label: `TikTok del Movimiento MÁS (${site.movementTiktokHandle})`,
+      },
+    ],
+  },
+];
 
 export function Footer() {
   return (
@@ -51,16 +97,6 @@ export function Footer() {
             <p className="font-semibold text-white">Contacto</p>
             <ul className="mt-1 text-white">
               <li>
-                <a
-                  href={waLink("Hola, quisiera más información sobre AyudemosMás.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block py-3 hover:text-white"
-                >
-                  WhatsApp Business
-                </a>
-              </li>
-              <li>
                 <a href={`mailto:${site.email}`} className="inline-block py-3 hover:text-white">
                   {site.email}
                 </a>
@@ -73,18 +109,35 @@ export function Footer() {
                   {site.alliancesEmail}
                 </a>
               </li>
-              <li>
-                <a
-                  href={site.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 py-3 hover:text-white"
-                >
-                  <InstagramIcon className="h-4 w-4" />
-                  {site.instagramHandle}
-                </a>
-              </li>
             </ul>
+
+            <div className="mt-3 flex flex-col gap-3">
+              {socialGroups.map((group) => (
+                <div key={group.title}>
+                  <p className="text-xs font-semibold text-white">{group.title}</p>
+                  <ul className="flex flex-wrap gap-x-5 text-white">
+                    {group.links.map((link) => (
+                      <li key={link.href}>
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={link.label}
+                          className="inline-flex min-h-11 items-center gap-1.5 hover:text-white"
+                        >
+                          {link.network === "Instagram" ? (
+                            <InstagramIcon className="h-4 w-4" />
+                          ) : (
+                            <TikTokIcon className="h-4 w-4" />
+                          )}
+                          {link.network}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

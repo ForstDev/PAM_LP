@@ -28,14 +28,18 @@ export const site = {
   reach: "Ayudemos al Perú y al Mundo.",
   tagline: "Es hora de ayudar.",
   domain: resolveSiteUrl(),
-  email: "contacto@ayudemosmas.com",
-  alliancesEmail: "alianzas@ayudemosmas.com",
+  email: "contacto@ayudemosmas.org",
+  alliancesEmail: "alianzas@ayudemosmas.org",
   instagram: "https://www.instagram.com/ayudemosmas.oficial/",
   instagramHandle: "@ayudemosmas.oficial",
+  tiktok: "https://www.tiktok.com/@ayudemosmas.oficial",
+  tiktokHandle: "@ayudemosmas.oficial",
+  movementInstagram: "https://www.instagram.com/mas.proyectosbeneficos/",
+  movementInstagramHandle: "@mas.proyectosbeneficos",
+  movementTiktok: "https://www.tiktok.com/@mas.proyectosbeneficos",
+  movementTiktokHandle: "@mas.proyectosbeneficos",
 } as const;
 
 /** Tienda de AyudemosMás Delivery en Shopify. Los botones que usan ShopLink la abren en una pestaña nueva. */
 export const SHOP_URL: string | null = "https://delivery.ayudemosmas.org/";
 
-/** Número real de WhatsApp Business — todos los CTA de la landing lo usan. */
-export const WHATSAPP_NUMBER = "51938973251";

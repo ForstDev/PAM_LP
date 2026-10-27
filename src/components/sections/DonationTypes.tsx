@@ -35,7 +35,7 @@ type Cause = {
 
 // Los tres tipos de donación que sostiene AyudemosMás hoy. Se describe en qué
 // consiste cada ayuda; no se nombran organizaciones porque aún no hay
-// alianzas confirmadas. Fotos: Pexels (20859638, 12193104, 7469274).
+// alianzas confirmadas. Fotos: Pexels (20859638, 37191920, 7469274).
 const causes: Cause[] = [
   {
     area: "Alimentación",
@@ -65,7 +65,7 @@ const causes: Cause[] = [
     ],
     helps: ["Campañas médicas", "Lucha contra la anemia", "Medicinas e insumos"],
     icon: HeartPulse,
-    image: { src: "/donaciones/salud-campana.webp", alt: "Personal de salud tomando la presión arterial a una paciente" },
+    image: { src: "/donaciones/salud-campana-peru.webp", alt: "Tres profesionales de salud con mandil y mascarilla registran muestras de sangre en una campaña de salud en Piura, Perú" },
     accent: "bg-celeste",
     tint: "bg-celeste/25",
     ring: "ring-celeste",
@@ -76,10 +76,9 @@ const causes: Cause[] = [
     lines: [
       "Damos una segunda oportunidad",
       "a perros y gatos de la calle con",
-      "esterilizaciones, rescates",
-      "y apoyo a albergues.",
+      "rescates y apoyo a albergues.",
     ],
-    helps: ["Esterilización", "Rescate", "Albergues"],
+    helps: ["Rescate", "Albergues"],
     icon: PawPrint,
     image: { src: "/donaciones/animales-rescate.webp", alt: "Voluntarios atendiendo a un perro rescatado en una revisión veterinaria" },
     accent: "bg-azul",
@@ -513,7 +512,7 @@ export function DonationTypes() {
           </h2>
           <p className="mt-4 max-w-[60ch] text-balance text-lg leading-relaxed text-foreground">
             Estos son solo 3 ejemplos de los muchos seres vivos que reciben tu
-            ayuda. Toca uno para conocerlo.
+            ayuda.
           </p>
         </Reveal>
 

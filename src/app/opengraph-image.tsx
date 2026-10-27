@@ -7,7 +7,7 @@ export const alt = "AyudemosMás. Es hora de ayudar.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-// Imagen que se ve al compartir el enlace (WhatsApp, Instagram, LinkedIn).
+// Imagen que se ve al compartir el enlace (Instagram, TikTok, LinkedIn).
 export default async function OpengraphImage() {
   const [logo, serifItalic, outfitBold] = await Promise.all([
     readFile(path.join(process.cwd(), "public/logo-horizontal.svg")),
