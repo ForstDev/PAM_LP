@@ -62,7 +62,7 @@ export function Header() {
 
           <div className="flex items-center gap-2 justify-self-end">
             <ShopLink className="hidden whitespace-nowrap rounded-full bg-verde px-5 py-3.5 text-sm font-semibold text-foreground transition-transform hover:scale-105 sm:inline-block">
-              Sé parte
+              Punto de partida
             </ShopLink>
 
             <button
@@ -122,7 +122,7 @@ export function Header() {
                   onClick={() => setMobileOpen(false)}
                   className="mt-2 whitespace-nowrap rounded-full bg-celeste px-4 py-3 text-center text-sm font-semibold text-foreground"
                 >
-                  Sé parte
+                  Punto de partida
                 </ShopLink>
               </div>
             </m.div>

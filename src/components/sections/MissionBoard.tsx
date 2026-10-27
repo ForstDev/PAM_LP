@@ -1,8 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, m } from "motion/react";
+import {
+  AnimatePresence,
+  animate,
+  m,
+  useMotionValue,
+  useReducedMotion,
+  type AnimationPlaybackControls,
+} from "motion/react";
 import { Globe, ImageIcon, MapPin } from "lucide-react";
 import { StatCounter } from "@/components/StatCounter";
 import { groups, missions, type Mission } from "./issuesData";
@@ -130,9 +137,64 @@ function MissionDetail({ mission }: { mission: Mission }) {
   );
 }
 
+const EASE_OUT = [0.22, 1, 0.36, 1] as const;
+
+// Alto animado de un contenedor. Un ResizeObserver mide el contenido interior
+// (borde incluido) y lleva un MotionValue numérico: la primera medición se fija
+// sin animar; las siguientes se interpolan desde el alto actual (que aún guarda
+// el de la tarjeta saliente) hasta el nuevo. Hasta la primera medición
+// `measured` es false y el contenedor queda en "auto" (SSR y primer pintado).
+function useAnimatedHeight<T extends HTMLElement>(reduceMotion: boolean) {
+  const ref = useRef<T>(null);
+  const height = useMotionValue(0);
+  const [measured, setMeasured] = useState(false);
+  const reduceRef = useRef(reduceMotion);
+  useEffect(() => {
+    reduceRef.current = reduceMotion;
+  }, [reduceMotion]);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let first = true;
+    let last = 0;
+    let controls: AnimationPlaybackControls | null = null;
+    const update = () => {
+      const h = el.getBoundingClientRect().height;
+      if (h <= 0 || h === last) return;
+      last = h;
+      controls?.stop();
+      if (first) {
+        first = false;
+        height.set(h);
+        setMeasured(true);
+        return;
+      }
+      controls = animate(height, h, {
+        duration: reduceRef.current ? 0 : 0.35,
+        ease: EASE_OUT,
+      });
+    };
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      controls?.stop();
+    };
+  }, [height]);
+
+  return [ref, height, measured] as const;
+}
+
 export function MissionBoard() {
   const [groupId, setGroupId] = useState(groups[0].id);
   const [missionId, setMissionId] = useState(groups[0].missionIds[0]);
+  const [groupChanged, setGroupChanged] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const [cardRef, wrapperHeight, measured] = useAnimatedHeight<HTMLDivElement>(
+    Boolean(reduceMotion),
+  );
 
   const group = groups.find((g) => g.id === groupId) ?? groups[0];
   const groupMissions = group.missionIds
@@ -145,7 +207,11 @@ export function MissionBoard() {
     if (!next) return;
     setGroupId(id);
     setMissionId(next.missionIds[0]);
+    setGroupChanged(true);
   };
+
+  const enterY = reduceMotion ? 0 : 8;
+  const exitY = reduceMotion ? 0 : -6;
 
   return (
     <div>
@@ -187,17 +253,38 @@ export function MissionBoard() {
       </div>
 
       {/* Pasos 2 y 3. Por debajo de lg: fila de miniaturas sobre la tarjeta.
-          Desde lg: columna vertical de miniaturas a la izquierda y la tarjeta
-          a la derecha, ambas alineadas arriba. */}
-      <div className="mt-8 lg:mt-10 lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-start lg:gap-8 xl:gap-10">
+          Desde lg: columna vertical de miniaturas a la izquierda, centrada en
+          vertical respecto de la tarjeta (se desliza con su alto animado). */}
+      <div className="mt-8 lg:mt-10 lg:grid lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-8 xl:gap-10">
         {/* Paso 2: elegir una misión del tema (2 a 4 fotos circulares).
             Por debajo de sm cada botón mide 4rem y el círculo 56 px para que
             las 4 miniaturas quepan sin cortarse desde 320 px de ancho. */}
-        <ul className="flex justify-between gap-x-2 sm:justify-start sm:gap-x-10 lg:-ml-5 lg:flex-col xl:-ml-6 lg:justify-start lg:gap-x-0 lg:gap-y-3">
+        <m.ul
+          key={groupId}
+          initial={groupChanged ? "hidden" : false}
+          animate="shown"
+          variants={{
+            hidden: {},
+            shown: { transition: { staggerChildren: reduceMotion ? 0 : 0.04 } },
+          }}
+          className="flex justify-center gap-x-2 min-[360px]:gap-x-4 sm:gap-x-10 lg:-ml-5 lg:flex-col xl:-ml-6 lg:justify-start lg:gap-x-0 lg:gap-y-3"
+        >
           {groupMissions.map((mission) => {
             const selected = mission.id === active.id;
             return (
-              <li key={mission.id}>
+              <m.li
+                key={mission.id}
+                variants={{
+                  hidden: { opacity: 0, y: reduceMotion ? 0 : 6 },
+                  shown: {
+                    opacity: 1,
+                    y: 0,
+                    transition: reduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.25, ease: EASE_OUT },
+                  },
+                }}
+              >
                 <button
                   type="button"
                   onClick={() => setMissionId(mission.id)}
@@ -213,7 +300,7 @@ export function MissionBoard() {
                       className={`absolute -bottom-1.5 -right-1.5 h-[85%] w-[85%] rounded-full ${solid[mission.color]}`}
                     />
                     <span
-                      className={`relative block h-full w-full overflow-hidden rounded-full transition-all duration-300 ${
+                      className={`relative block h-full w-full overflow-hidden rounded-full transition-opacity duration-300 ${
                         selected ? "" : "opacity-70 group-hover:opacity-100"
                       }`}
                     >
@@ -223,32 +310,52 @@ export function MissionBoard() {
                       />
                     </span>
                   </span>
-                  <span
-                    className={`text-xs leading-tight text-foreground sm:text-sm ${
-                      selected ? "font-semibold" : "font-medium"
-                    }`}
-                  >
+                  {/* Mismo peso con y sin selección para que el ancho del
+                      texto no cambie; la selección se marca con el círculo de
+                      color y la opacidad de la foto. */}
+                  <span className="text-xs font-semibold leading-tight text-foreground sm:text-sm">
                     {mission.name}
                   </span>
                 </button>
-              </li>
+              </m.li>
             );
           })}
-        </ul>
+        </m.ul>
 
-        {/* Paso 3: el detalle de la misión elegida. */}
+        {/* Paso 3: el detalle de la misión elegida. El envoltorio anima su
+            alto al de la tarjeta actual; el relleno con márgenes negativos
+            deja ver la sombra aunque recorte con overflow-hidden. La tarjeta
+            saliente sale del flujo (popLayout) para que nunca quede vacío. */}
         <div className="mt-8 lg:mt-0" aria-live="polite">
-          <AnimatePresence mode="wait" initial={false}>
-            <m.div
-              key={active.id}
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-            >
-              <MissionDetail mission={active} />
-            </m.div>
-          </AnimatePresence>
+          <m.div
+            style={measured ? { height: wrapperHeight } : undefined}
+            className="-mx-4 -mb-10 -mt-4 overflow-hidden sm:-mx-6"
+          >
+            <div ref={cardRef} className="relative px-4 pb-10 pt-4 sm:px-6">
+              <AnimatePresence mode="popLayout" initial={false}>
+                <m.div
+                  key={active.id}
+                  initial={{ opacity: 0, y: enterY }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                    transition: reduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.25, ease: EASE_OUT, delay: 0.08 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    y: exitY,
+                    transition: reduceMotion
+                      ? { duration: 0 }
+                      : { duration: 0.15, ease: "easeOut" },
+                  }}
+                >
+                  <MissionDetail mission={active} />
+                </m.div>
+              </AnimatePresence>
+            </div>
+          </m.div>
         </div>
       </div>
     </div>
