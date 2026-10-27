@@ -7,8 +7,8 @@ export function HeroSection() {
     <section id="top" className="relative isolate overflow-hidden bg-navy">
       <div className="absolute inset-0">
         <Image
-          src="/hero-voluntarios-v2.webp"
-          alt="Voluntarios de AyudemosMás construyendo juntos"
+          src="/hero-voluntarios-v3.webp"
+          alt="Voluntarios de AyudemosMás con polos blancos levantan juntos un panel de madera para construir una vivienda en una zona arenosa"
           fill
           priority
           fetchPriority="high"
