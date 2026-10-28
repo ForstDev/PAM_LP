@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import { MotionProvider } from "@/components/MotionProvider";
@@ -71,6 +71,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#7FDBC2",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
