@@ -46,12 +46,12 @@ const freeserif = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
-  title: "AyudemosMás | Entorno multiplataforma solidario en Perú",
+  title: "AyudemosMás | Espacio Digital solidario en Perú",
   description:
     "Delivery y tiendas solidarias del movimiento MÁS. El 100% de nuestras ganancias va a organizaciones que trabajan en diversas causas. Es hora de ayudar.",
   alternates: { canonical: "/" },
   keywords: [
-    "entorno multiplataforma solidario",
+    "espacio digital solidario",
     "AyudemosMás",
     "delivery solidario Perú",
     "comprar y ayudar",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "AyudemosMás | Es hora de ayudar.",
     description:
-      "Entorno multiplataforma solidario con delivery y tiendas que donan el 100% de sus ganancias.",
+      "Espacio Digital solidario con delivery y tiendas que donan el 100% de sus ganancias.",
     url: site.domain,
     siteName: site.name,
     locale: "es_PE",

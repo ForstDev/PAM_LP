@@ -512,7 +512,7 @@ export function DonationTypes() {
           </h2>
           <p className="mt-4 max-w-[60ch] text-balance text-lg leading-relaxed text-foreground">
             Estos son solo 3 ejemplos de los muchos seres vivos que reciben tu
-            ayuda.
+            ayuda. Hacer click en cada uno te muestra más información.
           </p>
         </Reveal>
 

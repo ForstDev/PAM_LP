@@ -26,7 +26,7 @@ export type MissionGroup = {
 
 // Las 11 misiones confirmadas por el cliente (Tablero Oficial de Misiones).
 // Cifras y fuentes copiadas tal cual del tablero. Fotos libres para uso
-// comercial, sin atribución obligatoria. Pexels: hambre 6994946, agua
+// comercial, sin atribución obligatoria. Pexels: hambre 18477776, agua
 // 11612595, género 4834133, salud 37191914, escuelas 7396380, salud mental
 // 1149923, Amazonía 33425565, animales 30129027, paz 32034569. Unsplash:
 // tecnología _7ceGXTAtyQ. Pobreza: imagen del cliente. Se agrupan en 4 temas para
@@ -51,7 +51,7 @@ export const missions: Mission[] = [
   },
   {
     id: "hambre",
-    image: { src: "/misiones/hambre.webp", alt: "Caja de donación con pastas, latas y botellas de agua" },
+    image: { src: "/misiones/hambre-peru.webp", alt: "Mujer con gorro y mandil prepara juanes envueltos en hojas en una cocina de Rioja, San Martín, Perú" },
     name: "Hambre",
     title: "Lucha contra el hambre y la injusticia alimentaria",
     ods: "ODS 2",

@@ -47,7 +47,7 @@ export function FinalCta() {
               className="inline-flex max-w-full items-center gap-2 rounded-full bg-celeste px-4 py-4 min-[360px]:px-5 text-sm font-semibold text-foreground sm:px-7 sm:text-base"
             >
               <ArrowUpRight className="h-5 w-5 shrink-0" strokeWidth={1.75} />
-              Descubre más del Movimiento&nbsp;MÁS
+              Descubre el Movimiento&nbsp;MÁS
             </m.a>
           </div>
         </Reveal>

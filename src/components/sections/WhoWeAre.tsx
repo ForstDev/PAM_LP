@@ -63,7 +63,7 @@ export function WhoWeAre() {
             circleClassName="-left-8 -top-8 h-[75%] w-[75%]"
           >
             <Image
-              src="/quienes-somos-cumbre-v6.webp"
+              src="/quienes-somos-cumbre-v7.webp"
               alt="Conversación con ONGs en un stand de la Cumbre Perú Sostenible"
               width={480}
               height={480}
@@ -85,13 +85,13 @@ export function WhoWeAre() {
             AyudemosMás
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-foreground">
-            Somos AyudemosMás, parte de MÁS, un movimiento cultural
-            humanitario. Nacimos para hacer que nuestras acciones del día a día
+            Somos AyudemosMás, un espacio digital, y el proyecto benéfico motor
+            de MÁS: Un movimiento cultural humanitario. Nacimos para hacer que nuestras acciones del día a día
             ayuden a otros.
           </p>
           <p className="mt-5 max-w-[60ch] border-l-4 border-verde pl-4 text-lg font-semibold leading-relaxed text-foreground">
             AyudemosMás multiplica la ayuda que reciben caridades y ONGs con
-            una nueva fuente de fondos, la promoción de la economía solidaria.
+            una nueva fuente de fondos: La promoción de la economía solidaria.
           </p>
         </Reveal>
       </div>

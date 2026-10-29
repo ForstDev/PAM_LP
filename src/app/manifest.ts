@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "AyudemosMás",
     short_name: "AyudemosMás",
-    description: "Entorno multiplataforma solidario. Es hora de ayudar.",
+    description: "Espacio Digital solidario. Es hora de ayudar.",
     start_url: "/",
     display: "standalone",
     lang: "es-PE",

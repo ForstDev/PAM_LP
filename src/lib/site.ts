@@ -24,7 +24,7 @@ function resolveSiteUrl(): string {
 // Datos oficiales del Manual de Marca AyudemosMás (versión actualizada).
 export const site = {
   name: "AyudemosMás",
-  claim: "Entorno multiplataforma solidario",
+  claim: "Espacio Digital solidario",
   reach: "Ayudemos al Perú y al Mundo.",
   tagline: "Es hora de ayudar.",
   domain: resolveSiteUrl(),

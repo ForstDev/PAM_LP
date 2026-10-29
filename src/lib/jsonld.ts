@@ -16,7 +16,7 @@ export const jsonLd = {
       email: site.email,
       slogan: site.tagline,
       description:
-        "AyudemosMás es el proyecto benéfico motor del movimiento MÁS: un entorno multiplataforma solidario que dona el 100% de sus ganancias a organizaciones que trabajan en diversas causas.",
+        "AyudemosMás es el proyecto benéfico motor del movimiento MÁS: un espacio digital solidario que dona el 100% de sus ganancias a organizaciones que trabajan en diversas causas.",
       areaServed: "PE",
       sameAs: [site.instagram, site.tiktok],
       parentOrganization: {

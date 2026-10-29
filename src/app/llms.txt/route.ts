@@ -11,7 +11,7 @@ const body = `# ${site.name}
 
 > ${site.claim} en Perú. Transformamos tu compra en ayuda real, porque el 100% de nuestras ganancias va a organizaciones que trabajan en diversas causas sociales.
 
-${site.name} es parte de MÁS, un movimiento cultural humanitario de ciudadanos independientes, no político ni partidario. Nacimos para que las compras del día a día ayuden a otros y para multiplicar la ayuda que reciben caridades y ONGs con una nueva fuente de fondos, la promoción de la economía solidaria.
+${site.name} es un espacio digital y el proyecto benéfico motor de MÁS, un movimiento cultural humanitario de ciudadanos independientes, no político ni partidario. Nacimos para que las compras del día a día ayuden a otros y para multiplicar la ayuda que reciben caridades y ONGs con una nueva fuente de fondos, la promoción de la economía solidaria.
 
 ## Cómo llega la ayuda
 
