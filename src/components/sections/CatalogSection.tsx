@@ -31,7 +31,7 @@ export function CatalogSection() {
           <Reveal>
             <h3 className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xl font-bold text-foreground sm:text-2xl">
               AyudemosMás Delivery
-              <span className="rounded-full px-3 py-0.5 text-[0.65rem] font-semibold uppercase tracking-widest ring-1 ring-celeste sm:text-xs">
+              <span className="relative top-[2px] rounded-full px-3 py-0.5 text-[0.65rem] font-semibold uppercase tracking-widest ring-1 ring-celeste sm:text-xs">
                 Restaurantes
               </span>
             </h3>
@@ -45,7 +45,7 @@ export function CatalogSection() {
           </div>
         </div>
 
-        <div className="mt-16 border-t border-foreground/10 pt-16 sm:mt-20 sm:pt-20">
+        <div className="mt-10 border-t border-foreground/10 pt-10 sm:mt-12 sm:pt-12">
           {/* Bloque 2: supermercado virtual */}
           <Reveal>
             <h3 className="text-xl font-bold text-foreground sm:text-2xl">

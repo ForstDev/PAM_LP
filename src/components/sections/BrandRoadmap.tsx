@@ -162,7 +162,7 @@ export function BrandRoadmap() {
                   className="absolute -left-8 top-0 flex h-5 w-5 items-center justify-center lg:static"
                 >
                   {current && (
-                    <span className="absolute h-full w-full animate-ping rounded-full bg-verde opacity-60" />
+                    <span className="absolute left-1 top-1 h-3 w-3 animate-ping rounded-full bg-verde opacity-60 [animation-duration:2.8s]" />
                   )}
                   <span
                     className={`relative h-4 w-4 rounded-full ${
