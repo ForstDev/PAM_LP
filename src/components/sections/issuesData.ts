@@ -27,9 +27,9 @@ export type MissionGroup = {
 // Las 11 misiones confirmadas por el cliente (Tablero Oficial de Misiones).
 // Cifras y fuentes copiadas tal cual del tablero. Fotos libres para uso
 // comercial, sin atribución obligatoria. Pexels: hambre 18477776, agua
-// 11612595, género 4834133, salud 37191914, escuelas 7396380, salud mental
-// 1149923, Amazonía 33425565, animales 30129027, paz 32034569. Unsplash:
-// tecnología _7ceGXTAtyQ. Pobreza: imagen del cliente. Se agrupan en 4 temas para
+// 11612595, género 4834133, salud 37191914, Amazonía 33425565, animales
+// 30129027, paz 32034569. Unsplash: tecnología _7ceGXTAtyQ. Pobreza, acoso
+// escolar y salud mental: imágenes del cliente. Se agrupan en 4 temas para
 // que nadie tenga que recorrer 11 elementos seguidos.
 export const missions: Mission[] = [
   {
@@ -118,7 +118,7 @@ export const missions: Mission[] = [
   },
   {
     id: "escuelas",
-    image: { src: "/misiones/escuelas-acoso.webp", alt: "Estudiantes rodean a una compañera que baja la cabeza en su carpeta" },
+    image: { src: "/misiones/escuelas-bullying.webp", alt: "Pizarra verde con la palabra bullying tachada con una línea roja" },
     name: "Sin acoso escolar",
     title: "Escuelas seguras y libres de acoso escolar",
     ods: "ODS 4",
@@ -134,7 +134,7 @@ export const missions: Mission[] = [
   },
   {
     id: "mental",
-    image: { src: "/misiones/mental.webp", alt: "Persona caminando hacia el sol por un camino tranquilo" },
+    image: { src: "/misiones/mental-peru.webp", alt: "Persona sentada sola sobre una roca frente a un cerro andino bajo un cielo azul" },
     name: "Salud mental",
     title: "Cuidado de la salud mental",
     ods: "ODS 3 (meta 3.4)",

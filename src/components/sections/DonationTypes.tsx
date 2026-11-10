@@ -80,7 +80,7 @@ const causes: Cause[] = [
     ],
     helps: ["Rescate", "Albergues"],
     icon: PawPrint,
-    image: { src: "/donaciones/animales-rescate.webp", alt: "Voluntarios atendiendo a un perro rescatado en una revisión veterinaria" },
+    image: { src: "/donaciones/animales-cachorro.webp", alt: "Cachorro asomándose con timidez entre las tablas de una puerta de madera" },
     accent: "bg-azul",
     tint: "bg-azul/25",
     ring: "ring-azul",

@@ -2,16 +2,11 @@
 
 import { useState } from "react";
 import { m } from "motion/react";
-import { Check } from "lucide-react";
 import { StatCounter } from "@/components/StatCounter";
-
-const values = ["Opciones vegetarianas", "Cero crueldad animal", "Opciones veganas"];
 
 /**
  * Número puro (sin fondo) que cuenta de 0 a 100, y solo después de terminar
- * de contar aparece el texto que explica a qué va ese 100%. Debajo, los
- * valores del catálogo (siempre visibles); desde sm los checks quedan en una
- * columna recta pegada al borde derecho.
+ * de contar aparece el texto que explica a qué va ese 100%.
  */
 export function ProfitCounter() {
   const [done, setDone] = useState(false);
@@ -29,22 +24,6 @@ export function ProfitCounter() {
       >
         de las ganancias va a organizaciones<br />y causas sociales.
       </m.p>
-      <ul className="mt-5 space-y-2">
-        {values.map((value) => (
-          <li
-            key={value}
-            className="flex items-center gap-2 whitespace-nowrap text-sm font-medium text-foreground sm:flex-row-reverse sm:justify-start"
-          >
-            <span
-              aria-hidden
-              className="flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-verde/40"
-            >
-              <Check className="h-3.5 w-3.5" strokeWidth={2.5} />
-            </span>
-            {value}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

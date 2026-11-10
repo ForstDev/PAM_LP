@@ -24,9 +24,20 @@ ${site.name} es un espacio digital y el proyecto benéfico motor de MÁS, un mov
 
 ## Plataformas
 
-- ${site.name} Delivery, disponible ahora. Te llevamos productos de primera necesidad y comida de restaurantes. Empezaremos con Vanemar, nuestro minimarket aliado, con frutas, verduras, lácteos, pastas, abarrotes y bebidas.${shopSentence}
-- ${site.name} Tiendas, próximamente. Tiendas virtuales por categoría, como supermercado, tecnología y moda.
-- ${site.name} Vende, próximamente. Un espacio para vender lo que ya no usas o alquilar lo tuyo.
+En cada fase, el 100% de las ganancias está dirigido a ayudar.
+
+### Fase 1, llega en noviembre
+
+- ${site.name} Delivery. Tu comida favorita de restaurantes aliados, hasta la puerta de tu casa.${shopSentence}
+- ${site.name} Supermarket. Tu supermercado virtual con productos de primera necesidad, como abarrotes, frutas y verduras, con nuestro propio delivery.
+
+### Fase 2, próximamente
+
+- ${site.name} Tiendas. Tiendas virtuales por categoría, como tecnología, moda y hogar.
+
+### Fase 3, más adelante
+
+- ${site.name} B2B. Abastecimiento para empresas y negocios.
 
 ## Causas que apoyamos
 

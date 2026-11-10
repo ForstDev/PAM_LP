@@ -1,18 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type KeyboardEvent } from "react";
 import { m } from "motion/react";
 import { site } from "@/lib/site";
 
-type Audience = "ong" | "marca";
+type Audience = "ong" | "restaurante" | "marca";
 
 const tabs: { id: Audience; label: string }[] = [
   { id: "ong", label: "Organizaciones" },
+  { id: "restaurante", label: "Restaurantes" },
   { id: "marca", label: "Marcas y bodegas" },
 ];
 
-// Contenido de los brochures del manual: «para ONGs» (10.3) y «para marcas»
-// (10.5). Misma estructura en ambos para que el cambio sea suave.
+// Contenido para los tres públicos: organizaciones (brochure «para ONGs»,
+// 10.3), restaurantes (AyudemosMás Delivery) y marcas y bodegas (brochure
+// «para marcas», 10.5, en AyudemosMás Supermarket). Misma estructura en los
+// tres para que el cambio sea suave.
 const panels: Record<
   Audience,
   {
@@ -20,6 +23,8 @@ const panels: Record<
     /** Corte opcional del título en dos líneas (solo donde ambas caben). */
     titleLines?: [string, string];
     impact: string;
+    /** Plataforma donde se publica (chip bajo la frase de impacto). */
+    platform?: string;
     steps: { title: string; text: string }[];
     cta: string;
     /** Asunto del correo a alianzas. */
@@ -39,13 +44,27 @@ const panels: Record<
     cta: "Quiero sumar mi organización",
     subject: "Quiero sumar mi organización a AyudemosMás",
   },
+  restaurante: {
+    title: "¿Tienes un restaurante?",
+    impact: "Vende más. Ayuda más.",
+    platform: "AyudemosMás Delivery",
+    steps: [
+      { title: "Conversamos", text: "Nos presentas tu restaurante y tu carta." },
+      { title: "Verificamos", text: "Revisamos juntos que tu restaurante comparta nuestros valores." },
+      { title: "Publicamos", text: "Tu carta llega a AyudemosMás Delivery y nuestra flota lleva tus pedidos." },
+      { title: "Compartimos el impacto", text: "Te contamos lo que generaron tus ventas." },
+    ],
+    cta: "Quiero sumar mi restaurante",
+    subject: "Quiero sumar mi restaurante a AyudemosMás",
+  },
   marca: {
     title: "¿Tienes una marca o una bodega?",
     impact: "Vende más. Ayuda más.",
+    platform: "AyudemosMás Supermarket",
     steps: [
       { title: "Conversamos", text: "Nos presentas tu marca o bodega y tus productos." },
-      { title: "Acordamos", text: "Definimos precios, stock, envíos y condiciones." },
-      { title: "Publicamos", text: "Tus productos llegan a la tienda con tu historia." },
+      { title: "Acordamos", text: "Definimos precios, stock y condiciones." },
+      { title: "Publicamos", text: "Tus productos llegan a AyudemosMás Supermarket y nosotros los llevamos." },
       { title: "Compartimos el impacto", text: "Te contamos lo que generaron tus ventas." },
     ],
     cta: "Quiero sumar mi marca o bodega",
@@ -54,12 +73,29 @@ const panels: Record<
 };
 
 /**
- * Afiliación con dos públicos. Los dos paneles ocupan la misma celda de la
- * grilla: el bloque siempre mide lo del panel más alto y el cambio entre
- * pestañas es un fundido, sin saltos de altura.
+ * Afiliación con tres públicos (organizaciones, restaurantes y marcas y
+ * bodegas). Los tres paneles ocupan la misma celda de la grilla: el bloque
+ * siempre mide lo del panel más alto y el cambio entre pestañas es un
+ * fundido, sin saltos de altura. Las flechas izquierda/derecha (e Inicio/Fin)
+ * mueven entre pestañas, con tabindex itinerante.
  */
 export function AffiliationPanel() {
   const [audience, setAudience] = useState<Audience>("ong");
+
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
+    const current = tabs.findIndex((tab) => tab.id === audience);
+    let next: number;
+    if (event.key === "ArrowRight") next = (current + 1) % tabs.length;
+    else if (event.key === "ArrowLeft")
+      next = (current - 1 + tabs.length) % tabs.length;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = tabs.length - 1;
+    else return;
+    event.preventDefault();
+    const id = tabs[next].id;
+    setAudience(id);
+    document.getElementById(`tab-${id}`)?.focus();
+  }
 
   return (
     <div>
@@ -73,7 +109,8 @@ export function AffiliationPanel() {
       <div
         role="tablist"
         aria-label="Tipo de afiliación"
-        className="mt-5 inline-flex rounded-full bg-white p-1 shadow-sm shadow-azul/20"
+        onKeyDown={handleKeyDown}
+        className="mt-5 flex w-full rounded-full sm:inline-flex sm:w-auto bg-white p-1 shadow-sm shadow-azul/20"
       >
         {tabs.map((tab) => {
           const selected = tab.id === audience;
@@ -85,8 +122,9 @@ export function AffiliationPanel() {
               role="tab"
               aria-selected={selected}
               aria-controls={`panel-${tab.id}`}
+              tabIndex={selected ? 0 : -1}
               onClick={() => setAudience(tab.id)}
-              className="relative whitespace-nowrap rounded-full px-4 py-3 text-sm font-semibold text-foreground sm:px-5"
+              className="relative flex-1 rounded-full px-2 py-2.5 text-xs font-semibold leading-tight text-foreground sm:flex-none sm:whitespace-nowrap sm:px-5 sm:py-3 sm:text-sm"
             >
               {selected && (
                 <m.span
@@ -134,6 +172,11 @@ export function AffiliationPanel() {
               <p className="text-impact mt-4 text-2xl sm:text-3xl">
                 {panel.impact}
               </p>
+              {panel.platform && (
+                <p className="mt-3 inline-flex rounded-full bg-white/60 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-foreground ring-1 ring-celeste">
+                  {panel.platform}
+                </p>
+              )}
 
               <p className="mt-7 text-xs font-semibold uppercase tracking-[0.2em] text-foreground">
                 Así empezamos

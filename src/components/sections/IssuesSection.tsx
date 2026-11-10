@@ -15,13 +15,27 @@ export function IssuesSection() {
       <div className="relative mx-auto max-w-[84rem]">
         <Reveal>
           <SectionEyebrow>Problemáticas</SectionEyebrow>
-          <h2 className="mt-5 max-w-3xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
-            Los desafíos que nos mueven a ayudar
+          <h2 className="mt-5 max-w-4xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            Ayudamos a las ONGs cuyas misiones…
           </h2>
           <p className="mt-4 max-w-2xl text-lg leading-relaxed text-foreground">
-            Estas son las causas que apoyamos en el Perú y en el mundo. Elige
-            un tema y mira qué está pasando y cómo ayudamos.
+            …son enfrentar la variedad de problemáticas que hay en el Perú y en
+            el mundo.
           </p>
+          <div className="mt-6 flex max-w-3xl items-start gap-3 rounded-2xl bg-white/70 px-4 py-3 shadow-sm shadow-azul/10">
+            <span
+              aria-hidden
+              className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-verde text-xs font-bold lowercase text-foreground"
+            >
+              i
+            </span>
+            <p className="text-sm leading-relaxed text-foreground">
+              <strong>¿Qué es un ODS?</strong> Son los Objetivos de Desarrollo
+              Sostenible: 17 metas que la ONU y 193 países acordaron en 2015
+              para acabar con la pobreza, cuidar el planeta y mejorar la vida
+              de todas las personas hacia 2030.
+            </p>
+          </div>
         </Reveal>
 
         <div className="mt-12">

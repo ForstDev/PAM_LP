@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   AnimatePresence,
@@ -56,6 +56,74 @@ function MissionPhoto({
   );
 }
 
+// Chip de ODS con una burbuja que explica la sigla. Se muestra al pasar el
+// mouse, al enfocar con teclado y al tocar (el toque alterna; tocar fuera o
+// Escape la cierra). Desde md la burbuja sale a la derecha del chip; en
+// pantallas angostas va debajo y su ancho se limita para no salir de la
+// tarjeta.
+function OdsChip({ mission }: { mission: Mission }) {
+  const tooltipId = useId();
+  const wrapRef = useRef<HTMLSpanElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const open = hovered || pinned;
+
+  useEffect(() => {
+    if (!pinned) return;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!wrapRef.current?.contains(e.target as Node)) setPinned(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, [pinned]);
+
+  return (
+    <span ref={wrapRef} className="relative inline-block">
+      <button
+        type="button"
+        aria-describedby={tooltipId}
+        onPointerEnter={(e) => {
+          if (e.pointerType === "mouse") setHovered(true);
+        }}
+        onPointerLeave={(e) => {
+          if (e.pointerType === "mouse") {
+            setHovered(false);
+            setPinned(false);
+          }
+        }}
+        onFocus={(e) => {
+          if (e.currentTarget.matches(":focus-visible")) setPinned(true);
+        }}
+        onBlur={() => setPinned(false)}
+        onClick={() => setPinned((p) => !p)}
+        onKeyDown={(e) => {
+          if (e.key === "Escape") {
+            setPinned(false);
+            setHovered(false);
+          }
+        }}
+        className={`inline-block cursor-help rounded-full px-3 py-1 text-xs font-semibold text-foreground ${solid[mission.color]}`}
+      >
+        {mission.ods}
+      </button>
+      <span
+        id={tooltipId}
+        role="tooltip"
+        className={`pointer-events-none absolute left-0 top-full z-10 mt-2 w-max max-w-[min(17rem,calc(100vw-10.5rem))] rounded-lg bg-foreground px-3 py-2 text-xs font-normal leading-snug text-white shadow-lg transition-[opacity,visibility] duration-150 md:left-full md:top-1/2 md:mt-0 md:ml-3 md:max-w-[17rem] md:-translate-y-1/2 ${
+          open ? "visible opacity-100" : "invisible opacity-0"
+        }`}
+      >
+        <span
+          aria-hidden
+          className="absolute -top-1 left-4 h-2 w-2 rotate-45 bg-foreground md:-left-1 md:top-1/2 md:-mt-1"
+        />
+        Objetivos de Desarrollo Sostenible de la ONU: 17 metas para un mundo
+        mejor hacia 2030.
+      </span>
+    </span>
+  );
+}
+
 function MissionDetail({ mission }: { mission: Mission }) {
   return (
     <article className="rounded-3xl bg-white p-5 shadow-xl shadow-azul/20 sm:p-8">
@@ -76,11 +144,7 @@ function MissionDetail({ mission }: { mission: Mission }) {
         </div>
 
         <div className="md:col-start-2 md:row-start-2">
-          <span
-            className={`inline-block rounded-full px-3 py-1 text-xs font-semibold text-foreground ${solid[mission.color]}`}
-          >
-            {mission.ods}
-          </span>
+          <OdsChip mission={mission} />
           <h3 className="mt-3 font-serif text-xl font-bold leading-tight text-foreground md:text-3xl">
             {mission.title}
           </h3>

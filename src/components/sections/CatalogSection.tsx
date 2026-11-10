@@ -17,16 +17,8 @@ export function CatalogSection() {
           <Reveal>
             <h2 className="max-w-2xl font-serif text-3xl font-bold leading-tight text-foreground sm:text-4xl">
               Lo que ya compras cada semana,<br className="hidden md:inline" /> ahora
-              también ayuda…
+              también ayuda.
             </h2>
-            <p className="text-impact mt-4 text-xl sm:text-2xl">
-              Muy pronto… más productos en AyudemosMás Delivery
-            </p>
-            <p className="mt-5 max-w-[60ch] text-lg leading-relaxed text-foreground">
-              Empezaremos con Vanemar, nuestro minimarket aliado,
-              <br className="hidden md:inline" /> y pronto sumaremos más markets y
-              restaurantes.
-            </p>
           </Reveal>
 
           <Reveal delay={0.1}>
@@ -34,8 +26,39 @@ export function CatalogSection() {
           </Reveal>
         </div>
 
+        {/* Bloque 1: restaurantes aliados */}
         <div className="mt-16">
-          <CatalogCarousel />
+          <Reveal>
+            <h3 className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xl font-bold text-foreground sm:text-2xl">
+              AyudemosMás Delivery
+              <span className="rounded-full px-3 py-0.5 text-[0.65rem] font-semibold uppercase tracking-widest ring-1 ring-celeste sm:text-xs">
+                Restaurantes
+              </span>
+            </h3>
+            <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-foreground sm:text-base">
+              Nuestros restaurantes aliados compartirán los valores de las ONGs de
+              bienestar animal, producción sostenible y más con las que trabajamos.
+            </p>
+          </Reveal>
+          <div className="mt-8">
+            <CatalogCarousel catalog="restaurantes" />
+          </div>
+        </div>
+
+        <div className="mt-16 border-t border-foreground/10 pt-16 sm:mt-20 sm:pt-20">
+          {/* Bloque 2: supermercado virtual */}
+          <Reveal>
+            <h3 className="text-xl font-bold text-foreground sm:text-2xl">
+              AyudemosMás Supermarket
+            </h3>
+            <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-foreground sm:text-base">
+              Los productos de nuestro supermercado virtual, con delivery propio,
+              también estarán alineados con esas mismas ONGs.
+            </p>
+          </Reveal>
+          <div className="mt-8">
+            <CatalogCarousel catalog="supermercado" comingSoon="Muy pronto, más categorías" />
+          </div>
         </div>
       </div>
     </section>
