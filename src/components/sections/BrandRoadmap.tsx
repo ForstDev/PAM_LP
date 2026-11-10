@@ -159,10 +159,10 @@ export function BrandRoadmap() {
               <div className="relative flex h-5 items-center lg:h-auto lg:flex-col lg:gap-3">
                 <span
                   aria-hidden
-                  className="absolute -left-8 top-0 flex h-5 w-5 items-center justify-center lg:static"
+                  className="absolute -left-8 top-0 flex lg:left-0 h-5 w-5 items-center justify-center lg:relative"
                 >
                   {current && (
-                    <span className="absolute left-1 top-1 h-3 w-3 animate-ping rounded-full bg-verde opacity-60 [animation-duration:2.8s]" />
+                    <span className="absolute inset-1 animate-ping rounded-full bg-verde opacity-60 [animation-duration:2.8s]" />
                   )}
                   <span
                     className={`relative h-4 w-4 rounded-full ${
