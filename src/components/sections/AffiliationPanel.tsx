@@ -50,7 +50,6 @@ const panels: Record<
     platform: "AyudemosMás Delivery",
     steps: [
       { title: "Conversamos", text: "Nos presentas tu restaurante y tu carta." },
-      { title: "Verificamos", text: "Revisamos juntos que tu restaurante comparta nuestros valores." },
       { title: "Publicamos", text: "Tu carta llega a AyudemosMás Delivery y nuestra flota lleva tus pedidos." },
       { title: "Compartimos el impacto", text: "Te contamos lo que generaron tus ventas." },
     ],
@@ -64,7 +63,6 @@ const panels: Record<
     steps: [
       { title: "Conversamos", text: "Nos presentas tu marca o bodega y tus productos." },
       { title: "Acordamos", text: "Definimos precios, stock y condiciones." },
-      { title: "Publicamos", text: "Tus productos llegan a AyudemosMás Supermarket y nosotros los llevamos." },
       { title: "Compartimos el impacto", text: "Te contamos lo que generaron tus ventas." },
     ],
     cta: "Quiero sumar mi marca o bodega",

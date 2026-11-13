@@ -13,15 +13,6 @@ const body = `# ${site.name}
 
 ${site.name} es un espacio digital y el proyecto benéfico motor de MÁS, un movimiento cultural humanitario de ciudadanos independientes, no político ni partidario. Nacimos para que las compras del día a día ayuden a otros y para multiplicar la ayuda que reciben caridades y ONGs con una nueva fuente de fondos, la promoción de la economía solidaria.
 
-## Cómo llega la ayuda
-
-1. Compras productos que ya necesitas.
-2. Marcas y productores venden a través de nosotros.
-3. Descontamos impuestos y costos operativos.
-4. El 100% de la ganancia va al fondo de impacto.
-5. El fondo financia organizaciones y campañas.
-6. Mostramos los resultados con evidencia y publicaremos reportes abiertos y periódicos.
-
 ## Plataformas
 
 En cada fase, el 100% de las ganancias está dirigido a ayudar.

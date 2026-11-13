@@ -87,16 +87,6 @@ const causes: Cause[] = [
   },
 ];
 
-// Recorrido de cada compra, tal cual el brochure del manual (10.2).
-const steps = [
-  { title: "Compra", text: "Eliges productos que ya necesitas." },
-  { title: "Venta", text: "Marcas y productores venden a través de nosotros." },
-  { title: "Ganancia", text: "Descontamos impuestos y costos operativos." },
-  { title: "Fondo", text: "El 100% de la ganancia va al fondo de impacto." },
-  { title: "ONG", text: "El fondo financia organizaciones y campañas." },
-  { title: "Impacto", text: "Mostramos los resultados con evidencia." },
-];
-
 // La ruleta tiene 6 posiciones cada 60°: las 3 causas aparecen dos veces, así
 // el semicírculo visible siempre muestra las tres y el giro nunca se corta.
 const SLOT_DEG = 60;
@@ -659,63 +649,6 @@ export function DonationTypes() {
             </ol>
           </div>
         </div>
-      </div>
-
-      {/* Así llega tu ayuda: línea de tiempo con los 6 pasos del brochure. */}
-      <div className="relative mx-auto mt-20 max-w-[84rem]">
-        <Reveal>
-          <h3 className="font-serif text-2xl font-bold leading-tight text-foreground sm:text-3xl">
-            Así llega tu ayuda
-          </h3>
-          <p className="mt-2 max-w-[60ch] text-foreground">
-            Vas a poder saber qué pasó con tu compra. Publicaremos reportes
-            abiertos y periódicos.
-          </p>
-        </Reveal>
-
-        <ol className="relative mt-10 grid gap-8 lg:grid-cols-6 lg:gap-4">
-          <m.span
-            aria-hidden
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute left-[8.3%] right-[8.3%] top-[1.05rem] hidden h-0.5 origin-left bg-foreground/25 lg:block"
-          />
-          <m.span
-            aria-hidden
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="absolute bottom-4 left-[1.05rem] top-4 w-0.5 origin-top bg-foreground/25 lg:hidden"
-          />
-          {steps.map((s, index) => (
-            <m.li
-              key={s.title}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.5 }}
-              transition={{ duration: 0.4, ease: "easeOut", delay: 0.08 * index }}
-              className="relative flex gap-4 lg:flex-col lg:items-center lg:gap-3 lg:text-center"
-            >
-              <span
-                aria-hidden
-                className={`relative z-10 flex h-[2.1rem] w-[2.1rem] flex-shrink-0 items-center justify-center rounded-full text-sm font-bold text-foreground ring-4 ring-[#ecfaf6] ${
-                  index === 3 ? "bg-verde" : "bg-white"
-                }`}
-              >
-                {index + 1}
-              </span>
-              <span>
-                <span className="block font-semibold text-foreground">{s.title}</span>
-                <span className="mt-0.5 block text-sm leading-snug text-foreground">
-                  {s.text}
-                </span>
-              </span>
-            </m.li>
-          ))}
-        </ol>
       </div>
     </section>
   );
