@@ -37,7 +37,7 @@ export function CatalogSection() {
             </h3>
             <p className="mt-3 max-w-[60ch] text-sm leading-relaxed text-foreground sm:text-base">
               Nuestros restaurantes aliados compartirán los valores de las ONGs de
-              bienestar animal, producción sostenible y más con las que trabajamos.
+              bienestar animal, producción ética y más con las que trabajamos.
             </p>
           </Reveal>
           <div className="mt-8">

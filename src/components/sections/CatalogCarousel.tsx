@@ -19,6 +19,8 @@ import { SignatureCircle } from "@/components/SignatureCircle";
 
 type CatalogItem = {
   name: string;
+  /** Aclaración opcional en letra menor, debajo del nombre. */
+  note?: string;
   icon: LucideIcon;
   color: "verde" | "celeste" | "azul";
 };
@@ -30,7 +32,12 @@ const catalogs = {
   restaurantes: [
     { name: "Restaurantes con opciones vegetarianas", icon: Leaf, color: "celeste" },
     { name: "Restaurantes con opciones veganas", icon: Sprout, color: "celeste" },
-    { name: "Restaurantes sin crueldad animal", icon: Rabbit, color: "celeste" },
+    {
+      name: "Restaurantes libres de crueldad animal",
+      note: "(producción pecuaria y ganadería ética al 100%)",
+      icon: Rabbit,
+      color: "celeste",
+    },
   ],
   // Categorías reales del supermercado (confirmadas: son 6). Primera fila
   // en azul, segunda en verde.
@@ -84,7 +91,7 @@ export function CatalogCarousel({
                 transition={{ duration: 0.45, ease: "easeOut", delay: (index % 3) * 0.1 }}
                 whileHover={{ y: -4 }}
                 whileTap={{ scale: 0.98 }}
-                className="flex min-w-[65%] flex-shrink-0 cursor-pointer items-center gap-5 rounded-3xl border border-foreground bg-white p-5 text-left transition-colors hover:bg-verde/15 sm:min-w-0"
+                className="flex min-w-[65%] max-w-[85%] flex-shrink-0 cursor-pointer items-center gap-5 rounded-3xl border border-foreground bg-white p-5 text-left transition-colors hover:bg-verde/15 sm:min-w-0 sm:max-w-none"
               >
                 <SignatureCircle
                   color={item.color}
@@ -98,6 +105,11 @@ export function CatalogCarousel({
 
                 <p className="text-lg font-semibold text-foreground">
                   {item.name}
+                  {item.note && (
+                    <span className="mt-0.5 block text-sm font-normal leading-snug">
+                      {item.note}
+                    </span>
+                  )}
                 </p>
               </m.button>
             );

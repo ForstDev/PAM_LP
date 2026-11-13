@@ -32,8 +32,9 @@ export function IssuesSection() {
             <p className="text-sm leading-relaxed text-foreground">
               <strong>¿Qué es un ODS?</strong> Son los Objetivos de Desarrollo
               Sostenible: 17 metas que la ONU y 193 países acordaron en 2015
-              para acabar con la pobreza, cuidar el planeta y mejorar la vida
-              de todas las personas hacia 2030.
+              con el fin de luchar de forma histórica contra la pobreza,
+              cuidar el planeta y mejorar la vida de todas las personas hacia
+              2030.
             </p>
           </div>
         </Reveal>
